@@ -1,0 +1,30 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions" : {
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "allowJs": false,
+    "jsx": "react-native",
+    "noImplicitAny": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "ESNext",
+    "lib": ["ES7"],
+    "paths": {
+      "$assets/*": ["src/assets/*"],
+      "$components/*": ["src/components/*"],
+      "$constants/*": ["src/constants/*"],
+      "$context/*": ["src/context/*"],
+      "$dev/*": ["src/dev/*"],
+      "$helpers/*": ["src/helpers/*"],
+      "$hooks/*": ["src/hooks/*"],
+      "$locales/*": ["src/locales/*"],
+      "$mock/*": ["src/mock/*"],
+      "$navigation/*": ["src/navigation/*"],
+      "$screens/*": ["src/screens/*"],
+      "$types/*": ["src/types/*"],
+      "$utils/*": ["src/utils/*"]
+    }
+  }
+}

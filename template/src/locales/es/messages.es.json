@@ -1,0 +1,10 @@
+{
+    "INTERNET_CONNECTION": "Por favor verifique su conexión a Internet e inténtelo nuevamente.",
+    "WENT_WRONG": "¡Ups! ",
+    "UNABLE_PROCEED": "No podemos continuar en este momento.",
+    "SESSION_EXPIRED": "Tu sesión ha caducado. ",
+    "MEDIA_PERMISSION": "Permitir {{app_name}} para acceder a fotos y medios en su dispositivo.",
+    "CAMERA_PERMISSION": "Permitir {{app_name}} para acceder a su cámara para tomar fotos y videos.",
+    "LOCATION_PERMISSION": "Permitir {{app_name}} para acceder a su ubicación para proporcionar servicios basados ​​en la ubicación.",
+    "NOTIFICATION_PERMISSION": "Permitir {{app_name}} para enviarle notificaciones para mantenerse actualizado sobre actualizaciones y alertas importantes."
+}

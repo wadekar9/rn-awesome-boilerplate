@@ -1,0 +1,10 @@
+{
+    "INTERNET_CONNECTION": "Please check your internet connection and try again.",
+    "WENT_WRONG": "Oops! Something went wrong.",
+    "UNABLE_PROCEED": "We're unable to proceed at the moment.",
+    "SESSION_EXPIRED": "Your session has expired. Please log in again to continue.",
+    "MEDIA_PERMISSION": "Allow {{app_name}} to access photos, media on your device.",
+    "CAMERA_PERMISSION": "Allow {{app_name}} to access your camera to take photos and videos.",
+    "LOCATION_PERMISSION": "Allow {{app_name}} to access your location to provide location-based services.",
+    "NOTIFICATION_PERMISSION": "Allow {{app_name}} to send you notifications to stay updated on important updates and alerts."
+}

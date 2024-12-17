@@ -1,0 +1,17 @@
+{
+    "SUBMIT" : "Submit",
+    "CONTINUE" : "Continue",
+    "YES" : "Yes",
+    "NO" : "No",
+    "ADD" : "Add",
+    "UPDATE" : "Update",
+    "SAVE" : "Save",
+    "CANCEL" : "Cancel",
+    "DELETE" : "Delete",
+    "ACCEPT" : "Accept",
+    "REJECT" : "Reject",
+    "OPEN_SETTINGS" : "Open Settings",
+    "EDIT" : "Edit",
+    "VIEW" : "View",
+    "INVITE" : "Invite"
+}
