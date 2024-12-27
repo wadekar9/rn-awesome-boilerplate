@@ -1,2 +1,14 @@
+export { default as CheckmarkOutlineIcon } from './checkmark-outline.icon.svg';
+export { default as ChevronBackOutlineIcon } from './chevron-back-outline.icon.svg';
+export { default as ChevronDownOutlineIcon } from './chevron-down-outline.icon.svg';
+export { default as ChevronForwardOutlineIcon } from './chevron-forward-outline.icon.svg';
+export { default as ChevronUpOutlineIcon } from './chevron-up-outline.icon.svg';
 export { default as EarthIcon } from './earth.icon.svg';
+export { default as EyeOffOutlineIcon } from './eye-off-outline.icon.svg';
+export { default as EyeOutlineIcon } from './eye-outline.icon.svg';
+export { default as LockClosedOutlineIcon } from './lock-closed-outline.icon.svg';
+export { default as LogoGithubIcon } from './logo-github.icon.svg';
+export { default as MailOutlineIcon } from './mail-outline.icon.svg';
+export { default as PersonOutlineIcon } from './person-outline.icon.svg';
 export { default as ReactNativeIcon } from './react-native.icon.svg';
+export { default as SettingsOutlineIcon } from './settings-outline.icon.svg';
