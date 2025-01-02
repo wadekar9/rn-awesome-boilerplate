@@ -8,11 +8,26 @@ import { useAppTheme } from '$hooks/common'
 import { Colors } from '$constants/colors.constants'
 import { BaseButton } from '$components/ui'
 import { ReloadOutlineIcon } from '$assets/icons'
+import { useNetInfoInstance } from "@react-native-community/netinfo";
+import { useNavigation } from '@react-navigation/native'
 
-const NoInternetConnectionPage : React.FC = () => {
+const NoInternetConnectionPage: React.FC = () => {
 
+  const { netInfo: { type, isConnected }, refresh } = useNetInfoInstance();
+  const navigation = useNavigation();
   const { theme, colors } = useAppTheme();
   const styles = styling(theme);
+
+  React.useEffect(() => {
+    if (isConnected) {
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+        return;
+      };
+
+      navigation.navigate('Home');
+    }
+  }, [isConnected])
 
   return (
     <ThemedView>
@@ -30,6 +45,7 @@ const NoInternetConnectionPage : React.FC = () => {
             LeftAccessory={<ReloadOutlineIcon width={moderateScale(20)} height={moderateScale(20)} />}
             containerStyle={styles.buttonContainer}
             labelStyle={{ color: colors.text }}
+            onPress={refresh}
           />
         </View>
       </View>

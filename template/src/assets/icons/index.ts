@@ -12,3 +12,4 @@ export { default as MailOutlineIcon } from './mail-outline.icon.svg';
 export { default as PersonOutlineIcon } from './person-outline.icon.svg';
 export { default as ReactNativeIcon } from './react-native.icon.svg';
 export { default as SettingsOutlineIcon } from './settings-outline.icon.svg';
+export { default as ReloadOutlineIcon } from './reload-outline.icon.svg';

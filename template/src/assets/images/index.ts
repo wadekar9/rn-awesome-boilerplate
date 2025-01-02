@@ -4,3 +4,7 @@ export const IMAGES = {
     WINDOWS : require('./windows-logo.png'),
     WEBSITE : require('./website-logo.jpg'),
 }
+
+export const ICONS = {
+    NETWORK_CONNECTION : require('.//network-connection.png'),
+}
