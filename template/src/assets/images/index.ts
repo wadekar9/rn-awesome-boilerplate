@@ -6,5 +6,6 @@ export const IMAGES = {
 }
 
 export const ICONS = {
-    NETWORK_CONNECTION : require('.//network-connection.png'),
+    NETWORK_CONNECTION : require('./network-connection.png'),
+    EMPTY_STATE : require('./empty-state.png'),
 }
