@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useCallback, useMemo, useRef } from 'react';
+import React from 'react';
 import { View, Text, TextInput, TextInputProps, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { Colors } from '$constants/colors.constants';
@@ -21,7 +21,7 @@ interface BaseTextInputProps extends Omit<TextInputProps, 'style' | 'editable' |
     LeftAccessory?: React.ReactNode;
 }
 
-const BaseTextInput = forwardRef<BaseTextInputRef, BaseTextInputProps>(({
+const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
     label,
     secureTextEntry,
     error,
@@ -34,10 +34,10 @@ const BaseTextInput = forwardRef<BaseTextInputRef, BaseTextInputProps>(({
     const { colors, theme } = useAppTheme();
     const styles = styling(theme);
 
-    const inputRef = useRef<TextInput>(null);
+    const inputRef = React.useRef<TextInput>(null);
 
-    const [isSecure, setIsSecure] = useState<boolean>(secureTextEntry || false);
-    const [isFocused, setIsFocused] = useState<boolean>(false);
+    const [isSecure, setIsSecure] = React.useState<boolean>(secureTextEntry || false);
+    const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
     React.useImperativeHandle(ref, () => ({
         clear: () => null,
@@ -45,17 +45,17 @@ const BaseTextInput = forwardRef<BaseTextInputRef, BaseTextInputProps>(({
         focus: () => null,
     }), [])
 
-    const handleFocus = useCallback((e: any) => {
+    const handleFocus = React.useCallback((e: any) => {
         setIsFocused(true);
         if (props.onFocus) props.onFocus(e);
     }, [props]);
 
-    const handleBlur = useCallback((e: any) => {
+    const handleBlur = React.useCallback((e: any) => {
         setIsFocused(false);
         if (props.onBlur) props.onBlur(e);
     }, [props]);
 
-    const handleSubmitEditing = useCallback((e : any) => {
+    const handleSubmitEditing = React.useCallback((e : any) => {
         if (!props.onSubmitEditing){
             inputRef.current?.blur();
             return
@@ -63,7 +63,7 @@ const BaseTextInput = forwardRef<BaseTextInputRef, BaseTextInputProps>(({
         props.onSubmitEditing(e);
     }, [props]);
 
-    const $EXTRA_STYLES = useMemo((): StyleProp<ViewStyle> => {
+    const $EXTRA_STYLES = React.useMemo((): StyleProp<ViewStyle> => {
         if (!!!LeftAccessory && !!!RightAccessory) {
             return { paddingHorizontal: moderateScale(12) }
         } else if (!LeftAccessory) {
