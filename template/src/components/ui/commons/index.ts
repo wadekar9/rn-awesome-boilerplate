@@ -1,3 +1,4 @@
+export { default as BaseAutoImage } from './base-auto-image.ui';
 export { default as BaseDevider } from './base-devider.ui';
 export { default as BaseSwitch } from './base-switch.ui';
 export { default as BaseCheckbox } from './base-checkbox.ui';
