@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@d11/react-native-fast-image": "^8.9.0",
+    "@devvie/bottom-sheet": "^0.4.3",
     "@react-native-community/datetimepicker": "^8.2.0",
     "@react-native-community/netinfo": "^11.4.1",
     "@react-native-firebase/app": "^21.6.1",
@@ -45,7 +46,8 @@
     "react-native-reanimated": "^3.16.5",
     "react-native-safe-area-context": "^5.0.0",
     "react-native-screens": "^4.3.0",
-    "react-native-svg": "^15.10.1"
+    "react-native-svg": "^15.10.1",
+    "rn-emoji-keyboard": "^1.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
