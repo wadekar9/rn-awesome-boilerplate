@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, TextInputProps, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { Colors } from '$constants/colors.constants';
 import { useAppTheme } from '$hooks/common';
 import { IndianFlagIcon } from '$assets/icons';
 import { ITheme } from '$types/common';
 import { IconButton } from '../buttons';
+import MaskInput, { MaskInputProps, Masks } from 'react-native-mask-input';
 
 interface PhoneNumberInputRef {
     clear: () => void;
@@ -13,7 +14,7 @@ interface PhoneNumberInputRef {
     focus: () => void;
 }
 
-interface PhoneNumberInputProps extends Omit<TextInputProps, 'style' | 'editable' | 'multiline'> {
+interface PhoneNumberInputProps extends Omit<MaskInputProps, 'style' | 'editable' | 'multiline'> {
     label?: string;
     error?: string;
     disabled?: boolean;
@@ -31,8 +32,6 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
     const styles = styling(theme);
 
     const inputRef = React.useRef<TextInput>(null);
-
-    const [isSecure, setIsSecure] = React.useState<boolean>(secureTextEntry || false);
     const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
     React.useImperativeHandle(ref, () => ({
@@ -67,7 +66,7 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
                     <IconButton style={styles.icon}>
                       <IndianFlagIcon />
                     </IconButton>
-                    <TextInput
+                    <MaskInput
                         {...props}
                         ref={inputRef}
                         numberOfLines={1}
@@ -76,15 +75,17 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
                         placeholder={props.placeholder || "Enter Contact Number"}
                         placeholderTextColor={colors.grey}
                         cursorColor={colors.primary}
+                        secureTextEntry={false}
                         editable={!disabled}
                         keyboardAppearance={theme}
-                        keyboardType='number-pad'
+                        keyboardType={'number-pad'}
                         returnKeyType={props.returnKeyType || 'done'}
                         blurOnSubmit={props.blurOnSubmit || false}
-                        maxLength={props.maxLength || 10}
+                        maxLength={props.maxLength || 14}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                         onSubmitEditing={handleSubmitEditing}
+                        mask={Masks.USA_PHONE}
                     />
                 </View>
             </View>
