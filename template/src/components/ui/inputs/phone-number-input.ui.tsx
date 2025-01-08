@@ -1,33 +1,29 @@
 import React from 'react';
-import { View, Text, TextInput, TextInputProps, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import { View, Text, TextInput, TextInputProps, StyleSheet } from 'react-native';
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { Colors } from '$constants/colors.constants';
 import { useAppTheme } from '$hooks/common';
-import { EyeOffOutlineIcon, EyeOutlineIcon } from '$assets/icons';
+import { IndianFlagIcon } from '$assets/icons';
 import { ITheme } from '$types/common';
 import { IconButton } from '../buttons';
 
-interface BaseTextInputRef {
+interface PhoneNumberInputRef {
     clear: () => void;
     blur: () => void;
     focus: () => void;
 }
 
-interface BaseTextInputProps extends Omit<TextInputProps, 'style' | 'editable' | 'multiline'> {
+interface PhoneNumberInputProps extends Omit<TextInputProps, 'style' | 'editable' | 'multiline'> {
     label?: string;
     error?: string;
     disabled?: boolean;
-    RightAccessory?: React.ReactNode;
-    LeftAccessory?: React.ReactNode;
 }
 
-const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
+const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputProps>(({
     label,
     secureTextEntry,
     error,
     disabled = false,
-    RightAccessory,
-    LeftAccessory,
     ...props
 }, ref) => {
 
@@ -63,53 +59,33 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
         props.onSubmitEditing(e);
     }, [props]);
 
-    const $EXTRA_STYLES = React.useMemo((): StyleProp<ViewStyle> => {
-        if (!!!LeftAccessory && !!!RightAccessory) {
-            return { paddingHorizontal: moderateScale(12) }
-        } else if (!LeftAccessory) {
-            return { paddingLeft: moderateScale(12) }
-        } else if (!RightAccessory || !secureTextEntry) {
-            return { paddingRight: moderateScale(12) }
-        }
-    }, [LeftAccessory, RightAccessory, secureTextEntry])
-
     return (
         <View style={styles.wrapper}>
             {label && <Text style={styles.label}>{label}</Text>}
             <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors.primary }]}>
-                <View style={[styles.container, $EXTRA_STYLES]}>
-                    {!!LeftAccessory && (<View style={styles.icon}>{LeftAccessory}</View>)}
+                <View style={[styles.container]}>
+                    <IconButton style={styles.icon}>
+                      <IndianFlagIcon />
+                    </IconButton>
                     <TextInput
                         {...props}
                         ref={inputRef}
                         numberOfLines={1}
                         multiline={false}
                         style={styles.textInput}
-                        placeholder={props.placeholder || "Type Something here..."}
+                        placeholder={props.placeholder || "Enter Contact Number"}
                         placeholderTextColor={colors.grey}
-                        secureTextEntry={isSecure}
                         cursorColor={colors.primary}
                         editable={!disabled}
                         keyboardAppearance={theme}
+                        keyboardType='number-pad'
                         returnKeyType={props.returnKeyType || 'done'}
                         blurOnSubmit={props.blurOnSubmit || false}
+                        maxLength={props.maxLength || 10}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                         onSubmitEditing={handleSubmitEditing}
                     />
-                    {secureTextEntry && (
-                        <IconButton
-                            style={styles.icon}
-                            onPress={() => setIsSecure(prev => !prev)}
-                        >
-                            {!isSecure ? (
-                                <EyeOutlineIcon height={moderateScale(22)} width={moderateScale(22)} />
-                            ) : (
-                                <EyeOffOutlineIcon height={moderateScale(22)} width={moderateScale(22)} />
-                            )}
-                        </IconButton>
-                    )}
-                    {!!RightAccessory && (<View style={styles.icon}>{RightAccessory}</View>)}
                 </View>
             </View>
             {error && (
@@ -121,7 +97,7 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
     );
 });
 
-export default React.memo(BaseTextInput);
+export default React.memo(PhoneNumberInput);
 
 const styling = (theme: ITheme) => StyleSheet.create({
     wrapper: {
@@ -142,7 +118,9 @@ const styling = (theme: ITheme) => StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'stretch',
-        height: moderateScale(50)
+        height: moderateScale(50),
+        gap : moderateScale(5),
+        paddingRight : moderateScale(15)
     },
     textInput: {
         flex: 1,
