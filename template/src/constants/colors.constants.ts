@@ -27,8 +27,8 @@ export const Colors = {
     ...palette,
     text: palette.white,
     border: palette.grey,
-    surface: palette.white,
-    background: palette.white,
+    surface: palette.black,
+    background: palette.black,
     icon: palette.black,
     shadow: palette.white
   }
