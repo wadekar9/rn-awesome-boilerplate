@@ -1,0 +1,1 @@
+export { default as ThemeText } from './theme-text.ui'
