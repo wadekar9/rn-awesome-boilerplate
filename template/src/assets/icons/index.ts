@@ -22,3 +22,4 @@ export { default as FolderOpenOutlineIcon } from './folder-open-outline.svg';
 export { default as GalleryImagesOutlineIcon } from './gallery-images-outline.svg';
 export { default as IndianFlagIcon } from './indian-flag.icon.svg';
 export { default as CalendarOutlineIcon } from './calendar-outline.icon.svg';
+export { default as ArrowBackOutlineIcon } from './arrow-back-outline.icon.svg';

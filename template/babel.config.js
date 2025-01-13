@@ -19,6 +19,7 @@ module.exports = {
           "$mock": "./src/mock",
           "$navigation": "./src/navigation",
           "$screens": "./src/screens",
+          "$styles": "./src/styles",
           "$types": "./src/types",
           "$utils": "./src/utils"
         }
