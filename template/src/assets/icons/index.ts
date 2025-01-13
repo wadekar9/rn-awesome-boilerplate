@@ -20,3 +20,5 @@ export { default as SendOutlineIcon } from './send-outline.icon.svg';
 export { default as CameraOutlineIcon } from './camera-outline.svg';
 export { default as FolderOpenOutlineIcon } from './folder-open-outline.svg';
 export { default as GalleryImagesOutlineIcon } from './gallery-images-outline.svg';
+export { default as IndianFlagIcon } from './indian-flag.icon.svg';
+export { default as CalendarOutlineIcon } from './calendar-outline.icon.svg';
