@@ -8,7 +8,10 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "pod-install": "cd ios && pod install && cd ..",
+    "ios:clean": "xcodebuild clean -workspace Zeen.xcworkspace -scheme Zeen -configuration Debug",
+    "android:clean": "cd android && gradle clean && cd .."
   },
   "dependencies": {
     "@d11/react-native-fast-image": "^8.9.0",
