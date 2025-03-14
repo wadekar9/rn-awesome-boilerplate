@@ -100,7 +100,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   },
   container: {
     height: moderateScale(50),
-    backgroundColor: Colors[theme].surface,
+    backgroundColor: Colors[theme].background1,
     borderWidth: moderateScale(1),
     borderRadius: moderateScale(8),
     borderColor: Colors[theme].border,
@@ -138,8 +138,8 @@ const styling = (theme: ITheme) => StyleSheet.create({
   placeholder: {
     color: Colors[theme].grey
   },
-  content : {
+  content: {
     flex: 1,
-    justifyContent : 'center'
+    justifyContent: 'center'
   }
 })

@@ -14,7 +14,7 @@ interface PermissionModalProps {
 type MODE = 'media' | 'camera' | 'location' | 'notification';
 
 interface PermissionModalRef {
-    open: (e : MODE) => void;
+    open: (e: MODE) => void;
     close: () => void;
 }
 
@@ -27,7 +27,7 @@ const AskPermissionModal = React.forwardRef<PermissionModalRef, PermissionModalP
     const [mode, setMode] = React.useState<MODE>('notification');
 
     React.useImperativeHandle(ref, () => ({
-        open: (e : MODE) => {
+        open: (e: MODE) => {
             setVisible(true);
             setMode(e);
         },
@@ -104,12 +104,12 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
         height: undefined,
         padding: moderateScale(20),
-        backgroundColor: Colors[theme].surface,
+        backgroundColor: Colors[theme].background1,
         borderRadius: moderateScale(10),
         gap: moderateScale(10),
     },
-    message : {
-        textTransform : 'capitalize'
+    message: {
+        textTransform: 'capitalize'
     },
     description: {
         fontFamily: EFonts.MEDIUM,

@@ -74,7 +74,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
         height: moderateScale(50),
         borderRadius: moderateScale(8),
-        backgroundColor: Colors[theme].surface,
+        backgroundColor: Colors[theme].background1,
         paddingHorizontal: moderateScale(12),
         gap: moderateScale(10),
         borderWidth: moderateScale(1),

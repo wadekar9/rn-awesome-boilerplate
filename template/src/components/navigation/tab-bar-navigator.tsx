@@ -89,7 +89,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
         height: '100%',
         flexDirection: 'row',
-        backgroundColor: Colors[theme].surface,
+        backgroundColor: Colors[theme].background1,
         borderRadius: moderateScale(50),
         overflow: 'hidden'
     },

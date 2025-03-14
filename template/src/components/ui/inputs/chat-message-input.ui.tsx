@@ -131,7 +131,7 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
         translation={en}
         theme={{
           knob: Colors[theme].white,
-          container: Colors[theme].surface,
+          container: Colors[theme].background1,
           header: Colors[theme].text,
           category: {
             icon: Colors[theme].primary,

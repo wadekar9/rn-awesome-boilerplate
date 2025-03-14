@@ -108,7 +108,7 @@ export default React.memo(MediaUploadOptionsSheet);
 
 const styling = (theme: ITheme) => StyleSheet.create({
     sheetWrapper: {
-        backgroundColor: Colors[theme].surface
+        backgroundColor: Colors[theme].background1
     },
     dragHandleStyle: {
         backgroundColor: Colors[theme].text,
