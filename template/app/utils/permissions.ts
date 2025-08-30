@@ -1,6 +1,6 @@
-import messaging from "@react-native-firebase/messaging";
-import { PermissionsAndroid, Platform } from "react-native";
-import { PERMISSIONS, requestMultiple, Permission } from "react-native-permissions";
+import messaging from '@react-native-firebase/messaging';
+import { PermissionsAndroid, Platform } from 'react-native';
+import { PERMISSIONS, requestMultiple, Permission } from 'react-native-permissions';
 
 type PlatformPermissions = {
   android: Permission[];
@@ -14,18 +14,18 @@ interface PermissionResult {
 
 abstract class BasePermissionHandler {
   protected abstract permissions: PlatformPermissions;
-  
+
   public async requestPermission(): Promise<PermissionResult> {
     try {
       const platformPermissions = this.getPlatformPermissions();
       const result = await requestMultiple(platformPermissions);
       return {
-        granted: this.validatePermissionResult(result)
+        granted: this.validatePermissionResult(result),
       };
     } catch (error) {
       return {
         granted: false,
-        error: error instanceof Error ? error : new Error('Unknown error occurred')
+        error: error instanceof Error ? error : new Error('Unknown error occurred'),
       };
     }
   }
@@ -49,8 +49,8 @@ class CameraPermissionHandler extends BasePermissionHandler {
 
   protected validatePermissionResult(result: Record<string, string>): boolean {
     return Platform.select({
-      android: result["android.permission.CAMERA"] === 'granted',
-      ios: result["ios.permission.CAMERA"] === 'granted',
+      android: result['android.permission.CAMERA'] === 'granted',
+      ios: result['ios.permission.CAMERA'] === 'granted',
       default: false,
     });
   }
@@ -62,18 +62,18 @@ class MediaPermissionHandler extends BasePermissionHandler {
     android: [
       PERMISSIONS.ANDROID.READ_MEDIA_IMAGES,
       PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
-      PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE
+      PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
     ],
     ios: [PERMISSIONS.IOS.PHOTO_LIBRARY],
   };
 
   protected validatePermissionResult(result: Record<string, string>): boolean {
     return Platform.select({
-      android: 
-        result["android.permission.READ_EXTERNAL_STORAGE"] === 'granted' ||
-        result["android.permission.WRITE_EXTERNAL_STORAGE"] === 'granted' ||
-        result["android.permission.READ_MEDIA_IMAGES"] === 'granted',
-      ios: result["ios.permission.PHOTO_LIBRARY"] === 'granted',
+      android:
+        result['android.permission.READ_EXTERNAL_STORAGE'] === 'granted' ||
+        result['android.permission.WRITE_EXTERNAL_STORAGE'] === 'granted' ||
+        result['android.permission.READ_MEDIA_IMAGES'] === 'granted',
+      ios: result['ios.permission.PHOTO_LIBRARY'] === 'granted',
       default: false,
     });
   }
@@ -83,7 +83,7 @@ class LocationPermissionHandler extends BasePermissionHandler {
   protected permissions: PlatformPermissions = {
     android: [
       PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION,
-      PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION
+      PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
     ],
     ios: [PERMISSIONS.IOS.LOCATION_WHEN_IN_USE],
   };
@@ -91,9 +91,9 @@ class LocationPermissionHandler extends BasePermissionHandler {
   protected validatePermissionResult(result: Record<string, string>): boolean {
     return Platform.select({
       android:
-        result["android.permission.ACCESS_COARSE_LOCATION"] === 'granted' ||
-        result["android.permission.ACCESS_FINE_LOCATION"] === 'granted',
-      ios: result["ios.permission.LOCATION_WHEN_IN_USE"] === 'granted',
+        result['android.permission.ACCESS_COARSE_LOCATION'] === 'granted' ||
+        result['android.permission.ACCESS_FINE_LOCATION'] === 'granted',
+      ios: result['ios.permission.LOCATION_WHEN_IN_USE'] === 'granted',
       default: false,
     });
   }
@@ -114,14 +114,14 @@ class NotificationPermissionHandler extends BasePermissionHandler {
         granted = response === PermissionsAndroid.RESULTS.GRANTED;
       } else {
         const authStatus = await messaging().requestPermission();
-        granted =  authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+        granted = authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
       }
 
       return { granted };
     } catch (error) {
       return {
         granted: false,
-        error: error instanceof Error ? error : new Error('Unknown error occurred')
+        error: error instanceof Error ? error : new Error('Unknown error occurred'),
       };
     }
   }
@@ -159,7 +159,7 @@ class PermissionManager {
     if (!handler) {
       return {
         granted: false,
-        error: new Error(`Unknown permission type: ${type}`)
+        error: new Error(`Unknown permission type: ${type}`),
       };
     }
     return handler.requestPermission();

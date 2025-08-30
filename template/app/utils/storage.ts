@@ -1,4 +1,4 @@
-import { MMKV } from "react-native-mmkv";
+import { MMKV } from 'react-native-mmkv';
 
 /**
  *
@@ -46,5 +46,5 @@ export async function removeStore(key: string): Promise<boolean> {
 export async function clearStorage(): Promise<void> {
   try {
     storage.clearAll();
-  } catch (error) {}
+  } catch (error) { }
 }
