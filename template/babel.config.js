@@ -8,20 +8,20 @@ module.exports = {
         extensions: ['.ios.js', '.android.js', '.ios.jsx', '.android.jsx', '.js', '.jsx', '.json', '.ts', '.tsx'],
         root: ['.'],
         alias: {
-          "$assets": "./src/assets",
-          "$components": "./src/components",
-          "$constants": "./src/constants",
-          "$context": "./src/context",
-          "$dev": "./src/dev",
-          "$helpers": "./src/helpers",
-          "$hooks": "./src/hooks",
-          "$locales": "./src/locales",
-          "$mock": "./src/mock",
-          "$navigation": "./src/navigation",
-          "$screens": "./src/screens",
-          "$styles": "./src/styles",
-          "$types": "./src/types",
-          "$utils": "./src/utils"
+          "$assets": "./app/assets",
+          "$components": "./app/components",
+          "$constants": "./app/constants",
+          "$context": "./app/context",
+          "$dev": "./app/dev",
+          "$helpers": "./app/helpers",
+          "$hooks": "./app/hooks",
+          "$locales": "./app/locales",
+          "$mock": "./app/mock",
+          "$navigation": "./app/navigation",
+          "$screens": "./app/screens",
+          "$styles": "./app/styles",
+          "$types": "./app/types",
+          "$utils": "./app/utils"
         }
       }
     ]
