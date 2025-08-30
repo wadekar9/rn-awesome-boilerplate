@@ -9,3 +9,5 @@ yarn-error.log*
 # Files in template directory (when manually testing)
 /template/node_modules
 /template/yarn.lock
+/template/Gemfile.lock
+/template/Podfile.lock

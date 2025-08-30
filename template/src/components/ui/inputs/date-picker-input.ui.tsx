@@ -1,11 +1,11 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { Colors } from '$constants/colors.constants';
 import { CalendarOutlineIcon } from '$assets/icons';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 
 interface DatePickerInputProps {
   label?: string;
@@ -30,7 +30,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
   onDateChange,
   pickerMode = 'date',
   placeholder = 'DD/MM/YYYY',
-  disabled = false
+  disabled = false,
 }) => {
 
   const { colors, theme } = useAppTheme();
@@ -41,13 +41,13 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
 
   function showPicker() {
     setIsDatePickerVisible(true);
-  };
+  }
 
   function hidePicker() {
     setIsDatePickerVisible(false);
-  };
+  }
 
-  function onConfirmDate(date: Date) {
+  function onConfirmDate(event: DateTimePickerEvent, date: Date) {
     hidePicker();
     onDateChange && onDateChange(date);
   }
@@ -76,27 +76,28 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
         </View>
       )}
 
-      <DateTimePickerModal
-        mode={pickerMode}
-        isVisible={isDatePickerVisible}
-        date={value || TODAY_DATE}
-        onConfirm={onConfirmDate}
-        onCancel={hidePicker}
-        isDarkModeEnabled={theme === 'dark'}
-        textColor={colors.text}
-        is24Hour={is24Hour}
-        maximumDate={maximumDate}
-        minimumDate={minimumDate}
-      />
+      {isDatePickerVisible && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={value || TODAY_DATE}
+          mode={pickerMode}
+          onChange={onConfirmDate}
+          is24Hour={is24Hour}
+          maximumDate={maximumDate}
+          minimumDate={minimumDate}
+          textColor={colors.text}
+          themeVariant={theme}
+        />
+      )}
     </View>
-  )
-}
+  );
+};
 
 export default React.memo(DatePickerInput);
 
 const styling = (theme: ITheme) => StyleSheet.create({
   wrapper: {
-    width: '100%'
+    width: '100%',
   },
   container: {
     height: moderateScale(50),
@@ -106,40 +107,40 @@ const styling = (theme: ITheme) => StyleSheet.create({
     borderColor: Colors[theme].border,
     overflow: 'hidden',
     flexDirection: 'row',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
   },
   label: {
     color: Colors[theme].text,
     fontFamily: EFonts.REGULAR,
     textAlign: 'left',
-    marginBottom: moderateScale(4)
+    marginBottom: moderateScale(4),
   },
   icon: {
     height: '100%',
     width: undefined,
     aspectRatio: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   errorTextWrapper: {
-    marginTop: moderateScale(6)
+    marginTop: moderateScale(6),
   },
   errorText: {
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(13),
-    color: Colors[theme].danger,
-    flexWrap: 'wrap'
+    color: Colors[theme].error,
+    flexWrap: 'wrap',
   },
   value: {
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(16),
-    color: Colors[theme].text
+    color: Colors[theme].text,
   },
   placeholder: {
-    color: Colors[theme].grey
+    color: Colors[theme].gray,
   },
   content: {
     flex: 1,
-    justifyContent: 'center'
-  }
-})
+    justifyContent: 'center',
+  },
+});
