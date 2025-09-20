@@ -20,6 +20,7 @@ module.exports = {
           "$mock": "./app/mock",
           "$navigation": "./app/navigation",
           "$screens": "./app/screens",
+          "$store": "./app/store",
           "$styles": "./app/styles",
           "$types": "./app/types",
           "$utils": "./app/utils"

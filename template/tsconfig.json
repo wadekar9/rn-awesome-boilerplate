@@ -50,6 +50,9 @@
       "$screens/*": [
         "app/screens/*"
       ],
+      "$store/*": [
+        "app/store/*"
+      ],
       "$styles/*": [
         "app/styles/*"
       ],
