@@ -29,6 +29,9 @@
       "$dev/*": [
         "app/dev/*"
       ],
+      "$dto/*": [
+        "app/dto/*"
+      ],
       "$helpers/*": [
         "app/helpers/*"
       ],

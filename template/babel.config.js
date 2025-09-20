@@ -13,6 +13,7 @@ module.exports = {
           "$constants": "./app/constants",
           "$context": "./app/context",
           "$dev": "./app/dev",
+          "$dto": "./app/dto",
           "$helpers": "./app/helpers",
           "$hooks": "./app/hooks",
           "$locales": "./app/locales",
