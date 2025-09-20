@@ -8,7 +8,7 @@ export const defaultNS = 'actions';
 export const resources = {
     en,
     es,
-    hi
+    hi,
 } as const;
 
 i18n.use(initReactI18next).init({
@@ -16,9 +16,9 @@ i18n.use(initReactI18next).init({
     defaultNS,
     resources,
     interpolation: {
-        escapeValue: false
+        escapeValue: false,
     },
-    compatibilityJSON: 'v4'
+    compatibilityJSON: 'v4',
 });
 
 export default { i18n };

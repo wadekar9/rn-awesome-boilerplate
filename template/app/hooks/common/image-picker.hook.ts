@@ -1,11 +1,11 @@
 import { generateImageFileSchema } from '$helpers/files.helper';
-import { IMediaFile } from '$types/common';
+import { IMediaFile } from '$types/common.types';
 import { requestCameraPermissions, requestMediaPermissions } from '$utils/permissions';
 import { launchCamera, launchImageLibrary, MediaType } from 'react-native-image-picker';
 
 export const useImagePicker = (onSelect: (e: IMediaFile[]) => void, onPermissionFailed?: (mode: 'media' | 'camera') => void) => {
 
-    const openGallery = async (type : MediaType = 'photo', limit = 0) => {
+    const openGallery = async (type: MediaType = 'photo', limit = 0) => {
         try {
 
             const isPermissionAvailable = await requestMediaPermissions();
@@ -15,7 +15,7 @@ export const useImagePicker = (onSelect: (e: IMediaFile[]) => void, onPermission
                 return;
             }
 
-            const response = await launchImageLibrary({ mediaType : type, selectionLimit : limit });
+            const response = await launchImageLibrary({ mediaType: type, selectionLimit: limit });
 
             if (response.assets && !response.didCancel) {
                 onSelect(response.assets.map((image) => generateImageFileSchema(image)));
@@ -25,7 +25,7 @@ export const useImagePicker = (onSelect: (e: IMediaFile[]) => void, onPermission
         }
     }
 
-    const openCamera = async (type : MediaType = 'photo') => {
+    const openCamera = async (type: MediaType = 'photo') => {
         try {
 
             const isPermissionAvailable = await requestCameraPermissions();
@@ -35,7 +35,7 @@ export const useImagePicker = (onSelect: (e: IMediaFile[]) => void, onPermission
                 return;
             }
 
-            const response = await launchCamera({ mediaType : type });
+            const response = await launchCamera({ mediaType: type });
 
             if (response.assets && !response.didCancel) {
                 onSelect(response.assets.map((image) => generateImageFileSchema(image)));

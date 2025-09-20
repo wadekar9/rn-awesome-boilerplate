@@ -1,5 +1,5 @@
 import { generateMediaFileSchema } from '$helpers/files.helper';
-import { IMediaFile } from '$types/common';
+import { IMediaFile } from '$types/common.types';
 import { types, pick, isErrorWithCode } from '@react-native-documents/picker';
 
 export type MEDIA_TYPE = keyof typeof types;

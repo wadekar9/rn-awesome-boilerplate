@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs'
 import { EFonts, moderateScale } from '$constants/styles.constants';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 
 interface TabBarButtonProps extends BottomTabBarButtonProps {
     theme: ITheme;

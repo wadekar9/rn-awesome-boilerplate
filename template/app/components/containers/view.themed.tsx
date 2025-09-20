@@ -7,19 +7,21 @@ interface ThemedViewProps {
 }
 
 const ThemedView: React.FC<ThemedViewProps> = ({ children }) => {
-    const { colors } = useAppTheme();
+    const { colors, insets } = useAppTheme();
 
     return (
-        <View style={[styles.container, { backgroundColor: colors.background }]}>
-            {children}
+        <View style={[styles.container, { backgroundColor: colors.background, paddingTop: insets.top, paddingBottom: insets.bottom }]}>
+            <View style={styles.container}>
+                {children}
+            </View>
         </View>
-    )
-}
+    );
+};
 
-export default ThemedView
+export default ThemedView;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
-    }
-})
+        flex: 1,
+    },
+});

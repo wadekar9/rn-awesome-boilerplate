@@ -4,7 +4,7 @@ import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { Colors } from '$constants/colors.constants';
 import { useAppTheme } from '$hooks/common';
 import { EyeOffOutlineIcon, EyeOutlineIcon } from '$assets/icons';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 import { IconButton } from '../buttons';
 
 interface BaseTextInputRef {
@@ -55,8 +55,8 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
         if (props.onBlur) props.onBlur(e);
     }, [props]);
 
-    const handleSubmitEditing = React.useCallback((e : any) => {
-        if (!props.onSubmitEditing){
+    const handleSubmitEditing = React.useCallback((e: any) => {
+        if (!props.onSubmitEditing) {
             inputRef.current?.blur();
             return
         }

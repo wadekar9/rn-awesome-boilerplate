@@ -4,7 +4,7 @@ import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { Colors } from '$constants/colors.constants'
 import { useAppTheme, useDebounce } from '$hooks/common';
 import { SearchOutlineIcon } from '$assets/icons';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 
 interface BaseSearchbarRef {
     clear: () => void;

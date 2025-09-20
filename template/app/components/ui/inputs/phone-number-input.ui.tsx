@@ -4,7 +4,7 @@ import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { Colors } from '$constants/colors.constants';
 import { useAppTheme } from '$hooks/common';
 import { IndianFlagIcon } from '$assets/icons';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 import { IconButton } from '../buttons';
 import MaskInput, { MaskInputProps, Masks } from 'react-native-mask-input';
 
@@ -50,8 +50,8 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
         if (props.onBlur) props.onBlur(e);
     }, [props]);
 
-    const handleSubmitEditing = React.useCallback((e : any) => {
-        if (!props.onSubmitEditing){
+    const handleSubmitEditing = React.useCallback((e: any) => {
+        if (!props.onSubmitEditing) {
             inputRef.current?.blur();
             return
         }
@@ -64,7 +64,7 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
             <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors.primary }]}>
                 <View style={[styles.container]}>
                     <IconButton style={styles.icon}>
-                      <IndianFlagIcon />
+                        <IndianFlagIcon />
                     </IconButton>
                     <MaskInput
                         {...props}
@@ -120,8 +120,8 @@ const styling = (theme: ITheme) => StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'stretch',
         height: moderateScale(50),
-        gap : moderateScale(5),
-        paddingRight : moderateScale(15)
+        gap: moderateScale(5),
+        paddingRight: moderateScale(15)
     },
     textInput: {
         flex: 1,

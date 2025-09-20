@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import EmojiPicker, { EmojiType, en } from 'rn-emoji-keyboard'
 import { Colors } from '$constants/colors.constants';
 import { waitForSeconds } from '$helpers/utils.helper';
-import { IMediaFile, ITheme } from '$types/common';
+import { IMediaFile, ITheme } from '$types/common.types';
 import { useAppTheme, useDocumentPicker } from '$hooks/common';
 import { IconButton } from '../buttons';
 import { AttachOutlineIcon, EmojiOutlineIcon, SendOutlineIcon } from '$assets/icons';

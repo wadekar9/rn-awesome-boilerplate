@@ -3,7 +3,7 @@ import React from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { Colors } from '$constants/colors.constants';
 import { waitForSeconds } from '$helpers/utils.helper';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 import { useAppTranslation } from '$hooks/common';
 import { IconButton } from '$components/ui';
 

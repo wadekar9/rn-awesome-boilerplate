@@ -6,7 +6,7 @@ import { waitForSeconds } from '$helpers/utils.helper';
 import { Portal } from 'react-native-portalize';
 import BottomSheet, { BottomSheetMethods } from '@devvie/bottom-sheet';
 import { MediaType } from 'react-native-image-picker';
-import { IMediaFile, ITheme } from '$types/common';
+import { IMediaFile, ITheme } from '$types/common.types';
 import { useAppTheme, useDocumentPicker, useImagePicker } from '$hooks/common';
 import { IconButton } from '$components/ui';
 import { AskPermissionModal } from '$components/modals';
@@ -24,7 +24,7 @@ interface MediaUploadOptionsSheetRef {
 }
 
 const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, MediaUploadOptionsSheetProps>((
-    { maxFiles = 1, mediaType = 'photo', ...props },
+    { mediaType = 'photo', ...props },
     ref
 ) => {
 
@@ -62,7 +62,7 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
                 waitForSeconds(() => openPicker(['allFiles']), 800);
             }
         },
-    ]), [mediaType, maxFiles, colors]);
+    ]), [mediaType, colors, openCamera, openGallery, openPicker]);
 
     React.useImperativeHandle(ref, () => ({
         open: () => sheetRef.current?.open(0),

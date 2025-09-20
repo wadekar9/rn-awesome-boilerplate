@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { useAppTheme } from '$hooks/common';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { Colors } from '$constants/colors.constants';
 import { CalendarOutlineIcon } from '$assets/icons';

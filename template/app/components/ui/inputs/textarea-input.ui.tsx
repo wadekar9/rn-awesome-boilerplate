@@ -3,7 +3,7 @@ import { View, Text, TextInput, TextInputProps, StyleSheet, ViewStyle, StyleProp
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { Colors } from '$constants/colors.constants';
 import { useAppTheme } from '$hooks/common';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 
 interface TextareaInputRef {
   clear: () => void;
@@ -125,7 +125,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     fontFamily: EFonts.REGULAR,
     fontSize: EFontSize.XL,
     color: Colors[theme].text,
-    paddingVertical : moderateScale(10),
+    paddingVertical: moderateScale(10),
   },
   errorContainer: {
     marginTop: moderateScale(8),

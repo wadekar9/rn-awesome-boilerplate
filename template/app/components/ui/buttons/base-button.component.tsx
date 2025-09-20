@@ -1,7 +1,7 @@
 import { Pressable, PressableProps, PressableStateCallbackType, StyleProp, StyleSheet, Text, ViewStyle, TextStyle } from 'react-native'
 import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants'
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 import { Colors } from '$constants/colors.constants';
 
 interface BaseButtonProps extends PressableProps {
@@ -29,8 +29,8 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   function $wrapperStyle({ pressed }: PressableStateCallbackType): StyleProp<ViewStyle> {
     return [
       styles.wrapper,
-      !!pressed && { opacity : 0.85 },
-      !!disabled && { opacity : 0.5 },
+      !!pressed && { opacity: 0.85 },
+      !!disabled && { opacity: 0.5 },
       containerStyle
     ]
   }
@@ -51,7 +51,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
 
 export default React.memo(BaseButton);
 
-const styling = (theme : ITheme) => StyleSheet.create({
+const styling = (theme: ITheme) => StyleSheet.create({
   wrapper: {
     width: '100%',
     height: moderateScale(50),
@@ -61,12 +61,12 @@ const styling = (theme : ITheme) => StyleSheet.create({
     overflow: 'hidden',
     borderRadius: moderateScale(5),
     gap: moderateScale(10),
-    backgroundColor : Colors[theme].primary
+    backgroundColor: Colors[theme].primary
   },
-  label : {
-    fontFamily :EFonts.MEDIUM,
-    fontSize : moderateScale(15),
-    color : Colors[theme].white,
-    textTransform : 'capitalize'
+  label: {
+    fontFamily: EFonts.MEDIUM,
+    fontSize: moderateScale(15),
+    color: Colors[theme].white,
+    textTransform: 'capitalize'
   }
 })

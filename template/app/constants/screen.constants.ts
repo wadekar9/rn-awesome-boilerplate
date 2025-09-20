@@ -1,17 +1,19 @@
-export enum EAuthScreens {
+export enum ERootStackScreens {
     SPLASH = 'Splash',
-    LOGIN = 'Login',
-    REGISTER = 'Register'
+    AUTH_STACK = 'AuthStack',
+    PRIVATE_STACK = 'PrivateStack'
 }
 
-export enum EPrivateScreens {
-    NOTIFICATION = 'Notification'
+export enum EAuthStackScreens {
+    LOGIN = 'Login'
 }
 
-export enum EDrawerScreens {
-    SETTINGS = 'Settings'
+export enum EPrivateStackScreens {
+    BOTTOM_TAB_NAVIGATOR = 'BottomTabNavigator',
+    NOTIFICATIONS = 'Notifications'
 }
 
 export enum EBottomTabScreens {
-    HOME = 'Home'
+    HOME = 'Home',
+    SETTINGS = 'Settings'
 }

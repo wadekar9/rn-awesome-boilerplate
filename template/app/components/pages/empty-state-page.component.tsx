@@ -3,7 +3,7 @@ import React from 'react'
 import { ThemedView } from '$components/containers'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { useAppTheme } from '$hooks/common'
-import { ITheme } from '$types/common'
+import { ITheme } from '$types/common.types'
 import { Colors } from '$constants/colors.constants'
 import { ICONS } from '$assets/images'
 

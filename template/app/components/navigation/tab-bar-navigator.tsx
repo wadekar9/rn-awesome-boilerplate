@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import DropShadow from "react-native-drop-shadow";
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 interface TabBarNavigatorProps extends BottomTabBarProps {

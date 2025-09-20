@@ -7,7 +7,7 @@ import {
 import { moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
 import { Colors } from '$constants/colors.constants';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 
 interface BaseSwitchProps {
     value: boolean;

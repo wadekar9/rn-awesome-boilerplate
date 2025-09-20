@@ -4,7 +4,7 @@ import { Colors } from '$constants/colors.constants';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useAppTheme } from '$hooks/common';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 import { ChevronDownOutlineIcon, ChevronUpOutlineIcon } from '$assets/icons';
 
 interface BaseDropdownProps {
@@ -27,7 +27,7 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
 
     const [isFocus, setIsFocus] = useState<boolean>(false);
 
-    const DATA = useMemo(() => data.map(item => ({ label: item.name, value: `${item.id}` })),[data]);
+    const DATA = useMemo(() => data.map(item => ({ label: item.name, value: `${item.id}` })), [data]);
 
     return (
         <View style={styles.wrapper}>
@@ -38,7 +38,7 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
                     placeholderStyle={[styles.value, styles.placeholder]}
                     selectedTextStyle={styles.value}
                     itemTextStyle={styles.itemTextStyle}
-                    containerStyle={{backgroundColor:colors.surface}}
+                    containerStyle={{ backgroundColor: colors.surface }}
                     data={DATA}
                     maxHeight={moderateScale(200)}
                     labelField="label"
@@ -96,7 +96,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         fontFamily: EFonts.REGULAR,
         fontSize: moderateScale(16),
         color: Colors[theme].text,
-        textTransform : 'capitalize'
+        textTransform: 'capitalize'
     },
     placeholder: {
         color: Colors[theme].grey
@@ -124,7 +124,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         fontFamily: EFonts.REGULAR,
         fontSize: moderateScale(16),
         color: Colors[theme].text,
-        textTransform : 'capitalize'
+        textTransform: 'capitalize'
     },
     errorContainer: {
         marginTop: moderateScale(8),

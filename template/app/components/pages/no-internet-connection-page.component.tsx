@@ -3,7 +3,7 @@ import React from 'react'
 import { ThemedView } from '$components/containers'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { ICONS } from '$assets/images'
-import { ITheme } from '$types/common'
+import { ITheme } from '$types/common.types'
 import { useAppTheme } from '$hooks/common'
 import { Colors } from '$constants/colors.constants'
 import { BaseButton } from '$components/ui'
@@ -55,35 +55,35 @@ const NoInternetConnectionPage: React.FC = () => {
 
 export default NoInternetConnectionPage
 
-const styling = (theme : ITheme) => StyleSheet.create({
+const styling = (theme: ITheme) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     gap: moderateScale(50),
-    padding : moderateScale(20),
+    padding: moderateScale(20),
   },
-  content : {
-    alignItems : 'center',
-    justifyContent : 'center',
-    gap : moderateScale(15),
-    width : '100%'
+  content: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: moderateScale(15),
+    width: '100%'
   },
-  label : {
-    fontFamily : EFonts.SEMI_BOLD,
-    fontSize : EFontSize['2XL'],
-    color : Colors[theme].text
+  label: {
+    fontFamily: EFonts.SEMI_BOLD,
+    fontSize: EFontSize['2XL'],
+    color: Colors[theme].text
   },
-  description : {
-    fontFamily : EFonts.MEDIUM,
-    fontSize : EFontSize.LG,
-    color : Colors[theme].grey
+  description: {
+    fontFamily: EFonts.MEDIUM,
+    fontSize: EFontSize.LG,
+    color: Colors[theme].grey
   },
-  buttonContainer : {
-    width : 'auto',
-    alignSelf : 'center',
-    paddingHorizontal : moderateScale(22),
-    borderWidth : StyleSheet.hairlineWidth,
-    backgroundColor : 'transparent',
+  buttonContainer: {
+    width: 'auto',
+    alignSelf: 'center',
+    paddingHorizontal: moderateScale(22),
+    borderWidth: StyleSheet.hairlineWidth,
+    backgroundColor: 'transparent',
   }
 })

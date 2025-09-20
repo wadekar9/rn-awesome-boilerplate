@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, Animated, StyleProp, TextStyle } fr
 import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
-import { ITheme } from '$types/common';
+import { ITheme } from '$types/common.types';
 import { Colors } from '$constants/colors.constants';
 
 interface BaseRadioButtonProps {
