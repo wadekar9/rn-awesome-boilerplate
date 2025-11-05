@@ -3,7 +3,6 @@ import { DEVICE_WIDTH, moderateScale } from '$constants/styles.constants';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import DropShadow from "react-native-drop-shadow";
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { ITheme } from '$types/common.types';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
@@ -27,7 +26,7 @@ const TabBarNavigator: React.FC<TabBarNavigatorProps> = ({ state, descriptors, n
     });
 
     return (
-        <DropShadow style={[styles.wrapper, { bottom: insets.bottom || moderateScale(24) }]}>
+        <View style={[styles.wrapper, { bottom: insets.bottom || moderateScale(24) }]}>
             <View style={styles.container}>
 
                 <Animated.View style={[styles.indicatorWrapper, { width: TAB_WIDTH }, translateAnimation]} />
@@ -78,7 +77,7 @@ const TabBarNavigator: React.FC<TabBarNavigatorProps> = ({ state, descriptors, n
                     )
                 })}
             </View>
-        </DropShadow>
+        </View>
     );
 }
 
