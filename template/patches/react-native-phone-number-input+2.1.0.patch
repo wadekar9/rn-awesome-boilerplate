@@ -1,0 +1,749 @@
+diff --git a/node_modules/react-native-phone-number-input/lib/index.d.ts b/node_modules/react-native-phone-number-input/lib/index.d.ts
+index cd625e5..ce0b929 100644
+--- a/node_modules/react-native-phone-number-input/lib/index.d.ts
++++ b/node_modules/react-native-phone-number-input/lib/index.d.ts
+@@ -1,4 +1,4 @@
+-import { Component } from "react";
++import { ForwardRefExoticComponent, RefAttributes } from "react";
+ import { TextInputProps, StyleProp, TextStyle, ViewStyle } from "react-native";
+ import {
+   CountryCode,
+@@ -6,6 +6,7 @@ import {
+   Country,
+ } from "react-native-country-picker-modal";
+ import { CountryFilterProps } from "react-native-country-picker-modal/lib/CountryFilter";
++
+ export interface PhoneInputProps {
+   withDarkTheme?: boolean;
+   withShadow?: boolean;
+@@ -19,7 +20,7 @@ export interface PhoneInputProps {
+   onChangeCountry?: (country: Country) => void;
+   onChangeText?: (text: string) => void;
+   onChangeFormattedText?: (text: string) => void;
+-  renderDropdownImage?: JSX.Element;
++  renderDropdownImage?: () => JSX.Element;
+   containerStyle?: StyleProp<ViewStyle>;
+   textContainerStyle?: StyleProp<ViewStyle>;
+   textInputProps?: TextInputProps;
+@@ -31,277 +32,17 @@ export interface PhoneInputProps {
+   filterProps?: CountryFilterProps;
+   countryPickerProps?: any;
+ }
+-export interface PhoneInputState {
+-  code: CallingCode | undefined;
+-  number: string;
+-  modalVisible: boolean;
+-  countryCode: CountryCode;
+-  disabled: boolean;
+-}
+-export default class PhoneInput extends Component<
+-  PhoneInputProps,
+-  PhoneInputState
+-> {
+-  constructor(props: PhoneInputProps, context: any);
+-  UNSAFE_componentWillMount(): Promise<void>;
+-  UNSAFE_componentWillReceiveProps(nextProps: PhoneInputProps): Promise<void>;
+-  getCountryCode: () =>
+-    | "AF"
+-    | "AL"
+-    | "DZ"
+-    | "AS"
+-    | "AD"
+-    | "AO"
+-    | "AI"
+-    | "AQ"
+-    | "AG"
+-    | "AR"
+-    | "AM"
+-    | "AW"
+-    | "AU"
+-    | "AT"
+-    | "AZ"
+-    | "BS"
+-    | "BH"
+-    | "BD"
+-    | "BB"
+-    | "BY"
+-    | "BE"
+-    | "BZ"
+-    | "BJ"
+-    | "BM"
+-    | "BT"
+-    | "BO"
+-    | "BA"
+-    | "BW"
+-    | "BV"
+-    | "BR"
+-    | "IO"
+-    | "VG"
+-    | "BN"
+-    | "BG"
+-    | "BF"
+-    | "BI"
+-    | "KH"
+-    | "CM"
+-    | "CA"
+-    | "CV"
+-    | "BQ"
+-    | "KY"
+-    | "CF"
+-    | "TD"
+-    | "CL"
+-    | "CN"
+-    | "CX"
+-    | "CC"
+-    | "CO"
+-    | "KM"
+-    | "CK"
+-    | "CR"
+-    | "HR"
+-    | "CU"
+-    | "CW"
+-    | "CY"
+-    | "CZ"
+-    | "CD"
+-    | "DK"
+-    | "DJ"
+-    | "DM"
+-    | "DO"
+-    | "EC"
+-    | "EG"
+-    | "SV"
+-    | "GQ"
+-    | "ER"
+-    | "EE"
+-    | "SZ"
+-    | "ET"
+-    | "FK"
+-    | "FO"
+-    | "FJ"
+-    | "FI"
+-    | "FR"
+-    | "GF"
+-    | "PF"
+-    | "TF"
+-    | "GA"
+-    | "GM"
+-    | "GE"
+-    | "DE"
+-    | "GH"
+-    | "GI"
+-    | "GR"
+-    | "GL"
+-    | "GD"
+-    | "GP"
+-    | "GU"
+-    | "GT"
+-    | "GG"
+-    | "GN"
+-    | "GW"
+-    | "GY"
+-    | "HT"
+-    | "HM"
+-    | "HN"
+-    | "HU"
+-    | "IS"
+-    | "IN"
+-    | "ID"
+-    | "IR"
+-    | "IQ"
+-    | "IE"
+-    | "IM"
+-    | "IL"
+-    | "IT"
+-    | "CI"
+-    | "JM"
+-    | "JP"
+-    | "JE"
+-    | "JO"
+-    | "KZ"
+-    | "KE"
+-    | "XK"
+-    | "KW"
+-    | "KG"
+-    | "LA"
+-    | "LV"
+-    | "LB"
+-    | "LS"
+-    | "LR"
+-    | "LY"
+-    | "LI"
+-    | "LT"
+-    | "LU"
+-    | "MO"
+-    | "MK"
+-    | "MG"
+-    | "MW"
+-    | "MY"
+-    | "MV"
+-    | "ML"
+-    | "MT"
+-    | "MH"
+-    | "MQ"
+-    | "MR"
+-    | "MU"
+-    | "YT"
+-    | "MX"
+-    | "FM"
+-    | "MD"
+-    | "MC"
+-    | "MN"
+-    | "ME"
+-    | "MS"
+-    | "MA"
+-    | "MZ"
+-    | "MM"
+-    | "NA"
+-    | "NR"
+-    | "NP"
+-    | "NL"
+-    | "NC"
+-    | "NZ"
+-    | "NI"
+-    | "NE"
+-    | "NG"
+-    | "NU"
+-    | "NF"
+-    | "KP"
+-    | "MP"
+-    | "NO"
+-    | "OM"
+-    | "PK"
+-    | "PW"
+-    | "PS"
+-    | "PA"
+-    | "PG"
+-    | "PY"
+-    | "PE"
+-    | "PH"
+-    | "PN"
+-    | "PL"
+-    | "PT"
+-    | "PR"
+-    | "QA"
+-    | "CG"
+-    | "RO"
+-    | "RU"
+-    | "RW"
+-    | "RE"
+-    | "BL"
+-    | "SH"
+-    | "KN"
+-    | "LC"
+-    | "MF"
+-    | "PM"
+-    | "VC"
+-    | "WS"
+-    | "SM"
+-    | "SA"
+-    | "SN"
+-    | "RS"
+-    | "SC"
+-    | "SL"
+-    | "SG"
+-    | "SX"
+-    | "SK"
+-    | "SI"
+-    | "SB"
+-    | "SO"
+-    | "ZA"
+-    | "GS"
+-    | "KR"
+-    | "SS"
+-    | "ES"
+-    | "LK"
+-    | "SD"
+-    | "SR"
+-    | "SJ"
+-    | "SE"
+-    | "CH"
+-    | "SY"
+-    | "ST"
+-    | "TW"
+-    | "TJ"
+-    | "TZ"
+-    | "TH"
+-    | "TL"
+-    | "TG"
+-    | "TK"
+-    | "TO"
+-    | "TT"
+-    | "TN"
+-    | "TR"
+-    | "TM"
+-    | "TC"
+-    | "TV"
+-    | "UG"
+-    | "UA"
+-    | "AE"
+-    | "GB"
+-    | "US"
+-    | "UM"
+-    | "VI"
+-    | "UY"
+-    | "UZ"
+-    | "VU"
+-    | "VA"
+-    | "VE"
+-    | "VN"
+-    | "WF"
+-    | "EH"
+-    | "YE"
+-    | "ZM"
+-    | "ZW"
+-    | "KI"
+-    | "HK"
+-    | "AX";
+-  getCallingCode: () => string | undefined;
+-  isValidNumber: (number: string) => boolean;
+-  onSelect: (country: Country) => void;
+-  getNumberAfterPossiblyEliminatingZero: () => {number: string , formattedNumber: string };
+-  onChangeText: (text: string) => void;
+-  render(): JSX.Element;
++
++export interface PhoneInputRef {
++  focus: () => void;
++  blur: () => void;
++  clear: () => void;
+ }
+ 
+-export function isValidNumber(number: string, countryCode: CountryCode ): boolean;
+\ No newline at end of file
++declare const PhoneInput: ForwardRefExoticComponent<
++  PhoneInputProps & RefAttributes<PhoneInputRef>
++>;
++
++export default PhoneInput;
++
++export function isValidNumber(number: string, countryCode: CountryCode): boolean;
+diff --git a/node_modules/react-native-phone-number-input/lib/index.js b/node_modules/react-native-phone-number-input/lib/index.js
+index b89c388..21a6696 100644
+--- a/node_modules/react-native-phone-number-input/lib/index.js
++++ b/node_modules/react-native-phone-number-input/lib/index.js
+@@ -1,4 +1,4 @@
+-import React, { PureComponent } from "react";
++import React, { useState, useEffect, useImperativeHandle, useRef, forwardRef } from "react";
+ import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
+ import CountryPicker, {
+   getCallingCode,
+@@ -14,229 +14,201 @@ const dropDown =
+   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAi0lEQVRYR+3WuQ6AIBRE0eHL1T83FBqU5S1szdiY2NyTKcCAzU/Y3AcBXIALcIF0gRPAsehgugDEXnYQrUC88RIgfpuJ+MRrgFmILN4CjEYU4xJgFKIa1wB6Ec24FuBFiHELwIpQxa0ALUId9wAkhCnuBdQQ5ngP4I9wxXsBDyJ9m+8y/g9wAS7ABW4giBshQZji3AAAAABJRU5ErkJggg==";
+ const phoneUtil = PhoneNumberUtil.getInstance();
+ 
+-export default class PhoneInput extends PureComponent {
+-  constructor(props) {
+-    super(props);
+-    this.state = {
+-      code: props.defaultCode ? undefined : "91",
+-      number: props.value
+-        ? props.value
+-        : props.defaultValue
+-        ? props.defaultValue
+-        : "",
+-      modalVisible: false,
+-      countryCode: props.defaultCode ? props.defaultCode : "IN",
+-      disabled: props.disabled || false,
+-    };
+-  }
++const PhoneInput = forwardRef(({
++  defaultCode,
++  value,
++  defaultValue,
++  disabled,
++  onChangeCountry,
++  onChangeText,
++  onChangeFormattedText,
++  withShadow,
++  withDarkTheme,
++  codeTextStyle,
++  textInputProps,
++  textInputStyle,
++  autoFocus,
++  placeholder,
++  disableArrowIcon,
++  flagButtonStyle,
++  containerStyle,
++  textContainerStyle,
++  renderDropdownImage,
++  countryPickerProps = {},
++  filterProps = {},
++  countryPickerButtonStyle,
++  layout = "first",
++  flagSize,
++}, ref) => {
+ 
+-  static getDerivedStateFromProps(nextProps, prevState) {
+-    if (nextProps.disabled !== prevState.disabled) {
+-      if ((nextProps.value || nextProps.value === "") && nextProps.value !== prevState.number) {
+-        return ({ disabled: nextProps.disabled, number: nextProps.value });
+-      }
+-      return ({ disabled: nextProps.disabled });
+-    }
+-    return null;
+-  };
++  const inputRef = useRef(null);
+ 
+-  async componentDidMount() {
+-    const { defaultCode } = this.props;
+-    if (defaultCode) {
+-      const code = await getCallingCode(defaultCode);
+-      this.setState({ code });
+-    }
+-  }
++  const [code, setCode] = useState(defaultCode ? undefined : "91");
++  const [number, setNumber] = useState(value || defaultValue || "");
++  const [modalVisible, setModalVisible] = useState(false);
++  const [countryCode, setCountryCode] = useState(defaultCode || "IN");
++  const [isDisabled, setIsDisabled] = useState(disabled || false);
+ 
+-  getCountryCode = () => {
+-    return this.state.countryCode;
+-  };
++  useImperativeHandle(ref, () => ({
++    focus: () => inputRef.current?.focus(),
++    blur: () => inputRef.current?.blur(),
++    clear: () => inputRef.current?.clear(),
++  }), []);
+ 
+-  getCallingCode = () => {
+-    return this.state.code;
+-  };
++  // Handle prop updates (equivalent to getDerivedStateFromProps)
++  useEffect(() => {
++    if (disabled !== isDisabled) {
++      setIsDisabled(disabled);
++      if (value !== undefined && value !== number) {
++        setNumber(value);
++      }
++    }
++  }, [disabled, value, number, isDisabled]);
+ 
+-  isValidNumber = (number) => {
++  // Handle defaultCode initialization (equivalent to componentDidMount)
++  useEffect(() => {
++    const fetchCallingCode = async () => {
++      if (defaultCode) {
++        const newCode = await getCallingCode(defaultCode);
++        setCode(newCode);
++      }
++    };
++    fetchCallingCode();
++  }, [defaultCode]);
++
++  const isValidNumber = (num) => {
+     try {
+-      const { countryCode } = this.state;
+-      const parsedNumber = phoneUtil.parse(number, countryCode);
++      const parsedNumber = phoneUtil.parse(num, countryCode);
+       return phoneUtil.isValidNumber(parsedNumber);
+     } catch (err) {
+       return false;
+     }
+   };
+ 
+-  onSelect = (country) => {
+-    const { onChangeCountry } = this.props;
+-    this.setState(
+-      {
+-        countryCode: country.cca2,
+-        code: country.callingCode[0],
+-      },
+-      () => {
+-        const { onChangeFormattedText } = this.props;
+-        if (onChangeFormattedText) {
+-          if (country.callingCode[0]) {
+-            onChangeFormattedText(
+-              `+${country.callingCode[0]}${this.state.number}`
+-            );
+-          } else {
+-            onChangeFormattedText(this.state.number);
+-          }
+-        }
+-      }
+-    );
++  const onSelect = (country) => {
++    setCountryCode(country.cca2);
++    setCode(country.callingCode[0]);
++    setModalVisible(false);
++
++    if (onChangeFormattedText) {
++      onChangeFormattedText(
++        country.callingCode[0] ? `+${country.callingCode[0]}${number}` : number
++      );
++    }
+     if (onChangeCountry) {
+       onChangeCountry(country);
+     }
+   };
+ 
+-  onChangeText = (text) => {
+-    this.setState({ number: text });
+-    const { onChangeText, onChangeFormattedText } = this.props;
++  const onChangeTextHandler = (text) => {
++    setNumber(text);
+     if (onChangeText) {
+       onChangeText(text);
+     }
+     if (onChangeFormattedText) {
+-      const { code } = this.state;
+-      if (code) {
+-        onChangeFormattedText(text.length > 0 ? `+${code}${text}` : text);
+-      } else {
+-        onChangeFormattedText(text);
+-      }
++      onChangeFormattedText(text.length > 0 ? `+${code}${text}` : text);
+     }
+   };
+ 
+-  getNumberAfterPossiblyEliminatingZero() {
+-    let { number, code } = this.state;
++  const getNumberAfterPossiblyEliminatingZero = () => {
++    let formattedNumber = number;
+     if (number.length > 0 && number.startsWith("0")) {
+-      number = number.substr(1);
+-      return { number, formattedNumber: code ? `+${code}${number}` : number };
+-    } else {
+-      return { number, formattedNumber: code ? `+${code}${number}` : number };
++      formattedNumber = number.substr(1);
+     }
+-  }
+-
+-  renderDropdownImage = () => {
+-    return (
+-      <Image
+-        source={{ uri: dropDown }}
+-        resizeMode="contain"
+-        style={styles.dropDownImage}
+-      />
+-    );
++    return {
++      number: formattedNumber,
++      formattedNumber: code ? `+${code}${formattedNumber}` : formattedNumber,
++    };
+   };
+ 
+-  renderFlagButton = (props) => {
+-    const { layout = "first", flagSize } = this.props;
+-    const { countryCode } = this.state;
++  const renderDropdownImageHandler = () => (
++    <Image
++      source={{ uri: dropDown }}
++      resizeMode="contain"
++      style={styles.dropDownImage}
++    />
++  );
++
++  const renderFlagButton = () => {
+     if (layout === "first") {
+       return (
+         <Flag
+           countryCode={countryCode}
+-          flagSize={flagSize ? flagSize : DEFAULT_THEME.flagSize}
++          flagSize={flagSize || DEFAULT_THEME.flagSize}
++          withFlagButton
+         />
+       );
+     }
+     return <View />;
+   };
+ 
+-  render() {
+-    const {
+-      withShadow,
+-      withDarkTheme,
+-      codeTextStyle,
+-      textInputProps,
+-      textInputStyle,
+-      autoFocus,
+-      placeholder,
+-      disableArrowIcon,
+-      flagButtonStyle,
+-      containerStyle,
+-      textContainerStyle,
+-      renderDropdownImage,
+-      countryPickerProps = {},
+-      filterProps = {},
+-      countryPickerButtonStyle,
+-      layout = "first",
+-    } = this.props;
+-    const { modalVisible, code, countryCode, number, disabled } = this.state;
+-    return (
+-      <CountryModalProvider>
+-        <View
++  return (
++    <CountryModalProvider>
++      <View
++        style={[
++          styles.container,
++          withShadow ? styles.shadow : {},
++          containerStyle || {},
++        ]}
++      >
++        <TouchableOpacity
+           style={[
+-            styles.container,
+-            withShadow ? styles.shadow : {},
+-            containerStyle ? containerStyle : {},
++            styles.flagButtonView,
++            layout === "second" ? styles.flagButtonExtraWidth : {},
++            flagButtonStyle || {},
++            countryPickerButtonStyle || {},
+           ]}
++          disabled={isDisabled}
++          onPress={() => setModalVisible(true)}
+         >
+-          <TouchableOpacity
+-            style={[
+-              styles.flagButtonView,
+-              layout === "second" ? styles.flagButtonExtraWidth : {},
+-              flagButtonStyle ? flagButtonStyle : {},
+-              countryPickerButtonStyle ? countryPickerButtonStyle : {},
+-            ]}
+-            disabled={disabled}
+-            onPress={() => this.setState({ modalVisible: true })}
+-          >
+-            <CountryPicker
+-              onSelect={this.onSelect}
+-              withEmoji
+-              withFilter
+-              withFlag
+-              filterProps={filterProps}
+-              countryCode={countryCode}
+-              withCallingCode
+-              disableNativeModal={disabled}
+-              visible={modalVisible}
+-              theme={withDarkTheme ? DARK_THEME : DEFAULT_THEME}
+-              renderFlagButton={this.renderFlagButton}
+-              onClose={() => this.setState({ modalVisible: false })}
+-              {...countryPickerProps}
+-            />
+-            {code && layout === "second" && (
+-              <Text
+-                style={[styles.codeText, codeTextStyle ? codeTextStyle : {}]}
+-              >{`+${code}`}</Text>
+-            )}
+-            {!disableArrowIcon && (
+-              <React.Fragment>
+-                {renderDropdownImage
+-                  ? renderDropdownImage
+-                  : this.renderDropdownImage()}
+-              </React.Fragment>
+-            )}
+-          </TouchableOpacity>
+-          <View
+-            style={[
+-              styles.textContainer,
+-              textContainerStyle ? textContainerStyle : {},
+-            ]}
+-          >
+-            {code && layout === "first" && (
+-              <Text
+-                style={[styles.codeText, codeTextStyle ? codeTextStyle : {}]}
+-              >{`+${code}`}</Text>
+-            )}
++          <CountryPicker
++            onSelect={onSelect}
++            withEmoji
++            withFilter
++            withFlag
++            filterProps={filterProps}
++            countryCode={countryCode}
++            withCallingCode
++            disableNativeModal={isDisabled}
++            visible={modalVisible}
++            theme={withDarkTheme ? DARK_THEME : DEFAULT_THEME}
++            renderFlagButton={renderFlagButton}
++            onClose={() => setModalVisible(false)}
++            {...countryPickerProps}
++          />
++          {!disableArrowIcon && (
++            <>{renderDropdownImage ? renderDropdownImage() : renderDropdownImageHandler()}</>
++          )}
++        </TouchableOpacity>
++        <View
++          style={[styles.textContainer, textContainerStyle || {}]}
++        >
++          {code && layout === "first" && (
++            <View style={styles.codeWrapper}>
++              <Text style={[styles.codeText, codeTextStyle || {}]}>
++                {`+${code}`}
++              </Text>
++            </View>
++          )}
++          <View style={styles.textInputWrapper}>
+             <TextInput
+-              style={[styles.numberText, textInputStyle ? textInputStyle : {}]}
+-              placeholder={placeholder ? placeholder : "Phone Number"}
+-              onChangeText={this.onChangeText}
++              ref={inputRef}
++              style={[styles.numberText, textInputStyle || {}]}
++              placeholder={placeholder || "Phone Number"}
++              onChangeText={onChangeTextHandler}
+               value={number}
+-              editable={disabled ? false : true}
+-              selectionColor="black"
+-              keyboardAppearance={withDarkTheme ? "dark" : "default"}
++              editable={!isDisabled}
+               keyboardType="number-pad"
+-              autoFocus={autoFocus}
+               {...textInputProps}
+             />
+           </View>
+         </View>
+-      </CountryModalProvider>
+-    );
+-  }
+-}
++      </View>
++    </CountryModalProvider>
++  );
++})
++
++export default PhoneInput;
+ 
+ export const isValidNumber = (number, countryCode) => {
+   try {
+diff --git a/node_modules/react-native-phone-number-input/lib/styles.js b/node_modules/react-native-phone-number-input/lib/styles.js
+index 1789ce7..5eeef06 100644
+--- a/node_modules/react-native-phone-number-input/lib/styles.js
++++ b/node_modules/react-native-phone-number-input/lib/styles.js
+@@ -40,25 +40,32 @@ const styles = StyleSheet.create({
+     width: 12,
+   },
+   textContainer: {
+-    flex: 1,
+-    backgroundColor: '#F8F9F9',
+-    paddingHorizontal: wp(4),
+-    paddingVertical: hp(2),
++    width : '100%',
+     textAlign: 'left',
+     flexDirection: 'row',
+-    alignItems: 'center',
++    alignItems: 'stretch',
+   },
+   codeText: {
+     fontSize: 16,
+-    marginRight: 10,
+     fontWeight: '500',
+     color: '#000000',
+   },
+   numberText: {
+     fontSize: 16,
+     color: '#000000',
+-    flex: 1,
+   },
++  codeWrapper : {
++    height : '100%',
++    paddingHorizontal : 10,
++    alignItems : 'center',
++    justifyContent : 'center'
++  },
++  textInputWrapper : {
++    width : '100%',
++    height : '100%',
++    top : -1,
++    paddingRight : 10
++  }
+ });
+ 
+ export default styles;

@@ -1,16 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { waitForSeconds } from '$helpers/utils.helper';
-import { Portal } from 'react-native-portalize';
-import BottomSheet, { BottomSheetMethods } from '@devvie/bottom-sheet';
 import { MediaType } from 'react-native-image-picker';
-import { IMediaFile, ITheme } from '$types/common.types';
+import { BottomSheetRef, IMediaFile, ITheme } from '$types/common.types';
 import { useAppTheme, useDocumentPicker, useImagePicker } from '$hooks/common';
 import { IconButton } from '$components/ui';
 import { AskPermissionModal } from '$components/modals';
 import { CameraOutlineIcon, FolderOpenOutlineIcon, GalleryImagesOutlineIcon } from '$assets/icons';
+import BaseBottomSheet from './base-bottom-sheet.component';
 
 interface MediaUploadOptionsSheetProps {
     onChooseFile: (e: IMediaFile[]) => void;
@@ -32,7 +31,7 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
     const styles = styling(theme);
 
     const permissionRef = React.useRef<any>(null);
-    const sheetRef = React.useRef<BottomSheetMethods>(null);
+    const sheetRef = React.useRef<BottomSheetRef>(null);
 
     const { openGallery, openCamera } = useImagePicker(props.onChooseFile, () => permissionRef.current?.open('media'));
     const { openPicker } = useDocumentPicker(props.onChooseFile);
@@ -65,19 +64,15 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
     ]), [mediaType, colors, openCamera, openGallery, openPicker]);
 
     React.useImperativeHandle(ref, () => ({
-        open: () => sheetRef.current?.open(0),
+        open: () => sheetRef.current?.open(),
         close: () => sheetRef.current?.close()
     }), [])
 
     return (
-        <Portal>
-            <BottomSheet
+        <>
+            <BaseBottomSheet
                 ref={sheetRef}
-                height={moderateScale(200)}
-                closeOnBackdropPress
-                closeOnDragDown
-                style={styles.sheetWrapper}
-                dragHandleStyle={styles.dragHandleStyle}
+                sheetHeight={moderateScale(200)}
             >
                 <View style={styles.options}>
                     {OPTIONS.map((option, idx) => (
@@ -94,13 +89,13 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
                         </IconButton>
                     ))}
                 </View>
-            </BottomSheet>
+            </BaseBottomSheet>
 
             <AskPermissionModal
                 ref={permissionRef}
                 theme={theme}
             />
-        </Portal>
+        </>
     )
 })
 
@@ -108,10 +103,10 @@ export default React.memo(MediaUploadOptionsSheet);
 
 const styling = (theme: ITheme) => StyleSheet.create({
     sheetWrapper: {
-        backgroundColor: Colors[theme].background1
+        backgroundColor: COLORS[theme].background1
     },
     dragHandleStyle: {
-        backgroundColor: Colors[theme].text,
+        backgroundColor: COLORS[theme].text,
     },
     options: {
         width: '100%',
@@ -133,12 +128,12 @@ const styling = (theme: ITheme) => StyleSheet.create({
         justifyContent: 'center',
         borderRadius: moderateScale(40),
         borderWidth: moderateScale(1),
-        borderColor: Colors[theme].primary
+        borderColor: COLORS[theme].primary
     },
     label: {
         fontFamily: EFonts.MEDIUM,
         fontSize: EFontSize.LG,
-        color: Colors[theme].text,
+        color: COLORS[theme].text,
     },
     container: {
         flex: 1,

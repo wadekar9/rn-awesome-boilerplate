@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
-import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
-import { Colors } from '$constants/colors.constants';
+import { View, Text, StyleSheet, TextInputProps } from 'react-native';
 import { useAppTheme } from '$hooks/common';
-import { IndianFlagIcon } from '$assets/icons';
 import { ITheme } from '$types/common.types';
-import { IconButton } from '../buttons';
-import MaskInput, { MaskInputProps, Masks } from 'react-native-mask-input';
+import PhoneInput from "react-native-phone-number-input";
+import { removeCountryCode } from '$helpers/utils.helper';
+import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
+import { COLORS } from '$constants/colors.constants';
+import { ChevronDownOutlineIcon } from '$assets/icons';
 
 interface PhoneNumberInputRef {
     clear: () => void;
@@ -14,15 +14,17 @@ interface PhoneNumberInputRef {
     focus: () => void;
 }
 
-interface PhoneNumberInputProps extends Omit<MaskInputProps, 'style' | 'editable' | 'multiline'> {
+interface PhoneNumberInputProps extends Omit<TextInputProps, 'style' | 'editable' | 'multiline'> {
+    countryCode: string;
     label?: string;
     error?: string;
     disabled?: boolean;
+    onChangeFormattedText?: (text: string) => void;
 }
 
 const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputProps>(({
     label,
-    secureTextEntry,
+    countryCode,
     error,
     disabled = false,
     ...props
@@ -31,13 +33,13 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
     const { colors, theme } = useAppTheme();
     const styles = styling(theme);
 
-    const inputRef = React.useRef<TextInput>(null);
+    const inputRef = React.useRef<any>(null);
     const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
     React.useImperativeHandle(ref, () => ({
-        clear: () => null,
-        blur: () => null,
-        focus: () => null,
+        clear: () => inputRef.current?.clear(),
+        blur: () => inputRef.current?.blur(),
+        focus: () => inputRef.current?.focus(),
     }), [])
 
     const handleFocus = React.useCallback((e: any) => {
@@ -50,8 +52,8 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
         if (props.onBlur) props.onBlur(e);
     }, [props]);
 
-    const handleSubmitEditing = React.useCallback((e: any) => {
-        if (!props.onSubmitEditing) {
+    const handleSubmitEditing = React.useCallback((e : any) => {
+        if (!props.onSubmitEditing){
             inputRef.current?.blur();
             return
         }
@@ -61,34 +63,60 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
     return (
         <View style={styles.wrapper}>
             {label && <Text style={styles.label}>{label}</Text>}
-            <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors.primary }]}>
-                <View style={[styles.container]}>
-                    <IconButton style={styles.icon}>
-                        <IndianFlagIcon />
-                    </IconButton>
-                    <MaskInput
-                        {...props}
-                        ref={inputRef}
-                        numberOfLines={1}
-                        multiline={false}
-                        style={styles.textInput}
-                        placeholder={props.placeholder || "Enter Contact Number"}
-                        placeholderTextColor={colors.grey}
-                        cursorColor={colors.primary}
-                        secureTextEntry={false}
-                        editable={!disabled}
-                        keyboardAppearance={theme}
-                        keyboardType={'number-pad'}
-                        returnKeyType={props.returnKeyType || 'done'}
-                        blurOnSubmit={props.blurOnSubmit || false}
-                        maxLength={props.maxLength || 14}
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        onSubmitEditing={handleSubmitEditing}
-                        mask={Masks.USA_PHONE}
-                    />
-                </View>
-            </View>
+            <PhoneInput
+                ref={inputRef}
+                defaultValue={props.value}
+                defaultCode={countryCode as any || 'GB'}
+                layout="first"
+                onChangeText={props.onChangeText}
+                onChangeFormattedText={props.onChangeFormattedText}
+                withDarkTheme={theme == 'dark'}
+                withShadow={false}
+                autoFocus={false}
+                placeholder={props.placeholder || "Enter Contact Number"}
+                disabled={disabled}
+                textInputProps={{
+                    value: removeCountryCode(props.value || ''),
+                    placeholderTextColor: colors.gray5,
+                    editable: !disabled,
+                    cursorColor: colors.primary,
+                    onFocus: handleFocus,
+                    onBlur: handleBlur,
+                    onSubmitEditing: handleSubmitEditing,
+                    keyboardType: 'number-pad',
+                    returnKeyType: props.returnKeyType || 'done',
+                    blurOnSubmit: props.blurOnSubmit || false,
+                    autoFocus: false,
+                    keyboardAppearance: theme,
+                    multiline: false,
+                    numberOfLines: 1
+                }}
+                containerStyle={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors.primary }]}
+                textContainerStyle={{ height: moderateScale(50), backgroundColor: COLORS[theme].background }}
+                codeTextStyle={{
+                    fontFamily: EFonts.REGULAR,
+                    fontSize: EFontSize.XL,
+                    color: COLORS[theme].text3
+                }}
+                textInputStyle={{
+                    flex: 1,
+                    height: '100%',
+                    fontFamily: EFonts.REGULAR,
+                    fontSize: EFontSize.XL,
+                    color: COLORS[theme].text3,
+                    backgroundColor: COLORS[theme].background
+                }}
+                flagButtonStyle={{
+                    borderRightWidth: moderateScale(1.5),
+                    borderRightColor: COLORS[theme].border
+                }}
+                renderDropdownImage={() => (
+                    <View style={{ height: '100%', justifyContent: 'center' }}>
+                        <ChevronDownOutlineIcon width={moderateScale(12)} height={moderateScale(7)} fill={colors.text3} />
+                    </View>
+                )}
+            />
+
             {error && (
                 <View style={styles.errorContainer}>
                     <Text numberOfLines={3} style={styles.errorText}>{error}</Text>
@@ -105,45 +133,48 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
     },
     label: {
-        color: Colors[theme].text,
-        fontFamily: EFonts.REGULAR,
+        color: COLORS[theme].text,
+        fontFamily: EFonts.BOLD,
+        fontSize: EFontSize.BASE,
         textAlign: 'left',
-        marginBottom: moderateScale(4)
+        letterSpacing: 0.25,
+        marginBottom: moderateScale(8),
     },
     containerWrapper: {
-        borderWidth: moderateScale(1),
-        borderRadius: moderateScale(8),
-        borderColor: Colors[theme].border,
+        borderWidth: moderateScale(1.5),
+        borderRadius: moderateScale(6),
+        backgroundColor: COLORS[theme].background,
+        borderColor: COLORS[theme].border,
+        height: moderateScale(50),
         overflow: 'hidden',
+        padding: 0,
+        width: '100%'
     },
     container: {
         flexDirection: 'row',
         alignItems: 'stretch',
         height: moderateScale(50),
-        gap: moderateScale(5),
-        paddingRight: moderateScale(15)
     },
     textInput: {
         flex: 1,
         height: '100%',
         fontFamily: EFonts.REGULAR,
         fontSize: EFontSize.XL,
-        color: Colors[theme].text
+        color: COLORS[theme].text,
     },
     errorContainer: {
         marginTop: moderateScale(8),
     },
     errorText: {
         fontFamily: EFonts.REGULAR,
-        fontSize: moderateScale(13),
-        color: Colors[theme].primary,
+        fontSize: EFontSize.SM,
+        color: COLORS[theme].red,
         flexWrap: 'wrap',
     },
     icon: {
         height: moderateScale(50),
-        paddingHorizontal: moderateScale(12),
         alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'stretch'
-    }
+        alignSelf: 'stretch',
+    },
 });
