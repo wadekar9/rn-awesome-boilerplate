@@ -4,7 +4,7 @@ import { ThemedView } from '$components/containers'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { useAppTheme } from '$hooks/common'
 import { ITheme } from '$types/common.types'
-import { Colors } from '$constants/colors.constants'
+import { COLORS } from '$constants/colors.constants'
 import { ICONS } from '$assets/images'
 
 const EmptyStatePage: React.FC = () => {
@@ -48,11 +48,11 @@ const styling = (theme: ITheme) => StyleSheet.create({
   label: {
     fontFamily: EFonts.SEMI_BOLD,
     fontSize: EFontSize['2XL'],
-    color: Colors[theme].text
+    color: COLORS[theme].text
   },
   description: {
     fontFamily: EFonts.MEDIUM,
     fontSize: EFontSize.LG,
-    color: Colors[theme].grey
+    color: COLORS[theme].gray
   }
 })

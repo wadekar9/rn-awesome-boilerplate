@@ -3,7 +3,7 @@ import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 
 interface BaseRadioButtonProps {
   value: boolean;
@@ -79,7 +79,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     width: moderateScale(22),
     height: moderateScale(22),
     borderWidth: moderateScale(2),
-    borderColor: Colors[theme].primary,
+    borderColor: COLORS[theme].primary,
     borderRadius: moderateScale(11),
     overflow: 'hidden',
     alignItems: 'center',
@@ -88,7 +88,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   container: {
     width: moderateScale(12),
     height: moderateScale(12),
-    backgroundColor: Colors[theme].primary,
+    backgroundColor: COLORS[theme].primary,
     borderRadius: moderateScale(100),
   },
   flexWrapper: {
@@ -99,7 +99,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   label: {
     fontFamily: EFonts.MEDIUM,
     textTransform: 'capitalize',
-    color: Colors[theme].text,
+    color: COLORS[theme].text,
     fontSize: moderateScale(14)
   }
 })

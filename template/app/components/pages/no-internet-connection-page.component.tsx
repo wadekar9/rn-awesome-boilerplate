@@ -5,7 +5,7 @@ import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { ICONS } from '$assets/images'
 import { ITheme } from '$types/common.types'
 import { useAppTheme } from '$hooks/common'
-import { Colors } from '$constants/colors.constants'
+import { COLORS } from '$constants/colors.constants'
 import { BaseButton } from '$components/ui'
 import { ReloadOutlineIcon } from '$assets/icons'
 import { useNetInfoInstance } from "@react-native-community/netinfo";
@@ -25,7 +25,7 @@ const NoInternetConnectionPage: React.FC = () => {
         return;
       };
 
-      navigation.navigate('Home');
+      // If there's no back stack, navigate to a default screen, e.g., Home
     }
   }, [isConnected])
 
@@ -72,12 +72,12 @@ const styling = (theme: ITheme) => StyleSheet.create({
   label: {
     fontFamily: EFonts.SEMI_BOLD,
     fontSize: EFontSize['2XL'],
-    color: Colors[theme].text
+    color: COLORS[theme].text
   },
   description: {
     fontFamily: EFonts.MEDIUM,
     fontSize: EFontSize.LG,
-    color: Colors[theme].grey
+    color: COLORS[theme].gray
   },
   buttonContainer: {
     width: 'auto',

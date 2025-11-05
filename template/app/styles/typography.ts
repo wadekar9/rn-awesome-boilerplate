@@ -1,9 +1,9 @@
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { EFonts, EFontSize } from '$constants/styles.constants';
 import { TextStyle } from 'react-native';
 
 const baseTextStyles: TextStyle = {
-  color: Colors.light.text,
+  color: COLORS.light.text,
   fontSize: EFontSize.BASE,
   fontFamily: EFonts.REGULAR
 };

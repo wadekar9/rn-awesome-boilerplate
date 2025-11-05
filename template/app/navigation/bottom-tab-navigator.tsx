@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabsRoutes } from './routes';
-import { PrivateStackScreenProps } from '$types/navigation';
+import { BottomTabStackParamsList, PrivateStackScreenProps } from '$types/navigation';
 import { EBottomTabScreens, EPrivateStackScreens } from '$constants/screen.constants';
 
-const BottomTab = createBottomTabNavigator();
+const BottomTab = createBottomTabNavigator<BottomTabStackParamsList>();
 
 const BottomTabNavigator: React.FC<PrivateStackScreenProps<EPrivateStackScreens.BOTTOM_TAB_NAVIGATOR>> = () => {
 

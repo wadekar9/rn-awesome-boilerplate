@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TextInputProps, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
 
@@ -34,9 +34,9 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
   React.useImperativeHandle(ref, () => ({
-    clear: () => null,
-    blur: () => null,
-    focus: () => null,
+    clear: () => inputRef.current?.clear(),
+    blur: () => inputRef.current?.blur(),
+    focus: () => inputRef.current?.focus()
   }), [])
 
   const handleFocus = React.useCallback((e: any) => {
@@ -77,7 +77,7 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
             multiline={true}
             style={styles.textInput}
             placeholder={props.placeholder || "Type Something here..."}
-            placeholderTextColor={colors.grey}
+            placeholderTextColor={colors.gray}
             cursorColor={colors.primary}
             editable={!disabled}
             keyboardAppearance={theme}
@@ -104,7 +104,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     width: '100%',
   },
   label: {
-    color: Colors[theme].text,
+    color: COLORS[theme].text,
     fontFamily: EFonts.REGULAR,
     textAlign: 'left',
     textTransform: 'capitalize',
@@ -113,7 +113,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   containerWrapper: {
     borderWidth: moderateScale(1),
     borderRadius: moderateScale(8),
-    borderColor: Colors[theme].border,
+    borderColor: COLORS[theme].border,
     overflow: 'hidden',
   },
   container: {
@@ -124,7 +124,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     height: '100%',
     fontFamily: EFonts.REGULAR,
     fontSize: EFontSize.XL,
-    color: Colors[theme].text,
+    color: COLORS[theme].text,
     paddingVertical: moderateScale(10),
   },
   errorContainer: {
@@ -133,7 +133,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   errorText: {
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(13),
-    color: Colors[theme].primary,
+    color: COLORS[theme].primary,
     flexWrap: 'wrap',
   },
   icon: {

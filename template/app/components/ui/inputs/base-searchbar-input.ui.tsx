@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput, View } from 'react-native'
 import React from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
-import { Colors } from '$constants/colors.constants'
+import { COLORS } from '$constants/colors.constants'
 import { useAppTheme, useDebounce } from '$hooks/common';
 import { SearchOutlineIcon } from '$assets/icons';
 import { ITheme } from '$types/common.types';
@@ -50,7 +50,7 @@ const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>((pr
                     value={search}
                     onChangeText={setSearch}
                     placeholder='Search....'
-                    placeholderTextColor={colors.grey}
+                    placeholderTextColor={colors.gray}
                     style={styles.input}
                     returnKeyType={'search'}
                     returnKeyLabel={'Search'}
@@ -74,11 +74,11 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
         height: moderateScale(50),
         borderRadius: moderateScale(8),
-        backgroundColor: Colors[theme].background1,
+        backgroundColor: COLORS[theme].background1,
         paddingHorizontal: moderateScale(12),
         gap: moderateScale(10),
         borderWidth: moderateScale(1),
-        borderColor: Colors[theme].border,
+        borderColor: COLORS[theme].border,
         flexDirection: 'row',
         alignItems: 'stretch'
     },
@@ -89,7 +89,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     input: {
         fontFamily: EFonts.REGULAR,
         fontSize: EFontSize.LG,
-        color: Colors[theme].text,
+        color: COLORS[theme].text,
         height: '100%'
     }
 })

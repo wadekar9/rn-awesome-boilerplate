@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
 import { EFonts, moderateScale } from '$constants/styles.constants';
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { CalendarOutlineIcon } from '$assets/icons';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 
@@ -47,8 +47,9 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
     setIsDatePickerVisible(false);
   }
 
-  function onConfirmDate(event: DateTimePickerEvent, date: Date) {
+  function onConfirmDate(event: DateTimePickerEvent, date?: Date) {
     hidePicker();
+    if (event.type === 'dismissed' || !date) return;
     onDateChange && onDateChange(date);
   }
 
@@ -101,16 +102,16 @@ const styling = (theme: ITheme) => StyleSheet.create({
   },
   container: {
     height: moderateScale(50),
-    backgroundColor: Colors[theme].background1,
+    backgroundColor: COLORS[theme].background1,
     borderWidth: moderateScale(1),
     borderRadius: moderateScale(8),
-    borderColor: Colors[theme].border,
+    borderColor: COLORS[theme].border,
     overflow: 'hidden',
     flexDirection: 'row',
     alignItems: 'stretch',
   },
   label: {
-    color: Colors[theme].text,
+    color: COLORS[theme].text,
     fontFamily: EFonts.REGULAR,
     textAlign: 'left',
     marginBottom: moderateScale(4),
@@ -128,16 +129,16 @@ const styling = (theme: ITheme) => StyleSheet.create({
   errorText: {
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(13),
-    color: Colors[theme].error,
+    color: COLORS[theme].error,
     flexWrap: 'wrap',
   },
   value: {
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(16),
-    color: Colors[theme].text,
+    color: COLORS[theme].text,
   },
   placeholder: {
-    color: Colors[theme].gray,
+    color: COLORS[theme].gray,
   },
   content: {
     flex: 1,

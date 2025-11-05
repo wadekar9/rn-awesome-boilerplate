@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useMemo, useState } from 'react'
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useAppTheme } from '$hooks/common';
@@ -38,7 +38,7 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
                     placeholderStyle={[styles.value, styles.placeholder]}
                     selectedTextStyle={styles.value}
                     itemTextStyle={styles.itemTextStyle}
-                    containerStyle={{ backgroundColor: colors.surface }}
+                    containerStyle={{ backgroundColor: colors.background3 }}
                     data={DATA}
                     maxHeight={moderateScale(200)}
                     labelField="label"
@@ -62,9 +62,9 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
                     renderRightIcon={(visible) => (
                         <View style={styles.icon}>
                             {visible ?
-                                <ChevronUpOutlineIcon stroke={colors.grey} width={moderateScale(24)} height={moderateScale(24)} />
+                                <ChevronUpOutlineIcon stroke={colors.gray} width={moderateScale(24)} height={moderateScale(24)} />
                                 :
-                                <ChevronDownOutlineIcon stroke={colors.grey} width={moderateScale(24)} height={moderateScale(24)} />
+                                <ChevronDownOutlineIcon stroke={colors.gray} width={moderateScale(24)} height={moderateScale(24)} />
                             }
                         </View>
                     )}
@@ -86,7 +86,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
     },
     label: {
-        color: Colors[theme].text,
+        color: COLORS[theme].text,
         fontFamily: EFonts.REGULAR,
         fontSize: moderateScale(16),
         textAlign: 'left',
@@ -95,16 +95,16 @@ const styling = (theme: ITheme) => StyleSheet.create({
     value: {
         fontFamily: EFonts.REGULAR,
         fontSize: moderateScale(16),
-        color: Colors[theme].text,
+        color: COLORS[theme].text,
         textTransform: 'capitalize'
     },
     placeholder: {
-        color: Colors[theme].grey
+        color: COLORS[theme].gray
     },
     containerWrapper: {
         borderWidth: StyleSheet.hairlineWidth,
         borderRadius: moderateScale(8),
-        borderColor: Colors[theme].border,
+        borderColor: COLORS[theme].border,
         overflow: 'hidden',
         elevation: 0
     },
@@ -123,7 +123,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     itemTextStyle: {
         fontFamily: EFonts.REGULAR,
         fontSize: moderateScale(16),
-        color: Colors[theme].text,
+        color: COLORS[theme].text,
         textTransform: 'capitalize'
     },
     errorContainer: {
@@ -132,7 +132,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     errorText: {
         fontFamily: EFonts.REGULAR,
         fontSize: moderateScale(13),
-        color: Colors[theme].primary,
+        color: COLORS[theme].primary,
         flexWrap: 'wrap',
     }
 })

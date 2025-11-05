@@ -1,7 +1,7 @@
 import { StyleSheet, View, Modal, Linking, Text } from 'react-native'
 import React from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { waitForSeconds } from '$helpers/utils.helper';
 import { ITheme } from '$types/common.types';
 import { useAppTranslation } from '$hooks/common';
@@ -104,7 +104,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
         height: undefined,
         padding: moderateScale(20),
-        backgroundColor: Colors[theme].background1,
+        backgroundColor: COLORS[theme].background1,
         borderRadius: moderateScale(10),
         gap: moderateScale(10),
     },
@@ -114,7 +114,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     description: {
         fontFamily: EFonts.MEDIUM,
         fontSize: moderateScale(14),
-        color: Colors[theme].text
+        color: COLORS[theme].text
     },
     actions: {
         flexDirection: 'row',
@@ -125,6 +125,6 @@ const styling = (theme: ITheme) => StyleSheet.create({
     label: {
         fontFamily: EFonts.BOLD,
         fontSize: EFontSize.LG,
-        color: Colors[theme].primary
+        color: COLORS[theme].primary
     }
 })

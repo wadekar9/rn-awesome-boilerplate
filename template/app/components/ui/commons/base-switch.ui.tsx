@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { ITheme } from '$types/common.types';
 
 interface BaseSwitchProps {
@@ -74,10 +74,10 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     wrapper: {
         width: DEFAULT_DIMENSIONS.width,
         height: DEFAULT_DIMENSIONS.height,
-        backgroundColor: Colors[theme].grey,
+        backgroundColor: COLORS[theme].gray,
         borderRadius: DEFAULT_DIMENSIONS.radius,
         borderWidth: moderateScale(2),
-        borderColor: Colors[theme].grey,
+        borderColor: COLORS[theme].gray,
         overflow: 'hidden',
     },
     disabledWrapper: {
@@ -85,7 +85,7 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     },
     background: {
         position: 'absolute',
-        backgroundColor: Colors[theme].primary,
+        backgroundColor: COLORS[theme].primary,
         width: '100%',
         height: '100%',
         zIndex: -1,
@@ -93,7 +93,7 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     circle: {
         height: DEFAULT_DIMENSIONS.circleSize,
         width: DEFAULT_DIMENSIONS.circleSize,
-        backgroundColor: Colors[theme].white,
+        backgroundColor: COLORS[theme].white,
         borderRadius: DEFAULT_DIMENSIONS.circleRadius,
         marginVertical: 2,
         zIndex: 1,

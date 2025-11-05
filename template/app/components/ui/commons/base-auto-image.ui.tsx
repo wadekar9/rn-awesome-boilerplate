@@ -3,7 +3,7 @@ import { moderateScale } from "$constants/styles.constants"
 import { useAutoImage } from "$hooks/common";
 import { Platform, StyleSheet, StyleProp, ViewStyle, View } from "react-native"
 import FastImage, { FastImageProps, ImageStyle, Source } from "@d11/react-native-fast-image";
-import { Colors } from "$constants/colors.constants";
+import { COLORS } from "$constants/colors.constants";
 
 export interface AutoImageProps extends Omit<FastImageProps, 'style'> {
     width?: number;
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     wrapper: {
         width: moderateScale(100),
         height: moderateScale(100),
-        backgroundColor: Colors.light.grey,
+        backgroundColor: COLORS.light.gray,
         overflow: 'hidden'
     },
     image: {

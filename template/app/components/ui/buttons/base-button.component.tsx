@@ -2,7 +2,7 @@ import { Pressable, PressableProps, PressableStateCallbackType, StyleProp, Style
 import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants'
 import { ITheme } from '$types/common.types';
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 
 interface BaseButtonProps extends PressableProps {
   theme?: ITheme;
@@ -61,12 +61,12 @@ const styling = (theme: ITheme) => StyleSheet.create({
     overflow: 'hidden',
     borderRadius: moderateScale(5),
     gap: moderateScale(10),
-    backgroundColor: Colors[theme].primary
+    backgroundColor: COLORS[theme].primary
   },
   label: {
     fontFamily: EFonts.MEDIUM,
     fontSize: moderateScale(15),
-    color: Colors[theme].white,
+    color: COLORS[theme].white,
     textTransform: 'capitalize'
   }
 })

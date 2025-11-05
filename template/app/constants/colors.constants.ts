@@ -16,7 +16,7 @@ const palette = {
   secondary: '#89D3DF',
 } as const;
 
-export const Colors = {
+export const COLORS = {
   light: {
 
     gray: '#8E8E93',

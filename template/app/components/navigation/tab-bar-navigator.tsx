@@ -1,4 +1,4 @@
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { DEVICE_WIDTH, moderateScale } from '$constants/styles.constants';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
@@ -88,7 +88,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
         height: '100%',
         flexDirection: 'row',
-        backgroundColor: Colors[theme].background1,
+        backgroundColor: COLORS[theme].background1,
         borderRadius: moderateScale(50),
         overflow: 'hidden'
     },
@@ -99,8 +99,8 @@ const styling = (theme: ITheme) => StyleSheet.create({
         position: 'absolute',
         borderRadius: moderateScale(50),
         borderWidth: moderateScale(1),
-        borderColor: Colors[theme].border,
-        shadowColor: Colors[theme].black,
+        borderColor: COLORS[theme].border,
+        shadowColor: COLORS[theme].black,
         shadowOffset: {
             width: 0,
             height: 2,
@@ -113,7 +113,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         alignItems: 'center',
         justifyContent: 'flex-end',
-        backgroundColor: Colors[theme].primary
+        backgroundColor: COLORS[theme].primary
     },
     indicator: {
         width: moderateScale(24),

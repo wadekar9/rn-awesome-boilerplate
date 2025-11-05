@@ -1,7 +1,7 @@
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import React from 'react'
 import { EFonts, EFontSize } from '$constants/styles.constants';
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 
 interface TextButtonProps {
   disabled?: boolean;
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   label : {
     fontFamily : EFonts.MEDIUM,
     fontSize : EFontSize.BASE,
-    color : Colors.light.primary,
+    color : COLORS.light.primary,
     textDecorationLine : 'underline'
   }
 })

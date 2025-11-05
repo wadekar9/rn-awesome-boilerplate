@@ -2,8 +2,7 @@ import React from 'react';
 import { Keyboard, NativeSyntheticEvent, Platform, StyleSheet, TextInput, TextInputContentSizeChangeEventData, View } from 'react-native';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import EmojiPicker, { EmojiType, en } from 'rn-emoji-keyboard'
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { waitForSeconds } from '$helpers/utils.helper';
 import { IMediaFile, ITheme } from '$types/common.types';
 import { useAppTheme, useDocumentPicker } from '$hooks/common';
@@ -29,7 +28,6 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
   const { onSend, onSendMedia } = props;
   const { theme, colors } = useAppTheme();
 
-  const [isEmojiPickerOpen, setIsEmojiPickerOpen] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string>('');
   const [height, setHeight] = React.useState<number>(DEFAULT_HEIGHT);
   const insets = useSafeAreaInsets();
@@ -64,11 +62,6 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
     }
   }, [text, onSend, DEFAULT_HEIGHT]);
 
-  const onSelectEmoji = React.useCallback((emoji: EmojiType) => {
-    setIsEmojiPickerOpen(false);
-    setText((prev) => prev.concat(emoji.emoji));
-  }, []);
-
   const iosPlatformStyles = React.useMemo(() => {
     return Platform.OS === 'ios' ? {
       top: (height > DEFAULT_HEIGHT) ? 0 : moderateScale(10),
@@ -84,7 +77,7 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
             style={styles.icon}
             onPress={() => {
               Keyboard.dismiss();
-              waitForSeconds(() => setIsEmojiPickerOpen(true), 500);
+              waitForSeconds(() => console.log("Emoji button pressed"), 500);
             }}
           >
             <EmojiOutlineIcon fill={colors.text} />
@@ -95,7 +88,7 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
             onChangeText={setText}
             style={[styles.textInput, { height }, iosPlatformStyles]}
             placeholder="Write a message..."
-            placeholderTextColor={colors.grey}
+            placeholderTextColor={colors.gray}
             cursorColor={colors.primary}
             underlineColorAndroid="transparent"
             keyboardAppearance="light"
@@ -122,25 +115,6 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
           </IconButton>
         </View>
       </View>
-
-      <EmojiPicker
-        onEmojiSelected={onSelectEmoji}
-        open={isEmojiPickerOpen}
-        onClose={() => setIsEmojiPickerOpen(false)}
-        categoryPosition="top"
-        translation={en}
-        theme={{
-          knob: Colors[theme].white,
-          container: Colors[theme].background1,
-          header: Colors[theme].text,
-          category: {
-            icon: Colors[theme].primary,
-            iconActive: Colors[theme].white,
-            container: Colors[theme].background,
-            containerActive: Colors[theme].primary
-          },
-        }}
-      />
 
       <MediaUploadOptionsSheet
         ref={mediaOptionSheet}
@@ -174,7 +148,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     borderRadius: moderateScale(30),
     overflow: 'hidden',
     alignSelf: 'flex-end',
-    backgroundColor: Colors[theme].primary
+    backgroundColor: COLORS[theme].primary
   },
   sendButton: {
     alignItems: 'center',
@@ -186,9 +160,9 @@ const styling = (theme: ITheme) => StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     borderWidth: moderateScale(1),
-    borderColor: Colors[theme].border,
+    borderColor: COLORS[theme].border,
     borderRadius: moderateScale(10),
-    backgroundColor: Colors[theme].background,
+    backgroundColor: COLORS[theme].background,
     overflow: 'hidden'
   },
   textInput: {
@@ -196,7 +170,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     height: 'auto',
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(16),
-    color: Colors[theme].text
+    color: COLORS[theme].text
   },
   icon: {
     paddingHorizontal: moderateScale(12),

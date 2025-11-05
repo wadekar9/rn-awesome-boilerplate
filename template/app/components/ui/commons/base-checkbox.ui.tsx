@@ -3,7 +3,7 @@ import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
-import { Colors } from '$constants/colors.constants';
+import { COLORS } from '$constants/colors.constants';
 import { CheckmarkOutlineIcon } from '$assets/icons';
 
 interface BaseCheckboxProps {
@@ -80,14 +80,14 @@ const styling = (theme: ITheme) => StyleSheet.create({
     width: moderateScale(22),
     height: moderateScale(22),
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: Colors[theme].grey,
+    borderColor: COLORS[theme].gray,
     borderRadius: moderateScale(5),
     overflow: 'hidden'
   },
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: Colors[theme].primary,
+    backgroundColor: COLORS[theme].primary,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -99,7 +99,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   label: {
     fontFamily: EFonts.MEDIUM,
     textTransform: 'capitalize',
-    color: Colors[theme].text,
+    color: COLORS[theme].text,
     fontSize: moderateScale(14)
   }
 })
