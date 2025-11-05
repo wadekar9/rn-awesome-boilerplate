@@ -1,67 +1,36 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json",
+  "extends": "@react-native/typescript-config",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules", "**/Pods"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "allowJs": false,
     "jsx": "react-native",
     "noImplicitAny": true,
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "target": "ESNext",
-    "lib": [
-      "ES2017"
-    ],
+    "lib": ["ES2017"],
     "paths": {
-      "$assets/*": [
-        "app/assets/*"
-      ],
-      "$components/*": [
-        "app/components/*"
-      ],
-      "$constants/*": [
-        "app/constants/*"
-      ],
-      "$context/*": [
-        "app/context/*"
-      ],
-      "$dev/*": [
-        "app/dev/*"
-      ],
-      "$dto/*": [
-        "app/dto/*"
-      ],
-      "$helpers/*": [
-        "app/helpers/*"
-      ],
-      "$hooks/*": [
-        "app/hooks/*"
-      ],
-      "$locales/*": [
-        "app/locales/*"
-      ],
-      "$mock/*": [
-        "app/mock/*"
-      ],
-      "$navigation/*": [
-        "app/navigation/*"
-      ],
-      "$screens/*": [
-        "app/screens/*"
-      ],
-      "$store/*": [
-        "app/store/*"
-      ],
-      "$styles/*": [
-        "app/styles/*"
-      ],
-      "$types/*": [
-        "app/types/*"
-      ],
-      "$utils/*": [
-        "app/utils/*"
-      ]
+      "$assets/*": ["app/assets/*"],
+      "$components/*": ["app/components/*"],
+      "$constants/*": ["app/constants/*"],
+      "$context/*": ["app/context/*"],
+      "$dev/*": ["app/dev/*"],
+      "$dto/*": ["app/dto/*"],
+      "$helpers/*": ["app/helpers/*"],
+      "$hooks/*": ["app/hooks/*"],
+      "$locales/*": ["app/locales/*"],
+      "$navigation/*": ["app/navigation/*"],
+      "$screens/*": ["app/screens/*"],
+      "$store/*": ["app/store/*"],
+      "$styles/*": ["app/styles/*"],
+      "$types/*": ["app/types/*"],
+      "$utils/*": ["app/utils/*"],
+      "$validators/*": ["app/validators/*"],
     }
   }
 }
