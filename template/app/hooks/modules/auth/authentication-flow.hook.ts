@@ -1,6 +1,6 @@
-import { EAuthScreens } from "$constants/screen.constants";
+import { EAuthStackScreens } from "$constants/screen.constants";
 import BootSplash from 'react-native-bootsplash';
-import { getData } from '$utils/storage';
+import { Storage } from '$utils/storage';
 import { EStorageKeys } from '$constants/storage.constants';
 import { showFlashMessage } from "$helpers/message.helper";
 import { useAppTranslation } from "$hooks/common";
@@ -19,13 +19,13 @@ export const useAuthenticationFlow = () => {
     }
 
     const navigateToLogin = () => {
-        navigation.replace(EAuthScreens.LOGIN);
+        navigation.replace(EAuthStackScreens.LOGIN);
         hideSplashScreen();
     };
 
     const handleAuthentication = async () => {
         try {
-            const token = await getData(EStorageKeys.ACCESS_TOKEN);
+            const token = Storage.getString(EStorageKeys.ACCESS_TOKEN);
 
             if (!token) {
                 navigateToLogin();

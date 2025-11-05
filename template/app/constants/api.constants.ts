@@ -7,4 +7,4 @@ export const API_ROUTES = {
     }
 } as const;
 
-export const API_URL = Config.API_URL;
+export const API_URL = Config.BASE_URL;

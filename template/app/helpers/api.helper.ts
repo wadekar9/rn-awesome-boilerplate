@@ -1,9 +1,9 @@
 import { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
-import { getData } from '$utils/storage';
+import { Storage } from '$utils/storage';
 import { EStorageKeys } from '$constants/storage.constants';
 
 const onRequest = async (config: any) => {
-    const token = await getData(EStorageKeys.ACCESS_TOKEN);
+    const token = Storage.getString(EStorageKeys.ACCESS_TOKEN);
 
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
