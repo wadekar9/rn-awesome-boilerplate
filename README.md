@@ -24,16 +24,19 @@ A production-ready React Native template with TypeScript, modern tooling, and be
 - iOS: Xcode 14+ and CocoaPods
 - Android: Android Studio and JDK 11+
 
-### Installation
+### Installation (Recommended)
 
-Choose one of the following methods:
-
-#### Method 1: Using Published npm Package (Recommended)
 ```bash
 npx @react-native-community/cli init MyApp --template rn-awesome-boilerplate
 ```
 
-#### Method 2: Using GitHub Repository
+> **Tip**: Use `--skip-git-init` if initialization is slow:
+> ```bash
+> npx @react-native-community/cli init MyApp --template rn-awesome-boilerplate --skip-git-init
+> ```
+
+### Alternative: From GitHub (slower if repo has large history)
+
 ```bash
 npx @react-native-community/cli init MyApp --template https://github.com/wadekar9/rn-awesome-boilerplate
 ```

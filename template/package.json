@@ -2,6 +2,22 @@
   "name": "react-native-boilerplate",
   "version": "0.0.1",
   "private": true,
+  "files": [
+    "app",
+    "android",
+    "ios",
+    "__tests__",
+    "app.json",
+    "App.tsx",
+    "index.js",
+    "babel.config.js",
+    "metro.config.js",
+    "react-native.config.js",
+    "tsconfig.json",
+    "package.json",
+    "README.md",
+    "patches"
+  ],
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
