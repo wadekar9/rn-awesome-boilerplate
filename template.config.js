@@ -1,5 +1,5 @@
 module.exports = {
-    placeholderName: 'MyRNTemplate',
-    templateDir: './template',
-    // postInitScript: './scripts/setup.js',
+  placeholderName: "RNAwesomeBoilerplate",
+  templateDir: "./template",
+  postInitScript: "./script.js"
 };

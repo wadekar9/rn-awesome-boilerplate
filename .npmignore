@@ -1,0 +1,17 @@
+# Don't publish these
+node_modules/
+*.log
+.DS_Store
+.git/
+.github/
+.vscode/
+.idea/
+
+# Keep these out of npm package
+coverage/
+*.tgz
+.env
+.env.local
+
+# But DO include template files
+!template/
