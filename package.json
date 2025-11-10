@@ -1,6 +1,6 @@
 {
   "name": "rn-awesome-boilerplate",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A production-ready React Native template with TypeScript, Redux, and modern tooling",
   "main": "template/index.js",
   "repository": {
