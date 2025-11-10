@@ -1,0 +1,52 @@
+# Ignore build artifacts and heavy generated files when the template is copied
+# This keeps the new project's initial `git add` fast.
+
+# Android
+android/build/
+android/**/build/
+android/.gradle/
+
+# iOS
+ios/build/
+ios/Pods/
+ios/Pods-*/
+
+# App/module builds
+app/build/
+
+# Node modules and package manager caches
+node_modules/
+.yarn/
+.pnpm-store/
+
+# Vendor and bundled artifacts
+vendor/
+vendor/bundle/
+
+# Patches (if they contain large files)
+patches/
+
+# Keystores, local config, and IDE files
+*.keystore
+debug.keystore
+development-release.keystore
+.local.properties
+.gradle/
+*.log
+.vscode/
+.idea/
+.DS_Store
+
+# Lockfiles (optional — including them can be useful but they can be large)
+yarn.lock
+package-lock.json
+Gemfile.lock
+
+# Git metadata
+.git/
+
+# Misc
+*.zip
+*.tgz
+
+# End of file
