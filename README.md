@@ -1,5 +1,8 @@
 # React Native Awesome Boilerplate
 
+<img width="100%" height="386" alt="banner" src="https://github.com/user-attachments/assets/685c62cb-7c24-48a9-9794-60b4ea6e1d97" />
+
+
 A production-ready React Native template with TypeScript, modern tooling, and best practices built-in. Start building your cross-platform mobile app in minutes.
 
 ## ✨ Features
