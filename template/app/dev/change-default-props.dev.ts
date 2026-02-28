@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { ScrollView, Text, TextInput, TouchableOpacity } from "react-native";
 
 Text.defaultProps = Text.defaultProps || {};

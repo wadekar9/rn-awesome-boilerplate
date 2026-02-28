@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
@@ -6,7 +6,7 @@ import { waitForSeconds } from '$helpers/utils.helper';
 import { MediaType } from 'react-native-image-picker';
 import { BottomSheetRef, IMediaFile, ITheme } from '$types/common.types';
 import { useAppTheme, useDocumentPicker, useImagePicker } from '$hooks/common';
-import { IconButton } from '$components/ui';
+import { IconButton, ThemeText } from '$components/ui';
 import { AskPermissionModal } from '$components/modals';
 import { Camera, Folder, Images } from 'lucide-react-native';
 import BaseBottomSheet from './base-bottom-sheet.component';
@@ -85,7 +85,7 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
                             <View style={styles.icon}>
                                 {option.icon}
                             </View>
-                            <Text style={styles.label}>{option.title}</Text>
+                            <ThemeText style={styles.label}>{option.title}</ThemeText>
                         </IconButton>
                     ))}
                 </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInputProps } from 'react-native';
+import { View, StyleSheet, TextInputProps } from 'react-native';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
 import PhoneInput from "react-native-phone-number-input";
@@ -7,6 +7,7 @@ import { removeCountryCode } from '$helpers/utils.helper';
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
 import { ChevronDown } from 'lucide-react-native';
+import { ThemeText } from '../themed';
 
 interface PhoneNumberInputRef {
     clear: () => void;
@@ -62,7 +63,7 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
 
     return (
         <View style={styles.wrapper}>
-            {label && <Text style={styles.label}>{label}</Text>}
+            {label && <ThemeText style={styles.label}>{label}</ThemeText>}
             <PhoneInput
                 ref={inputRef}
                 defaultValue={props.value}
@@ -119,7 +120,7 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
 
             {error && (
                 <View style={styles.errorContainer}>
-                    <Text numberOfLines={3} style={styles.errorText}>{error}</Text>
+                    <ThemeText numberOfLines={3} style={styles.errorText}>{error}</ThemeText>
                 </View>
             )}
         </View>

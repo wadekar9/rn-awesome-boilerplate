@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, TextInput, TextInputProps, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import { View, TextInput, TextInputProps, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
+import { ThemeText } from '../themed';
 
 interface TextareaInputRef {
   clear: () => void;
@@ -66,7 +67,7 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
 
   return (
     <View style={styles.wrapper}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && <ThemeText style={styles.label}>{label}</ThemeText>}
       <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors.primary }]}>
         <View style={[styles.container, $EXTRA_STYLES]}>
           {!!LeftAccessory && (<View style={styles.icon}>{LeftAccessory}</View>)}
@@ -90,7 +91,7 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
       </View>
       {error && (
         <View style={styles.errorContainer}>
-          <Text numberOfLines={3} style={styles.errorText}>{error}</Text>
+          <ThemeText numberOfLines={3} style={styles.errorText}>{error}</ThemeText>
         </View>
       )}
     </View>

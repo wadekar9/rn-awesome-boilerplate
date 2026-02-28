@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
@@ -6,6 +6,7 @@ import { EFonts, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
 import { Calendar } from 'lucide-react-native';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import { ThemeText } from '../themed';
 
 interface DatePickerInputProps {
   label?: string;
@@ -57,7 +58,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
 
   return (
     <View style={styles.wrapper}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && <ThemeText style={styles.label}>{label}</ThemeText>}
       <Pressable
         style={[styles.container, { opacity: disabled ? 0.5 : 1 }]}
         onPress={showPicker}
@@ -67,13 +68,13 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
           <Calendar width={moderateScale(25)} height={moderateScale(25)} color={colors.text} />
         </View>
         <View style={styles.content}>
-          {value ? (<Text style={styles.value}>{formatDate(value)}</Text>) : (<Text style={[styles.value, styles.placeholder]}>{placeholder}</Text>)}
+          {value ? (<ThemeText style={styles.value}>{formatDate(value)}</ThemeText>) : (<ThemeText style={[styles.value, styles.placeholder]}>{placeholder}</ThemeText>)}
         </View>
       </Pressable>
 
       {error && (
         <View style={styles.errorTextWrapper}>
-          <Text numberOfLines={3} style={styles.errorText}>{error}</Text>
+          <ThemeText numberOfLines={3} style={styles.errorText}>{error}</ThemeText>
         </View>
       )}
 

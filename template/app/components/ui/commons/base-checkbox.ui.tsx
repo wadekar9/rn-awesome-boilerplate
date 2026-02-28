@@ -1,10 +1,11 @@
-import { StyleSheet, Text, TouchableOpacity, Animated, StyleProp, TextStyle } from 'react-native'
+import { StyleSheet, TouchableOpacity, Animated, StyleProp, TextStyle } from 'react-native'
 import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
 import { COLORS } from '$constants/colors.constants';
 import { Check } from 'lucide-react-native';
+import { ThemeText } from '../themed';
 
 interface BaseCheckboxProps {
   value: boolean;
@@ -68,7 +69,7 @@ export const BaseLabelCheckbox: React.FC<BaseLabelCheckboxProps> = ({
       disabled={props.disabled}
     >
       <BaseCheckbox {...props} />
-      <Text style={styles.label}>{label}</Text>
+      <ThemeText style={styles.label}>{label}</ThemeText>
     </TouchableOpacity>
   )
 }

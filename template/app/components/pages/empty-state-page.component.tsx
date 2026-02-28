@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { ThemedView } from '$components/containers'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
@@ -6,6 +6,7 @@ import { useAppTheme } from '$hooks/common'
 import { ITheme } from '$types/common.types'
 import { COLORS } from '$constants/colors.constants'
 import { IMAGES } from '$assets/images'
+import { ThemeText } from '$components/ui'
 
 const EmptyStatePage: React.FC = () => {
 
@@ -21,8 +22,8 @@ const EmptyStatePage: React.FC = () => {
         />
 
         <View style={styles.content}>
-          <Text style={styles.label}>Oops!</Text>
-          <Text style={styles.description}>Data not found</Text>
+          <ThemeText style={styles.label}>Oops!</ThemeText>
+          <ThemeText style={styles.description}>Data not found</ThemeText>
         </View>
       </View>
     </ThemedView>

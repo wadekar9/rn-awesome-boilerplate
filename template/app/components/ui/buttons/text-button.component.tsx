@@ -1,7 +1,8 @@
-import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, TouchableOpacityProps } from 'react-native'
+import { StyleProp, StyleSheet, TextStyle, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { EFonts, EFontSize } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
+import { ThemeText } from '../themed';
 
 interface TextButtonProps {
   disabled?: boolean;
@@ -24,7 +25,7 @@ const TextButton: React.FC<TextButtonProps> = ({
       disabled={disabled}
       onPress={onPress}
     >
-      <Text style={[styles.label, labelStyle]}>{label}</Text>
+      <ThemeText numberOfLines={1} style={[styles.label, labelStyle]}>{label}</ThemeText>
     </TouchableOpacity>
   )
 }
@@ -32,10 +33,10 @@ const TextButton: React.FC<TextButtonProps> = ({
 export default React.memo(TextButton);
 
 const styles = StyleSheet.create({
-  label : {
-    fontFamily : EFonts.MEDIUM,
-    fontSize : EFontSize.BASE,
-    color : COLORS.light.primary,
-    textDecorationLine : 'underline'
+  label: {
+    fontFamily: EFonts.MEDIUM,
+    fontSize: EFontSize.BASE,
+    color: COLORS.light.primary,
+    textDecorationLine: 'underline'
   }
 })

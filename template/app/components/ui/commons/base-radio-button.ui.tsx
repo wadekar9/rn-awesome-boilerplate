@@ -1,9 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, Animated, StyleProp, TextStyle } from 'react-native'
+import { StyleSheet, TouchableOpacity, Animated, StyleProp, TextStyle } from 'react-native'
 import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
 import { COLORS } from '$constants/colors.constants';
+import { ThemeText } from '../themed';
 
 interface BaseRadioButtonProps {
   value: boolean;
@@ -67,7 +68,7 @@ export const BaseLabelRadioButton: React.FC<BaseLabelRadioButtonProps> = ({
       disabled={props.disabled}
     >
       <BaseRadioButton {...props} />
-      <Text style={styles.label}>{label}</Text>
+      <ThemeText style={styles.label}>{label}</ThemeText>
     </TouchableOpacity>
   )
 }

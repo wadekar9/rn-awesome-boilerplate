@@ -1,8 +1,9 @@
-import { Pressable, PressableProps, PressableStateCallbackType, StyleProp, StyleSheet, Text, ViewStyle, TextStyle } from 'react-native'
+import { Pressable, PressableProps, PressableStateCallbackType, StyleProp, StyleSheet, ViewStyle, TextStyle } from 'react-native'
 import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants'
 import { ITheme } from '$types/common.types';
 import { COLORS } from '$constants/colors.constants';
+import { ThemeText } from '../themed';
 
 interface BaseButtonProps extends PressableProps {
   theme?: ITheme;
@@ -43,7 +44,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
       style={$wrapperStyle}
     >
       {!!LeftAccessory && LeftAccessory}
-      <Text style={[styles.label, labelStyle]}>{label}</Text>
+      <ThemeText style={[styles.label, labelStyle]}>{label}</ThemeText>
       {!!RightAccessory && RightAccessory}
     </Pressable>
   )

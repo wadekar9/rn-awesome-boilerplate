@@ -1,11 +1,11 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { ThemedView } from '$components/containers'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { ITheme } from '$types/common.types'
 import { useAppTheme } from '$hooks/common'
 import { COLORS } from '$constants/colors.constants'
-import { BaseButton } from '$components/ui'
+import { BaseButton, ThemeText } from '$components/ui'
 import { useNetInfoInstance } from "@react-native-community/netinfo";
 import { useNavigation } from '@react-navigation/native'
 import { IMAGES } from '$assets/images'
@@ -38,8 +38,8 @@ const NoInternetConnectionPage: React.FC = () => {
         />
 
         <View style={styles.content}>
-          <Text style={styles.label}>No internet connection!</Text>
-          <Text style={styles.description}>Please check your network connection!</Text>
+          <ThemeText style={styles.label}>No internet connection!</ThemeText>
+          <ThemeText style={styles.description}>Please check your network connection!</ThemeText>
           <BaseButton
             label='Try Again'
             LeftAccessory={<RotateCcw width={moderateScale(20)} height={moderateScale(20)} color={colors.primary} />}

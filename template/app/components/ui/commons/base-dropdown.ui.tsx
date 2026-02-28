@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useMemo, useState } from 'react'
 import { COLORS } from '$constants/colors.constants';
 import { EFonts, moderateScale } from '$constants/styles.constants';
@@ -6,6 +6,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
 import { ChevronDown, ChevronUp } from 'lucide-react-native';
+import { ThemeText } from '../themed';
 
 interface BaseDropdownProps {
     data?: any[];
@@ -31,7 +32,7 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
 
     return (
         <View style={styles.wrapper}>
-            {label && <Text numberOfLines={2} style={styles.label}>{label}</Text>}
+            {label && <ThemeText numberOfLines={2} style={styles.label}>{label}</ThemeText>}
             <View style={[styles.containerWrapper, (variant == 'secondary') && { borderRadius: moderateScale(100) }]}>
                 <Dropdown
                     style={[styles.container, isFocus && { borderColor: 'blue' }]}
@@ -72,7 +73,7 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
             </View>
             {error && (
                 <View style={styles.errorContainer}>
-                    <Text numberOfLines={3} style={styles.errorText}>{error}</Text>
+                    <ThemeText numberOfLines={3} style={styles.errorText}>{error}</ThemeText>
                 </View>
             )}
         </View>

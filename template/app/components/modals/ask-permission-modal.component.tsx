@@ -1,11 +1,11 @@
-import { StyleSheet, View, Modal, Linking, Text } from 'react-native'
+import { StyleSheet, View, Modal, Linking } from 'react-native'
 import React from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
 import { waitForSeconds } from '$helpers/utils.helper';
 import { ITheme } from '$types/common.types';
 import { useAppTranslation } from '$hooks/common';
-import { IconButton } from '$components/ui';
+import { IconButton, ThemeText } from '$components/ui';
 
 interface PermissionModalProps {
     theme: ITheme;
@@ -72,16 +72,16 @@ const AskPermissionModal = React.forwardRef<PermissionModalRef, PermissionModalP
         >
             <View style={styles.wrapper}>
                 <View style={styles.container}>
-                    <Text style={styles.message}>{MESSAGE}</Text>
+                    <ThemeText style={styles.message}>{MESSAGE}</ThemeText>
 
-                    <Text numberOfLines={3} style={styles.description}>{DESCRIPTION}</Text>
+                    <ThemeText numberOfLines={3} style={styles.description}>{DESCRIPTION}</ThemeText>
 
                     <View style={styles.actions}>
                         <IconButton onPress={onCancel}>
-                            <Text style={styles.label}>{actions_t('CANCEL')}</Text>
+                            <ThemeText style={styles.label}>{actions_t('CANCEL')}</ThemeText>
                         </IconButton>
                         <IconButton onPress={onOpenSettings}>
-                            <Text style={styles.label}>{actions_t('OPEN_SETTINGS')}</Text>
+                            <ThemeText style={styles.label}>{actions_t('OPEN_SETTINGS')}</ThemeText>
                         </IconButton>
                     </View>
                 </View>
