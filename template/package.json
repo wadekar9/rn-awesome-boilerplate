@@ -35,7 +35,7 @@
   "dependencies": {
     "@d11/react-native-fast-image": "^8.12.0",
     "@react-native-community/datetimepicker": "^8.5.0",
-    "@react-native-community/netinfo": "^11.4.1",
+    "@react-native-community/netinfo": "^11.5.2",
     "@react-native-documents/picker": "^11.0.0",
     "@react-native-firebase/app": "^23.5.0",
     "@react-native-firebase/messaging": "^23.5.0",

@@ -40,7 +40,7 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data
-          android:scheme="app"
+          android:scheme="reactnativeboilerplate"
           android:host="*" />
       </intent-filter>
     </activity>
