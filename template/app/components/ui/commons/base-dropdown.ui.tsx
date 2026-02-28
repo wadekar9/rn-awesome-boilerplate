@@ -5,7 +5,7 @@ import { EFonts, moderateScale } from '$constants/styles.constants';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
-import { ChevronDownOutlineIcon, ChevronUpOutlineIcon } from '$assets/icons';
+import { ChevronDown, ChevronUp } from 'lucide-react-native';
 
 interface BaseDropdownProps {
     data?: any[];
@@ -62,9 +62,9 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
                     renderRightIcon={(visible) => (
                         <View style={styles.icon}>
                             {visible ?
-                                <ChevronUpOutlineIcon stroke={colors.gray} width={moderateScale(24)} height={moderateScale(24)} />
+                                <ChevronUp stroke={colors.gray} width={moderateScale(24)} height={moderateScale(24)} />
                                 :
-                                <ChevronDownOutlineIcon stroke={colors.gray} width={moderateScale(24)} height={moderateScale(24)} />
+                                <ChevronDown stroke={colors.gray} width={moderateScale(24)} height={moderateScale(24)} />
                             }
                         </View>
                     )}

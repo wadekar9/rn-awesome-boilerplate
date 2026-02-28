@@ -1,10 +1,10 @@
 import { StyleSheet, View } from 'react-native'
-import React, { ComponentType } from 'react'
+import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { moderateScale } from '$constants/styles.constants';
 import { useAppTheme, useSafeAreaInsetsStyle } from '$hooks/common';
 import { IconButton, ThemeText } from '$components/ui';
-import { ArrowBackOutlineIcon } from '$assets/icons';
+import { ArrowLeft } from 'lucide-react-native';
 
 interface BackHeaderProps {
   label?: string;
@@ -27,7 +27,7 @@ const BackHeader: React.FC<BackHeaderProps> = ({
           onPress={() => navigation.goBack()}
           style={styles.icon}
         >
-          <ArrowBackOutlineIcon width={moderateScale(20)} height={moderateScale(20)} fill={colors.text} />
+          <ArrowLeft width={moderateScale(20)} height={moderateScale(20)} color={colors.text} />
         </IconButton>
         {label && (
           <View style={styles.labelWrapper}>

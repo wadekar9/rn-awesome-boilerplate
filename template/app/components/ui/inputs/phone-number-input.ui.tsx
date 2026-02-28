@@ -6,7 +6,7 @@ import PhoneInput from "react-native-phone-number-input";
 import { removeCountryCode } from '$helpers/utils.helper';
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
-import { ChevronDownOutlineIcon } from '$assets/icons';
+import { ChevronDown } from 'lucide-react-native';
 
 interface PhoneNumberInputRef {
     clear: () => void;
@@ -52,8 +52,8 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
         if (props.onBlur) props.onBlur(e);
     }, [props]);
 
-    const handleSubmitEditing = React.useCallback((e : any) => {
-        if (!props.onSubmitEditing){
+    const handleSubmitEditing = React.useCallback((e: any) => {
+        if (!props.onSubmitEditing) {
             inputRef.current?.blur();
             return
         }
@@ -112,7 +112,7 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
                 }}
                 renderDropdownImage={() => (
                     <View style={{ height: '100%', justifyContent: 'center' }}>
-                        <ChevronDownOutlineIcon width={moderateScale(12)} height={moderateScale(7)} fill={colors.text3} />
+                        <ChevronDown width={moderateScale(12)} height={moderateScale(7)} color={colors.text3} />
                     </View>
                 )}
             />

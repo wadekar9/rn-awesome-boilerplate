@@ -5,7 +5,7 @@ import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { useAppTheme } from '$hooks/common'
 import { ITheme } from '$types/common.types'
 import { COLORS } from '$constants/colors.constants'
-import { ICONS } from '$assets/images'
+import { IMAGES } from '$assets/images'
 
 const EmptyStatePage: React.FC = () => {
 
@@ -16,7 +16,7 @@ const EmptyStatePage: React.FC = () => {
     <ThemedView>
       <View style={styles.container}>
         <Image
-          source={ICONS.EMPTY_STATE}
+          source={IMAGES.EMPTY_STATE}
           style={{ width: moderateScale(150), height: moderateScale(150) }}
         />
 

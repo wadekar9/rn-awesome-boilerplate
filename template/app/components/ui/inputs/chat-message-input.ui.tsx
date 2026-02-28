@@ -7,7 +7,7 @@ import { waitForSeconds } from '$helpers/utils.helper';
 import { IMediaFile, ITheme } from '$types/common.types';
 import { useAppTheme, useDocumentPicker } from '$hooks/common';
 import { IconButton } from '../buttons';
-import { AttachOutlineIcon, EmojiOutlineIcon, SendOutlineIcon } from '$assets/icons';
+import { Paperclip, SendHorizontal, Smile } from 'lucide-react-native';
 import { MediaUploadOptionsSheet } from '$components/bottom-sheet';
 
 interface ChatMessageInputProps {
@@ -80,7 +80,7 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
               waitForSeconds(() => console.log("Emoji button pressed"), 500);
             }}
           >
-            <EmojiOutlineIcon fill={colors.text} />
+            <Smile color={colors.text} />
           </IconButton>
           <TextInput
             ref={inputRef}
@@ -92,6 +92,9 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
             cursorColor={colors.primary}
             underlineColorAndroid="transparent"
             keyboardAppearance="light"
+            keyboardType={'default'}
+            textContentType={'none'}
+            autoComplete={'off'}
             blurOnSubmit={false}
             multiline={true}
             textAlignVertical={'auto'}
@@ -106,12 +109,12 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
               waitForSeconds(() => mediaOptionSheet.current?.open(), 500);
             }}
           >
-            <AttachOutlineIcon stroke={colors.text} />
+            <Paperclip color={colors.text} />
           </IconButton>
         </View>
         <View style={styles.linear}>
           <IconButton style={styles.sendButton} onPress={handleSend}>
-            <SendOutlineIcon stroke={colors.white} width={moderateScale(25)} height={moderateScale(25)} />
+            <SendHorizontal color={colors.white} width={moderateScale(25)} height={moderateScale(25)} />
           </IconButton>
         </View>
       </View>

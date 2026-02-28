@@ -3,7 +3,7 @@ import { View, Text, TextInput, TextInputProps, StyleSheet, ViewStyle, StyleProp
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
 import { useAppTheme } from '$hooks/common';
-import { EyeOffOutlineIcon, EyeOutlineIcon } from '$assets/icons';
+import { EyeOff, Eye } from 'lucide-react-native';
 import { ITheme } from '$types/common.types';
 import { IconButton } from '../buttons';
 
@@ -103,9 +103,9 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
                             onPress={() => setIsSecure(prev => !prev)}
                         >
                             {!isSecure ? (
-                                <EyeOutlineIcon height={moderateScale(22)} width={moderateScale(22)} />
+                                <Eye height={moderateScale(22)} width={moderateScale(22)} color={colors.gray} />
                             ) : (
-                                <EyeOffOutlineIcon height={moderateScale(22)} width={moderateScale(22)} />
+                                <EyeOff height={moderateScale(22)} width={moderateScale(22)} color={colors.gray} />
                             )}
                         </IconButton>
                     )}

@@ -4,7 +4,7 @@ import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
 import { COLORS } from '$constants/colors.constants';
-import { CheckmarkOutlineIcon } from '$assets/icons';
+import { Check } from 'lucide-react-native';
 
 interface BaseCheckboxProps {
   value: boolean;
@@ -46,7 +46,7 @@ const BaseCheckbox: React.FC<BaseCheckboxProps> = ({
       <Animated.View
         style={[styles.container, { opacity }]}
       >
-        <CheckmarkOutlineIcon width={moderateScale(18)} height={moderateScale(18)} />
+        <Check width={moderateScale(18)} height={moderateScale(18)} color={COLORS[theme].white} />
       </Animated.View>
     </TouchableOpacity>
   )

@@ -4,7 +4,7 @@ import { useAppTheme } from '$hooks/common';
 import { ITheme } from '$types/common.types';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
-import { CalendarOutlineIcon } from '$assets/icons';
+import { Calendar } from 'lucide-react-native';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 
 interface DatePickerInputProps {
@@ -64,7 +64,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
         disabled={disabled}
       >
         <View style={styles.icon}>
-          <CalendarOutlineIcon width={moderateScale(25)} height={moderateScale(25)} stroke={colors.text} />
+          <Calendar width={moderateScale(25)} height={moderateScale(25)} color={colors.text} />
         </View>
         <View style={styles.content}>
           {value ? (<Text style={styles.value}>{formatDate(value)}</Text>) : (<Text style={[styles.value, styles.placeholder]}>{placeholder}</Text>)}

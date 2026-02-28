@@ -8,7 +8,7 @@ import { BottomSheetRef, IMediaFile, ITheme } from '$types/common.types';
 import { useAppTheme, useDocumentPicker, useImagePicker } from '$hooks/common';
 import { IconButton } from '$components/ui';
 import { AskPermissionModal } from '$components/modals';
-import { CameraOutlineIcon, FolderOpenOutlineIcon, GalleryImagesOutlineIcon } from '$assets/icons';
+import { Camera, Folder, Images } from 'lucide-react-native';
 import BaseBottomSheet from './base-bottom-sheet.component';
 
 interface MediaUploadOptionsSheetProps {
@@ -39,7 +39,7 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
     const OPTIONS = React.useMemo(() => ([
         {
             title: 'Camera',
-            icon: <CameraOutlineIcon width={moderateScale(38)} height={moderateScale(38)} stroke={colors.primary} />,
+            icon: <Camera width={moderateScale(38)} height={moderateScale(38)} color={colors.primary} />,
             onPress: () => {
                 sheetRef.current?.close();
                 waitForSeconds(() => openCamera(mediaType), 800);
@@ -47,7 +47,7 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
         },
         {
             title: 'Gallery',
-            icon: <GalleryImagesOutlineIcon width={moderateScale(38)} height={moderateScale(38)} stroke={colors.primary} />,
+            icon: <Images width={moderateScale(38)} height={moderateScale(38)} color={colors.primary} />,
             onPress: () => {
                 sheetRef.current?.close();
                 waitForSeconds(() => openGallery('mixed', 1), 800);
@@ -55,7 +55,7 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
         },
         {
             title: 'Files',
-            icon: <FolderOpenOutlineIcon width={moderateScale(38)} height={moderateScale(38)} stroke={colors.primary} />,
+            icon: <Folder width={moderateScale(38)} height={moderateScale(38)} color={colors.primary} />,
             onPress: () => {
                 sheetRef.current?.close();
                 waitForSeconds(() => openPicker(['allFiles']), 800);

@@ -23,7 +23,8 @@ module.exports = {
           "$store": "./app/store",
           "$styles": "./app/styles",
           "$types": "./app/types",
-          "$utils": "./app/utils"
+          "$utils": "./app/utils",
+          "$validators": "./app/validators",
         }
       }
     ]

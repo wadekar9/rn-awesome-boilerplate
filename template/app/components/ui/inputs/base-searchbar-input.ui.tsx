@@ -3,7 +3,7 @@ import React from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { COLORS } from '$constants/colors.constants'
 import { useAppTheme, useDebounce } from '$hooks/common';
-import { SearchOutlineIcon } from '$assets/icons';
+import { Search } from 'lucide-react-native';
 import { ITheme } from '$types/common.types';
 
 interface BaseSearchbarRef {
@@ -42,7 +42,7 @@ const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>((pr
     return (
         <View style={[styles.container, isFocused && { borderColor: colors.primary }]}>
             <View style={styles.icon}>
-                <SearchOutlineIcon width={moderateScale(24)} height={moderateScale(24)} />
+                <Search width={moderateScale(24)} height={moderateScale(24)} color={colors.gray} />
             </View>
             <View style={{ flex: 1, height: '100%' }}>
                 <TextInput

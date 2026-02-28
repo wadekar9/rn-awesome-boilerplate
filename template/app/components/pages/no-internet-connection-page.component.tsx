@@ -2,14 +2,14 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { ThemedView } from '$components/containers'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
-import { ICONS } from '$assets/images'
 import { ITheme } from '$types/common.types'
 import { useAppTheme } from '$hooks/common'
 import { COLORS } from '$constants/colors.constants'
 import { BaseButton } from '$components/ui'
-import { ReloadOutlineIcon } from '$assets/icons'
 import { useNetInfoInstance } from "@react-native-community/netinfo";
 import { useNavigation } from '@react-navigation/native'
+import { IMAGES } from '$assets/images'
+import { RotateCcw } from 'lucide-react-native'
 
 const NoInternetConnectionPage: React.FC = () => {
 
@@ -33,7 +33,7 @@ const NoInternetConnectionPage: React.FC = () => {
     <ThemedView>
       <View style={styles.container}>
         <Image
-          source={ICONS.NETWORK_CONNECTION}
+          source={IMAGES.NETWORK_CONNECTION}
           style={{ width: moderateScale(150), height: moderateScale(150) }}
         />
 
@@ -42,7 +42,7 @@ const NoInternetConnectionPage: React.FC = () => {
           <Text style={styles.description}>Please check your network connection!</Text>
           <BaseButton
             label='Try Again'
-            LeftAccessory={<ReloadOutlineIcon width={moderateScale(20)} height={moderateScale(20)} />}
+            LeftAccessory={<RotateCcw width={moderateScale(20)} height={moderateScale(20)} color={colors.primary} />}
             containerStyle={styles.buttonContainer}
             labelStyle={{ color: colors.text }}
             onPress={refresh}
