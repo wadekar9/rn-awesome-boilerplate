@@ -42,9 +42,9 @@ const NoInternetConnectionPage: React.FC = () => {
           <ThemeText style={styles.description}>Please check your network connection!</ThemeText>
           <BaseButton
             label='Try Again'
-            LeftAccessory={<RotateCcw width={moderateScale(20)} height={moderateScale(20)} color={colors.primary} />}
+            LeftAccessory={<RotateCcw width={moderateScale(20)} height={moderateScale(20)} color={colors['brand-primary']} />}
             containerStyle={styles.buttonContainer}
-            labelStyle={{ color: colors.text }}
+            labelStyle={{ color: colors['text-primary'] }}
             onPress={refresh}
           />
         </View>
@@ -72,12 +72,12 @@ const styling = (theme: ITheme) => StyleSheet.create({
   label: {
     fontFamily: EFonts.SEMI_BOLD,
     fontSize: EFontSize['2XL'],
-    color: COLORS[theme].text
+    color: COLORS[theme]['text-primary']
   },
   description: {
     fontFamily: EFonts.MEDIUM,
     fontSize: EFontSize.LG,
-    color: COLORS[theme].gray
+    color: COLORS[theme]['text-secondary']
   },
   buttonContainer: {
     width: 'auto',

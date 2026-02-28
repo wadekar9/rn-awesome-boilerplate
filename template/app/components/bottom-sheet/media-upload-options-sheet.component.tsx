@@ -39,7 +39,7 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
     const OPTIONS = React.useMemo(() => ([
         {
             title: 'Camera',
-            icon: <Camera width={moderateScale(38)} height={moderateScale(38)} color={colors.primary} />,
+            icon: <Camera width={moderateScale(38)} height={moderateScale(38)} color={colors['brand-primary']} />,
             onPress: () => {
                 sheetRef.current?.close();
                 waitForSeconds(() => openCamera(mediaType), 800);
@@ -47,7 +47,7 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
         },
         {
             title: 'Gallery',
-            icon: <Images width={moderateScale(38)} height={moderateScale(38)} color={colors.primary} />,
+            icon: <Images width={moderateScale(38)} height={moderateScale(38)} color={colors['brand-primary']} />,
             onPress: () => {
                 sheetRef.current?.close();
                 waitForSeconds(() => openGallery('mixed', 1), 800);
@@ -55,7 +55,7 @@ const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, Med
         },
         {
             title: 'Files',
-            icon: <Folder width={moderateScale(38)} height={moderateScale(38)} color={colors.primary} />,
+            icon: <Folder width={moderateScale(38)} height={moderateScale(38)} color={colors['brand-primary']} />,
             onPress: () => {
                 sheetRef.current?.close();
                 waitForSeconds(() => openPicker(['allFiles']), 800);
@@ -103,10 +103,10 @@ export default React.memo(MediaUploadOptionsSheet);
 
 const styling = (theme: ITheme) => StyleSheet.create({
     sheetWrapper: {
-        backgroundColor: COLORS[theme].background1
+        backgroundColor: COLORS[theme].surface
     },
     dragHandleStyle: {
-        backgroundColor: COLORS[theme].text,
+        backgroundColor: COLORS[theme]['text-primary'],
     },
     options: {
         width: '100%',
@@ -128,16 +128,16 @@ const styling = (theme: ITheme) => StyleSheet.create({
         justifyContent: 'center',
         borderRadius: moderateScale(40),
         borderWidth: moderateScale(1),
-        borderColor: COLORS[theme].primary
+        borderColor: COLORS[theme]['brand-primary']
     },
     label: {
         fontFamily: EFonts.MEDIUM,
         fontSize: EFontSize.LG,
-        color: COLORS[theme].text,
+        color: COLORS[theme]['text-primary'],
     },
     container: {
         flex: 1,
-        backgroundColor: 'grey',
+        backgroundColor: COLORS[theme].background,
     },
     contentContainer: {
         flex: 1,

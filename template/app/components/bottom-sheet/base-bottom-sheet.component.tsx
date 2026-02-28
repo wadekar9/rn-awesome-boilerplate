@@ -7,7 +7,7 @@ import { BottomSheetRef, ITheme } from '$types/common.types';
 import { COLORS } from '$constants/colors.constants';
 import { moderateScale } from '$constants/styles.constants';
 
-export interface BaseBottomSheetRef extends BottomSheetRef {}
+export interface BaseBottomSheetRef extends BottomSheetRef { }
 
 export interface BaseBottomSheetProps {
     children: React.ReactNode;
@@ -42,7 +42,7 @@ const BaseBottomSheet = forwardRef<BaseBottomSheetRef, BaseBottomSheetProps>((pr
                 closeOnTouchBackdrop
                 closeOnPressBack
                 containerStyle={{
-                    backgroundColor: colors.white,
+                    backgroundColor: colors.surface,
                     borderTopLeftRadius: moderateScale(42),
                     borderTopRightRadius: moderateScale(42),
                     overflow: 'hidden'
@@ -69,10 +69,10 @@ const BaseBottomSheet = forwardRef<BaseBottomSheetRef, BaseBottomSheetProps>((pr
 
 export default React.memo(BaseBottomSheet);
 
-const styling = (theme : ITheme) => StyleSheet.create({
+const styling = (theme: ITheme) => StyleSheet.create({
     wrapper: {
-        backgroundColor: COLORS[theme].white,
-        gap : moderateScale(5)
+        backgroundColor: COLORS[theme].surface,
+        gap: moderateScale(5)
     },
     contentContainer: {
         flex: 1
@@ -83,10 +83,10 @@ const styling = (theme : ITheme) => StyleSheet.create({
         opacity: 0.25,
         borderRadius: moderateScale(10)
     },
-    indicatorWrapper : {
-        width : '100%',
-        alignItems : 'center',
-        justifyContent : 'flex-end',
-        height : moderateScale(18)
+    indicatorWrapper: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        height: moderateScale(18)
     }
 });

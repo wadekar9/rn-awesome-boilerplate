@@ -1,76 +1,117 @@
-const palette = {
-  black: '#000000',
-  white: '#ffffff',
-  transparent: 'rgba(0,0,0,0)',
-  transparent25: 'rgba(0,0,0,0.25)',
-  transparent50: 'rgba(0,0,0,0.50)',
-  transparent75: 'rgba(0,0,0,0.75)',
-  red: '#FF3B30',  // Errors & Alerts
-  orange: '#FF9500',  // Warnings
-  yellow: '#FFCC00',  // Notifications
-  green: '#34C759',  // Success
-  indigo: '#4B55A1',  // Alternative Accent
-  purple: '#9141AC',  // Encryption Highlights
-  pink: '#FF2D55',
+/**
+ * ==============================
+ * BRAND
+ * ==============================
+ */
+const BRAND = {
   primary: '#4285F4',
-  secondary: '#89D3DF',
+  'primary-soft': 'rgba(66,133,244,0.10)',
+  'primary-pressed': '#2F6FE4',
+  'primary-soft-pressed': 'rgba(66,133,244,0.15)',
 } as const;
 
+/**
+ * ==============================
+ * NEUTRAL SCALE (Slate-based)
+ * ==============================
+ */
+const NEUTRAL = {
+  50: '#F8FAFC',
+  100: '#F1F5F9',
+  200: '#E2E8F0',
+  300: '#CBD5E1',
+  400: '#94A3B8',
+  500: '#64748B',
+  600: '#475569',
+  700: '#334155',
+  800: '#1E293B',
+  900: '#0F172A',
+} as const;
+
+/**
+ * ==============================
+ * SEMANTIC COLORS
+ * ==============================
+ */
+const SEMANTIC = {
+  success: '#22C55E',
+  warning: '#F59E0B',
+  danger: '#EF4444',
+} as const;
+
+/**
+ * ==============================
+ * THEME
+ * ==============================
+ */
 export const COLORS = {
   light: {
+    // Backgrounds
+    background: NEUTRAL[50],
+    surface: '#FFFFFF',
+    'surface-alt': NEUTRAL[100],
 
-    gray: '#8E8E93',
-    gray1: '#AEAEB2',
-    gray2: '#C7C7CC',
-    gray3: '#D1D1D6',
-    gray4: '#E5E5EA',
-    gray5: '#F2F2F7',
+    // Text
+    'text-primary': NEUTRAL[900],
+    'text-secondary': NEUTRAL[500],
+    'text-muted': NEUTRAL[400],
 
-    text: '#262626',
-    text1: '#3C3C4399',
-    text2: '#3C3C434C',
-    text3: '#3C3C432D',
+    // Icons
+    'icon-primary': BRAND.primary,
+    'icon-default': NEUTRAL[600],
+    'icon-muted': NEUTRAL[400],
+    'icon-destructive': SEMANTIC.danger,
 
-    background: '#FFFFFF',
-    background1: '#FAFAFA',
-    background2: '#F5F5F5',
-    background3: '#D1D1D6',
+    // Borders
+    border: NEUTRAL[200],
 
-    border: "#D1D1D6",
+    // Brand
+    'brand-primary': BRAND.primary,
+    'brand-primary-soft': BRAND['primary-soft'],
+    'brand-primary-pressed': BRAND['primary-pressed'],
+    'brand-primary-soft-pressed': BRAND['primary-soft-pressed'],
 
-    shadow: palette.transparent25,
+    // States
+    'state-success': SEMANTIC.success,
+    'state-warning': SEMANTIC.warning,
+    'state-danger': SEMANTIC.danger,
 
-    error: palette.red,
-    success: palette.green,
-    warning: palette.orange,
-    ...palette
+    // Effects
+    shadow: 'rgba(15, 23, 42, 0.08)',
   },
+
   dark: {
+    // Backgrounds
+    background: NEUTRAL[900],
+    surface: NEUTRAL[800],
+    'surface-alt': NEUTRAL[700],
 
-    gray: '#8E8E93',
-    gray1: '#636366',
-    gray2: '#48484A',
-    gray3: '#3A3A3C',
-    gray4: '#2C2C2E',
-    gray5: '#1C1C1E',
+    // Text
+    'text-primary': NEUTRAL[50],
+    'text-secondary': NEUTRAL[400],
+    'text-muted': NEUTRAL[500],
 
-    text: '#FFFFFF',
-    text1: '#EBEBF599',
-    text2: '#EBEBF54C',
-    text3: '#EBEBF52D',
+    // Icons
+    'icon-primary': BRAND.primary,
+    'icon-default': NEUTRAL[400],
+    'icon-muted': NEUTRAL[500],
+    'icon-destructive': SEMANTIC.danger,
 
-    background: '#0D0D0D',
-    background1: '#161616',
-    background2: '#1B1B1B',
-    background3: '#3A3A3C',
+    // Borders
+    border: NEUTRAL[700],
 
-    shadow: palette.transparent50,
+    // Brand
+    'brand-primary': BRAND.primary,
+    'brand-primary-soft': 'rgba(66,133,244,0.18)',
+    'brand-primary-pressed': '#5A97F6',
+    'brand-primary-soft-pressed': 'rgba(66,133,244,0.20)',
 
-    border: "#4A4A4A",
+    // States
+    'state-success': SEMANTIC.success,
+    'state-warning': SEMANTIC.warning,
+    'state-danger': SEMANTIC.danger,
 
-    error: palette.red,
-    success: palette.green,
-    warning: palette.orange,
-    ...palette
-  }
+    // Effects
+    shadow: 'rgba(0, 0, 0, 0.4)',
+  },
 } as const;

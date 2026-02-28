@@ -49,11 +49,11 @@ const styling = (theme: ITheme) => StyleSheet.create({
   label: {
     fontFamily: EFonts.SEMI_BOLD,
     fontSize: EFontSize['2XL'],
-    color: COLORS[theme].text
+    color: COLORS[theme]['text-primary']
   },
   description: {
     fontFamily: EFonts.MEDIUM,
     fontSize: EFontSize.LG,
-    color: COLORS[theme].gray
+    color: COLORS[theme]['text-secondary']
   }
 })

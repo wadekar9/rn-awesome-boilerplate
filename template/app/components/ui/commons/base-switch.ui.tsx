@@ -74,10 +74,10 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     wrapper: {
         width: DEFAULT_DIMENSIONS.width,
         height: DEFAULT_DIMENSIONS.height,
-        backgroundColor: COLORS[theme].gray,
+        backgroundColor: COLORS[theme].border,
         borderRadius: DEFAULT_DIMENSIONS.radius,
         borderWidth: moderateScale(2),
-        borderColor: COLORS[theme].gray,
+        borderColor: COLORS[theme].border,
         overflow: 'hidden',
     },
     disabledWrapper: {
@@ -85,7 +85,7 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     },
     background: {
         position: 'absolute',
-        backgroundColor: COLORS[theme].primary,
+        backgroundColor: COLORS[theme]['brand-primary'],
         width: '100%',
         height: '100%',
         zIndex: -1,
@@ -93,7 +93,7 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     circle: {
         height: DEFAULT_DIMENSIONS.circleSize,
         width: DEFAULT_DIMENSIONS.circleSize,
-        backgroundColor: COLORS[theme].white,
+        backgroundColor: COLORS[theme].surface,
         borderRadius: DEFAULT_DIMENSIONS.circleRadius,
         marginVertical: 2,
         zIndex: 1,

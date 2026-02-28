@@ -27,7 +27,7 @@ const BackHeader: React.FC<BackHeaderProps> = ({
           onPress={() => navigation.goBack()}
           style={styles.icon}
         >
-          <ArrowLeft width={moderateScale(20)} height={moderateScale(20)} color={colors.text} />
+          <ArrowLeft width={moderateScale(20)} height={moderateScale(20)} color={colors['icon-default']} />
         </IconButton>
         {label && (
           <View style={styles.labelWrapper}>

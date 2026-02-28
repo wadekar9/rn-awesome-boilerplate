@@ -77,7 +77,7 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
     return (
         <View style={styles.wrapper}>
             {label && <ThemeText style={styles.label}>{label}</ThemeText>}
-            <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors.primary }]}>
+            <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors['brand-primary'] }]}>
                 <View style={[styles.container, $EXTRA_STYLES]}>
                     {!!LeftAccessory && (<View style={styles.icon}>{LeftAccessory}</View>)}
                     <TextInput
@@ -87,9 +87,9 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
                         multiline={false}
                         style={styles.textInput}
                         placeholder={props.placeholder || "Type Something here..."}
-                        placeholderTextColor={colors.gray}
+                        placeholderTextColor={colors['text-muted']}
                         secureTextEntry={isSecure}
-                        cursorColor={colors.primary}
+                        cursorColor={colors['brand-primary']}
                         editable={!disabled}
                         keyboardAppearance={theme}
                         returnKeyType={props.returnKeyType || 'done'}
@@ -104,9 +104,9 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
                             onPress={() => setIsSecure(prev => !prev)}
                         >
                             {!isSecure ? (
-                                <Eye height={moderateScale(22)} width={moderateScale(22)} color={colors.gray} />
+                                <Eye height={moderateScale(22)} width={moderateScale(22)} color={colors['icon-default']} />
                             ) : (
-                                <EyeOff height={moderateScale(22)} width={moderateScale(22)} color={colors.gray} />
+                                <EyeOff height={moderateScale(22)} width={moderateScale(22)} color={colors['icon-default']} />
                             )}
                         </IconButton>
                     )}
@@ -129,7 +129,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
     },
     label: {
-        color: COLORS[theme].text,
+        color: COLORS[theme]['text-primary'],
         fontFamily: EFonts.REGULAR,
         textAlign: 'left',
         marginBottom: moderateScale(4)
@@ -150,7 +150,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         height: '100%',
         fontFamily: EFonts.REGULAR,
         fontSize: EFontSize.XL,
-        color: COLORS[theme].text
+        color: COLORS[theme]['text-primary']
     },
     errorContainer: {
         marginTop: moderateScale(8),
@@ -158,7 +158,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     errorText: {
         fontFamily: EFonts.REGULAR,
         fontSize: moderateScale(13),
-        color: COLORS[theme].primary,
+        color: COLORS[theme]['state-danger'],
         flexWrap: 'wrap',
     },
     icon: {

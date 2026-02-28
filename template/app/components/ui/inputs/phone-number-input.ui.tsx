@@ -78,9 +78,9 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
                 disabled={disabled}
                 textInputProps={{
                     value: removeCountryCode(props.value || ''),
-                    placeholderTextColor: colors.gray5,
+                    placeholderTextColor: colors['text-muted'],
                     editable: !disabled,
-                    cursorColor: colors.primary,
+                    cursorColor: colors['brand-primary'],
                     onFocus: handleFocus,
                     onBlur: handleBlur,
                     onSubmitEditing: handleSubmitEditing,
@@ -92,19 +92,19 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
                     multiline: false,
                     numberOfLines: 1
                 }}
-                containerStyle={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors.primary }]}
+                containerStyle={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors['brand-primary'] }]}
                 textContainerStyle={{ height: moderateScale(50), backgroundColor: COLORS[theme].background }}
                 codeTextStyle={{
                     fontFamily: EFonts.REGULAR,
                     fontSize: EFontSize.XL,
-                    color: COLORS[theme].text3
+                    color: COLORS[theme]['text-secondary']
                 }}
                 textInputStyle={{
                     flex: 1,
                     height: '100%',
                     fontFamily: EFonts.REGULAR,
                     fontSize: EFontSize.XL,
-                    color: COLORS[theme].text3,
+                    color: COLORS[theme]['text-secondary'],
                     backgroundColor: COLORS[theme].background
                 }}
                 flagButtonStyle={{
@@ -113,7 +113,7 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
                 }}
                 renderDropdownImage={() => (
                     <View style={{ height: '100%', justifyContent: 'center' }}>
-                        <ChevronDown width={moderateScale(12)} height={moderateScale(7)} color={colors.text3} />
+                        <ChevronDown width={moderateScale(12)} height={moderateScale(7)} color={colors['text-secondary']} />
                     </View>
                 )}
             />
@@ -134,7 +134,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
     },
     label: {
-        color: COLORS[theme].text,
+        color: COLORS[theme]['text-primary'],
         fontFamily: EFonts.BOLD,
         fontSize: EFontSize.BASE,
         textAlign: 'left',
@@ -161,7 +161,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         height: '100%',
         fontFamily: EFonts.REGULAR,
         fontSize: EFontSize.XL,
-        color: COLORS[theme].text,
+        color: COLORS[theme]['text-primary'],
     },
     errorContainer: {
         marginTop: moderateScale(8),
@@ -169,7 +169,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     errorText: {
         fontFamily: EFonts.REGULAR,
         fontSize: EFontSize.SM,
-        color: COLORS[theme].red,
+        color: COLORS[theme]['state-danger'],
         flexWrap: 'wrap',
     },
     icon: {

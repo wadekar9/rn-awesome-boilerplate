@@ -40,9 +40,9 @@ const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>((pr
     }, [debouncedSearch])
 
     return (
-        <View style={[styles.container, isFocused && { borderColor: colors.primary }]}>
+        <View style={[styles.container, isFocused && { borderColor: colors['brand-primary'] }]}>
             <View style={styles.icon}>
-                <Search width={moderateScale(24)} height={moderateScale(24)} color={colors.gray} />
+                <Search width={moderateScale(24)} height={moderateScale(24)} color={colors['icon-default']} />
             </View>
             <View style={{ flex: 1, height: '100%' }}>
                 <TextInput
@@ -50,7 +50,7 @@ const BaseSearchbar = React.forwardRef<BaseSearchbarRef, BaseSearchbarProps>((pr
                     value={search}
                     onChangeText={setSearch}
                     placeholder='Search....'
-                    placeholderTextColor={colors.gray}
+                    placeholderTextColor={colors['text-muted']}
                     style={styles.input}
                     returnKeyType={'search'}
                     returnKeyLabel={'Search'}
@@ -74,7 +74,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
         height: moderateScale(50),
         borderRadius: moderateScale(8),
-        backgroundColor: COLORS[theme].background1,
+        backgroundColor: COLORS[theme]['surface-alt'],
         paddingHorizontal: moderateScale(12),
         gap: moderateScale(10),
         borderWidth: moderateScale(1),
@@ -89,7 +89,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     input: {
         fontFamily: EFonts.REGULAR,
         fontSize: EFontSize.LG,
-        color: COLORS[theme].text,
+        color: COLORS[theme]['text-primary'],
         height: '100%'
     }
 })

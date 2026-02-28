@@ -68,7 +68,7 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
   return (
     <View style={styles.wrapper}>
       {label && <ThemeText style={styles.label}>{label}</ThemeText>}
-      <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors.primary }]}>
+      <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors['brand-primary'] }]}>
         <View style={[styles.container, $EXTRA_STYLES]}>
           {!!LeftAccessory && (<View style={styles.icon}>{LeftAccessory}</View>)}
           <TextInput
@@ -78,8 +78,8 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
             multiline={true}
             style={styles.textInput}
             placeholder={props.placeholder || "Type Something here..."}
-            placeholderTextColor={colors.gray}
-            cursorColor={colors.primary}
+            placeholderTextColor={colors['text-muted']}
+            cursorColor={colors['brand-primary']}
             editable={!disabled}
             keyboardAppearance={theme}
             blurOnSubmit={props.blurOnSubmit || false}
@@ -105,7 +105,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     width: '100%',
   },
   label: {
-    color: COLORS[theme].text,
+    color: COLORS[theme]['text-primary'],
     fontFamily: EFonts.REGULAR,
     textAlign: 'left',
     textTransform: 'capitalize',
@@ -125,7 +125,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     height: '100%',
     fontFamily: EFonts.REGULAR,
     fontSize: EFontSize.XL,
-    color: COLORS[theme].text,
+    color: COLORS[theme]['text-primary'],
     paddingVertical: moderateScale(10),
   },
   errorContainer: {
@@ -134,7 +134,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   errorText: {
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(13),
-    color: COLORS[theme].primary,
+    color: COLORS[theme]['state-danger'],
     flexWrap: 'wrap',
   },
   icon: {
@@ -143,6 +143,6 @@ const styling = (theme: ITheme) => StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'stretch',
-    backgroundColor: 'red'
+    backgroundColor: COLORS[theme]['surface-alt']
   }
 });

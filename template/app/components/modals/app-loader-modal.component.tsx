@@ -1,8 +1,10 @@
 import { ActivityIndicator, Modal, StyleSheet, View } from 'react-native';
 import React, { memo } from 'react';
-import { COLORS } from '$constants/colors.constants';
+import { useAppTheme } from '$hooks/common';
 
 const AppLoaderModal: React.FC = () => {
+
+    const { colors } = useAppTheme();
 
     return (
         <Modal
@@ -11,8 +13,8 @@ const AppLoaderModal: React.FC = () => {
             visible={true}
             statusBarTranslucent
         >
-            <View style={[styles.container, { backgroundColor: 'rgba(0,0,0,0.3)' }]}>
-                <ActivityIndicator size={'large'} color={COLORS.light.primary} />
+            <View style={[styles.container, { backgroundColor: colors.shadow }]}>
+                <ActivityIndicator size={'large'} color={colors['brand-primary']} />
             </View>
         </Modal>
     )

@@ -97,14 +97,14 @@ const styling = (theme: ITheme) => StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgba(0,0,0,0.55)',
+        backgroundColor: COLORS[theme].shadow,
         paddingHorizontal: moderateScale(20)
     },
     container: {
         width: '100%',
         height: undefined,
         padding: moderateScale(20),
-        backgroundColor: COLORS[theme].background1,
+        backgroundColor: COLORS[theme].surface,
         borderRadius: moderateScale(10),
         gap: moderateScale(10),
     },
@@ -114,7 +114,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     description: {
         fontFamily: EFonts.MEDIUM,
         fontSize: moderateScale(14),
-        color: COLORS[theme].text
+        color: COLORS[theme]['text-primary']
     },
     actions: {
         flexDirection: 'row',
@@ -125,6 +125,6 @@ const styling = (theme: ITheme) => StyleSheet.create({
     label: {
         fontFamily: EFonts.BOLD,
         fontSize: EFontSize.LG,
-        color: COLORS[theme].primary
+        color: COLORS[theme]['brand-primary']
     }
 })

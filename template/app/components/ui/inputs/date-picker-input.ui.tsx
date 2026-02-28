@@ -65,7 +65,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
         disabled={disabled}
       >
         <View style={styles.icon}>
-          <Calendar width={moderateScale(25)} height={moderateScale(25)} color={colors.text} />
+          <Calendar width={moderateScale(25)} height={moderateScale(25)} color={colors['icon-default']} />
         </View>
         <View style={styles.content}>
           {value ? (<ThemeText style={styles.value}>{formatDate(value)}</ThemeText>) : (<ThemeText style={[styles.value, styles.placeholder]}>{placeholder}</ThemeText>)}
@@ -87,7 +87,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
           is24Hour={is24Hour}
           maximumDate={maximumDate}
           minimumDate={minimumDate}
-          textColor={colors.text}
+          textColor={colors['text-primary']}
           themeVariant={theme}
         />
       )}
@@ -103,7 +103,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   },
   container: {
     height: moderateScale(50),
-    backgroundColor: COLORS[theme].background1,
+    backgroundColor: COLORS[theme]['surface-alt'],
     borderWidth: moderateScale(1),
     borderRadius: moderateScale(8),
     borderColor: COLORS[theme].border,
@@ -112,7 +112,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     alignItems: 'stretch',
   },
   label: {
-    color: COLORS[theme].text,
+    color: COLORS[theme]['text-primary'],
     fontFamily: EFonts.REGULAR,
     textAlign: 'left',
     marginBottom: moderateScale(4),
@@ -130,16 +130,16 @@ const styling = (theme: ITheme) => StyleSheet.create({
   errorText: {
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(13),
-    color: COLORS[theme].error,
+    color: COLORS[theme]['state-danger'],
     flexWrap: 'wrap',
   },
   value: {
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(16),
-    color: COLORS[theme].text,
+    color: COLORS[theme]['text-primary'],
   },
   placeholder: {
-    color: COLORS[theme].gray,
+    color: COLORS[theme]['text-muted'],
   },
   content: {
     flex: 1,

@@ -62,12 +62,12 @@ const styling = (theme: ITheme) => StyleSheet.create({
     overflow: 'hidden',
     borderRadius: moderateScale(5),
     gap: moderateScale(10),
-    backgroundColor: COLORS[theme].primary
+    backgroundColor: COLORS[theme]['brand-primary']
   },
   label: {
     fontFamily: EFonts.MEDIUM,
     fontSize: moderateScale(15),
-    color: COLORS[theme].white,
+    color: COLORS[theme].surface,
     textTransform: 'capitalize'
   }
 })

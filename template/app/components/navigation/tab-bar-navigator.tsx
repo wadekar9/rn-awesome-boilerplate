@@ -88,7 +88,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
         height: '100%',
         flexDirection: 'row',
-        backgroundColor: COLORS[theme].background1,
+        backgroundColor: COLORS[theme].surface,
         borderRadius: moderateScale(50),
         overflow: 'hidden'
     },
@@ -100,7 +100,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         borderRadius: moderateScale(50),
         borderWidth: moderateScale(1),
         borderColor: COLORS[theme].border,
-        shadowColor: COLORS[theme].black,
+        shadowColor: COLORS[theme].shadow,
         shadowOffset: {
             width: 0,
             height: 2,
@@ -113,12 +113,12 @@ const styling = (theme: ITheme) => StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         alignItems: 'center',
         justifyContent: 'flex-end',
-        backgroundColor: COLORS[theme].primary
+        backgroundColor: COLORS[theme]['brand-primary']
     },
     indicator: {
         width: moderateScale(24),
         height: moderateScale(2),
-        backgroundColor: 'red',
+        backgroundColor: COLORS[theme]['icon-primary'],
         bottom: moderateScale(6)
     }
 });

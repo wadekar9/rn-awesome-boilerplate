@@ -80,7 +80,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     width: moderateScale(22),
     height: moderateScale(22),
     borderWidth: moderateScale(2),
-    borderColor: COLORS[theme].primary,
+    borderColor: COLORS[theme]['brand-primary'],
     borderRadius: moderateScale(11),
     overflow: 'hidden',
     alignItems: 'center',
@@ -89,7 +89,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   container: {
     width: moderateScale(12),
     height: moderateScale(12),
-    backgroundColor: COLORS[theme].primary,
+    backgroundColor: COLORS[theme]['brand-primary'],
     borderRadius: moderateScale(100),
   },
   flexWrapper: {
@@ -100,7 +100,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   label: {
     fontFamily: EFonts.MEDIUM,
     textTransform: 'capitalize',
-    color: COLORS[theme].text,
+    color: COLORS[theme]['text-primary'],
     fontSize: moderateScale(14)
   }
 })

@@ -47,7 +47,7 @@ const BaseCheckbox: React.FC<BaseCheckboxProps> = ({
       <Animated.View
         style={[styles.container, { opacity }]}
       >
-        <Check width={moderateScale(18)} height={moderateScale(18)} color={COLORS[theme].white} />
+        <Check width={moderateScale(18)} height={moderateScale(18)} color={COLORS[theme].surface} />
       </Animated.View>
     </TouchableOpacity>
   )
@@ -81,14 +81,14 @@ const styling = (theme: ITheme) => StyleSheet.create({
     width: moderateScale(22),
     height: moderateScale(22),
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: COLORS[theme].gray,
+    borderColor: COLORS[theme].border,
     borderRadius: moderateScale(5),
     overflow: 'hidden'
   },
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: COLORS[theme].primary,
+    backgroundColor: COLORS[theme]['brand-primary'],
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -100,7 +100,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
   label: {
     fontFamily: EFonts.MEDIUM,
     textTransform: 'capitalize',
-    color: COLORS[theme].text,
+    color: COLORS[theme]['text-primary'],
     fontSize: moderateScale(14)
   }
 })

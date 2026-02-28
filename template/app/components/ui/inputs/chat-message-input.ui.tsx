@@ -80,7 +80,7 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
               waitForSeconds(() => console.log("Emoji button pressed"), 500);
             }}
           >
-            <Smile color={colors.text} />
+            <Smile color={colors['icon-default']} />
           </IconButton>
           <TextInput
             ref={inputRef}
@@ -88,8 +88,8 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
             onChangeText={setText}
             style={[styles.textInput, { height }, iosPlatformStyles]}
             placeholder="Write a message..."
-            placeholderTextColor={colors.gray}
-            cursorColor={colors.primary}
+            placeholderTextColor={colors['text-muted']}
+            cursorColor={colors['brand-primary']}
             underlineColorAndroid="transparent"
             keyboardAppearance="light"
             keyboardType={'default'}
@@ -109,12 +109,12 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
               waitForSeconds(() => mediaOptionSheet.current?.open(), 500);
             }}
           >
-            <Paperclip color={colors.text} />
+            <Paperclip color={colors['icon-default']} />
           </IconButton>
         </View>
         <View style={styles.linear}>
           <IconButton style={styles.sendButton} onPress={handleSend}>
-            <SendHorizontal color={colors.white} width={moderateScale(25)} height={moderateScale(25)} />
+            <SendHorizontal color={colors.surface} width={moderateScale(25)} height={moderateScale(25)} />
           </IconButton>
         </View>
       </View>
@@ -151,7 +151,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     borderRadius: moderateScale(30),
     overflow: 'hidden',
     alignSelf: 'flex-end',
-    backgroundColor: COLORS[theme].primary
+    backgroundColor: COLORS[theme]['brand-primary']
   },
   sendButton: {
     alignItems: 'center',
@@ -173,7 +173,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     height: 'auto',
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(16),
-    color: COLORS[theme].text
+    color: COLORS[theme]['text-primary']
   },
   icon: {
     paddingHorizontal: moderateScale(12),
