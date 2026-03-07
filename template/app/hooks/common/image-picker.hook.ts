@@ -1,11 +1,12 @@
+import { useCallback } from 'react';
 import { generateImageFileSchema } from '$helpers/files.helper';
-import { IMediaFile } from '$types/common.types';
+import { IMediaFile } from '$dto/common';
 import { requestCameraPermissions, requestMediaPermissions } from '$utils/permissions';
 import { launchCamera, launchImageLibrary, MediaType } from 'react-native-image-picker';
 
 export const useImagePicker = (onSelect: (e: IMediaFile[]) => void, onPermissionFailed?: (mode: 'media' | 'camera') => void) => {
 
-    const openGallery = async (type: MediaType = 'photo', limit = 0) => {
+    const openGallery = useCallback(async (type: MediaType = 'photo', limit = 0) => {
         try {
 
             const isPermissionAvailable = await requestMediaPermissions();
@@ -23,9 +24,9 @@ export const useImagePicker = (onSelect: (e: IMediaFile[]) => void, onPermission
         } catch (error) {
             console.log("ERROR", error);
         }
-    }
+    }, [onSelect, onPermissionFailed]);
 
-    const openCamera = async (type: MediaType = 'photo') => {
+    const openCamera = useCallback(async (type: MediaType = 'photo') => {
         try {
 
             const isPermissionAvailable = await requestCameraPermissions();
@@ -43,7 +44,7 @@ export const useImagePicker = (onSelect: (e: IMediaFile[]) => void, onPermission
         } catch (error) {
             console.log("ERROR", error);
         }
-    }
+    }, [onSelect, onPermissionFailed]);
 
     return { openGallery, openCamera };
 }

@@ -1,18 +1,19 @@
+import { useCallback } from 'react';
 import { generateMediaFileSchema } from '$helpers/files.helper';
-import { IMediaFile } from '$types/common.types';
+import { IMediaFile, MEDIA_TYPE } from '$dto/common';
 import { types, pick, isErrorWithCode } from '@react-native-documents/picker';
 
-export type MEDIA_TYPE = keyof typeof types;
 
 export const useDocumentPicker = (onSelect: (response: IMediaFile[]) => void) => {
-    const openPicker = async (mediaType: MEDIA_TYPE[]) => {
+    const openPicker = useCallback(async (mediaType: MEDIA_TYPE[]) => {
         try {
             const response = await pick({
-                type: mediaType.map((type) => types[type]),
+                type: mediaType.map((type) => types[type] as any),
                 copyTo: 'documentDirectory',
                 mode: 'open',
                 allowMultiSelection: true,
             });
+
             if (response.length) {
                 onSelect(response.map(e => generateMediaFileSchema(e)));
             }
@@ -21,7 +22,7 @@ export const useDocumentPicker = (onSelect: (response: IMediaFile[]) => void) =>
                 console.error('Document Picker Error:', error);
             }
         }
-    };
+    }, [onSelect]);
 
     return { openPicker };
 };

@@ -1,4 +1,4 @@
-import { IMediaFile } from '$types/common.types';
+import { IMediaFile } from '$dto/common';
 import { DocumentPickerResponse } from '@react-native-documents/picker';
 import { Asset } from 'react-native-image-picker';
 import * as mime from 'react-native-mime-types';

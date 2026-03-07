@@ -1,21 +1,21 @@
 import messaging from '@react-native-firebase/messaging';
 import { PermissionsAndroid, Platform } from 'react-native';
 import { PERMISSIONS, requestMultiple, Permission } from 'react-native-permissions';
+import { IPermissionResult } from '$dto/common';
+
 
 type PlatformPermissions = {
   android: Permission[];
   ios: Permission[];
 };
 
-interface PermissionResult {
-  granted: boolean;
-  error?: Error;
-}
+
+
 
 abstract class BasePermissionHandler {
   protected abstract permissions: PlatformPermissions;
 
-  public async requestPermission(): Promise<PermissionResult> {
+  public async requestPermission(): Promise<IPermissionResult> {
     try {
       const platformPermissions = this.getPlatformPermissions();
       const result = await requestMultiple(platformPermissions);
@@ -105,7 +105,7 @@ class NotificationPermissionHandler extends BasePermissionHandler {
     ios: [],
   };
 
-  public async requestPermission(): Promise<PermissionResult> {
+  public async requestPermission(): Promise<IPermissionResult> {
     try {
       let granted = false;
 
@@ -154,7 +154,7 @@ class PermissionManager {
     this.handlers.set('notification', new NotificationPermissionHandler());
   }
 
-  public async requestPermission(type: string): Promise<PermissionResult> {
+  public async requestPermission(type: string): Promise<IPermissionResult> {
     const handler = this.handlers.get(type);
     if (!handler) {
       return {

@@ -1,8 +1,9 @@
-import { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
+import { AxiosInstance, AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { Storage } from '$utils/storage';
 import { EStorageKeys } from '$constants/storage.constants';
 
-const onRequest = async (config: any) => {
+const onRequest = async (config: InternalAxiosRequestConfig) => {
+
     const token = Storage.getString(EStorageKeys.ACCESS_TOKEN);
 
     if (token) {

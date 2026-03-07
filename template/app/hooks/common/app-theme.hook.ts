@@ -1,6 +1,6 @@
 import { COLORS } from '$constants/colors.constants';
 import { AppThemeContext } from '$context/app-theme.context';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const useAppTheme = () => {
@@ -13,11 +13,11 @@ export const useAppTheme = () => {
 
     const { changeTheme, theme, selectedTheme } = context;
 
-    return {
+    return useMemo(() => ({
         changeTheme,
         theme,
         selectedTheme,
         colors: COLORS[theme],
         insets,
-    };
+    }), [changeTheme, theme, selectedTheme, insets]);
 };

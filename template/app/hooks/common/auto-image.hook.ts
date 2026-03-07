@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react"
+import { useLayoutEffect, useState, useMemo } from "react"
 import { Image, PixelRatio } from "react-native"
 
 export function useAutoImage(
@@ -9,7 +9,6 @@ export function useAutoImage(
     dimensions?: [maxWidth?: number, maxHeight?: number],
 ): [width: number, height: number] {
     const [[remoteWidth, remoteHeight], setRemoteImageDimensions] = useState([0, 0])
-    const remoteAspectRatio = remoteWidth / remoteHeight
     const [maxWidth, maxHeight] = dimensions ?? []
 
     useLayoutEffect(() => {
@@ -22,19 +21,23 @@ export function useAutoImage(
         }
     }, [remoteUri, headers])
 
-    if (Number.isNaN(remoteAspectRatio)) return [100, 100]
+    return useMemo(() => {
+        const remoteAspectRatio = remoteWidth / remoteHeight
 
-    if (maxWidth && maxHeight) {
-        const aspectRatio = Math.min(maxWidth / remoteWidth, maxHeight / remoteHeight)
-        return [
-            PixelRatio.roundToNearestPixel(remoteWidth * aspectRatio),
-            PixelRatio.roundToNearestPixel(remoteHeight * aspectRatio),
-        ]
-    } else if (maxWidth) {
-        return [maxWidth, PixelRatio.roundToNearestPixel(maxWidth / remoteAspectRatio)]
-    } else if (maxHeight) {
-        return [PixelRatio.roundToNearestPixel(maxHeight * remoteAspectRatio), maxHeight]
-    } else {
-        return [remoteWidth, remoteHeight]
-    }
+        if (Number.isNaN(remoteAspectRatio) || remoteHeight === 0) return [100, 100]
+
+        if (maxWidth && maxHeight) {
+            const aspectRatio = Math.min(maxWidth / remoteWidth, maxHeight / remoteHeight)
+            return [
+                PixelRatio.roundToNearestPixel(remoteWidth * aspectRatio),
+                PixelRatio.roundToNearestPixel(remoteHeight * aspectRatio),
+            ]
+        } else if (maxWidth) {
+            return [maxWidth, PixelRatio.roundToNearestPixel(maxWidth / remoteAspectRatio)]
+        } else if (maxHeight) {
+            return [PixelRatio.roundToNearestPixel(maxHeight * remoteAspectRatio), maxHeight]
+        } else {
+            return [remoteWidth, remoteHeight]
+        }
+    }, [remoteWidth, remoteHeight, maxWidth, maxHeight]);
 }

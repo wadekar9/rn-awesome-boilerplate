@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { Edge, useSafeAreaInsets } from "react-native-safe-area-context"
 
 type ExtendedEdge = Edge | "start" | "end"
@@ -20,8 +21,8 @@ type SafeAreaInsetsStyle<
   Property extends "padding" | "margin" = "padding",
   Edges extends Array<ExtendedEdge> = Array<ExtendedEdge>,
 > = {
-  [K in Edges[number] as `${Property}${Capitalize<K>}`]: number
-}
+    [K in Edges[number]as `${Property}${Capitalize<K>}`]: number
+  }
 
 export function useSafeAreaInsetsStyle<
   Property extends "padding" | "margin" = "padding",
@@ -32,8 +33,12 @@ export function useSafeAreaInsetsStyle<
 ): SafeAreaInsetsStyle<Property, Edges> {
   const insets = useSafeAreaInsets()
 
-  return safeAreaEdges.reduce((acc, e) => {
-    const value = edgeInsetMap[e] ?? e
-    return { ...acc, [`${property}${propertySuffixMap[e]}`]: insets[value] }
-  }, {}) as SafeAreaInsetsStyle<Property, Edges>
-};
+  return useMemo(
+    () =>
+      safeAreaEdges.reduce((acc, e) => {
+        const value = edgeInsetMap[e] ?? e
+        return { ...acc, [`${property}${propertySuffixMap[e]}`]: insets[value] }
+      }, {}),
+    [insets, safeAreaEdges, property],
+  ) as SafeAreaInsetsStyle<Property, Edges>
+}

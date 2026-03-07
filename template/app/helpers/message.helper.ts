@@ -1,4 +1,3 @@
-import { COLORS } from '$constants/colors.constants';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { getI18n } from 'react-i18next';
 import { StatusBar } from 'react-native';
@@ -17,21 +16,23 @@ export function showFlashMessage(props: MessageOptions) {
         textStyle: {
             fontFamily: EFonts.MEDIUM,
             fontSize: moderateScale(14),
-            color: COLORS.light.white,
+            color: '#FFFFFF',
             letterSpacing: 0.5,
         },
         titleStyle: {
             fontFamily: EFonts.SEMI_BOLD,
             fontSize: moderateScale(15),
-            color: COLORS.light.white,
+            color: '#FFFFFF',
             letterSpacing: 0.5,
         },
+
         textProps: { numberOfLines: 2 },
         titleProps: { numberOfLines: 2 },
     });
 }
 
-export const showErrorFlashMessage = async (error: any) => {
+export const showErrorFlashMessage = async (error: unknown) => {
+
 
     const { t } = getI18n();
     const isConnected = (await fetch()).isConnected;
@@ -46,8 +47,9 @@ export const showErrorFlashMessage = async (error: any) => {
     }
 
     if (error) {
-        if (error?.message) {
-            let message: string = (typeof error?.message === 'string' && (error?.message.includes('Rejected') || error?.message === 'Rejected')) ? t('messages:WENT_WRONG') : error.message;
+        if (error instanceof Error || (typeof error === 'object' && 'message' in error)) {
+            const err = error as { message: any };
+            let message: string = (typeof err.message === 'string' && (err.message.includes('Rejected') || err.message === 'Rejected')) ? t('messages:WENT_WRONG') : String(err.message);
             if (!message.includes('Aborted') || message !== 'Aborted') {
                 showFlashMessage({
                     message: t('messages:UNABLE_PROCEED'),
@@ -72,6 +74,7 @@ export const showErrorFlashMessage = async (error: any) => {
             });
         }
     } else {
+
         showFlashMessage({
             message: t('messages:UNABLE_PROCEED'),
             description: t('messages:WENT_WRONG'),
