@@ -4,7 +4,8 @@ import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
 import { waitForSeconds } from '$helpers/utils.helper';
 import { MediaType } from 'react-native-image-picker';
-import { BottomSheetRef, IMediaFile, ITheme } from '$types/common.types';
+import { IMediaFile } from '$dto/common';
+import { BottomSheetRef, ITheme } from '$types/common.types';
 import { useAppTheme, useDocumentPicker, useImagePicker } from '$hooks/common';
 import { IconButton, ThemeText } from '$components/ui';
 import { AskPermissionModal } from '$components/modals';
@@ -17,10 +18,7 @@ interface MediaUploadOptionsSheetProps {
     maxFiles?: number;
 }
 
-interface MediaUploadOptionsSheetRef {
-    open: () => void;
-    close: () => void;
-}
+interface MediaUploadOptionsSheetRef extends BottomSheetRef { }
 
 const MediaUploadOptionsSheet = React.forwardRef<MediaUploadOptionsSheetRef, MediaUploadOptionsSheetProps>((
     { mediaType = 'photo', ...props },

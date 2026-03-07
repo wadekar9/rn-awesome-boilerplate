@@ -1,4 +1,4 @@
-import { Keyboard, StyleSheet, View } from 'react-native'
+import { Keyboard, Platform, StyleSheet, View } from 'react-native'
 import React, { forwardRef, useImperativeHandle } from 'react'
 import ActionSheet, { ActionSheetProps, ActionSheetRef } from "react-native-actions-sheet";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -42,21 +42,21 @@ const BaseBottomSheet = forwardRef<BaseBottomSheetRef, BaseBottomSheetProps>((pr
                 closeOnTouchBackdrop
                 closeOnPressBack
                 containerStyle={{
-                    backgroundColor: colors.surface,
-                    borderTopLeftRadius: moderateScale(42),
-                    borderTopRightRadius: moderateScale(42),
-                    overflow: 'hidden'
+                    backgroundColor: colors.background,
+                    borderTopLeftRadius: moderateScale(30),
+                    borderTopRightRadius: moderateScale(30),
+                    overflow: 'hidden',
+                    paddingBottom: (safeAreaInsets.bottom || safeAreaInsets.top) + moderateScale(24)
                 }}
                 animated={true}
                 gestureEnabled={false}
                 ref={sheetRef}
-                keyboardHandlerEnabled={true}
+                keyboardHandlerEnabled={Platform.OS === 'ios'}
                 statusBarTranslucent={true}
-                safeAreaInsets={safeAreaInsets}
                 defaultOverlayOpacity={0.8}
                 {...props.sheetProps}
             >
-                <View style={[styles.wrapper, { height: props.sheetHeight || moderateScale(354) }]}>
+                <View style={[styles.wrapper, props.sheetHeight ? { height: props.sheetHeight } : {}]}>
                     <View style={styles.indicatorWrapper}>
                         <View style={[styles.handleIndicatorStyle, { backgroundColor: colors.background }]} />
                     </View>

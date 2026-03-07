@@ -1,9 +1,9 @@
-import { StyleSheet, View, Modal, Linking } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { StyleSheet, View, Modal, Linking } from 'react-native';
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
 import { waitForSeconds } from '$helpers/utils.helper';
-import { ITheme } from '$types/common.types';
+import { BottomSheetRef, ITheme } from '$types/common.types';
 import { useAppTranslation } from '$hooks/common';
 import { IconButton, ThemeText } from '$components/ui';
 
@@ -13,15 +13,16 @@ interface PermissionModalProps {
 
 type MODE = 'media' | 'camera' | 'location' | 'notification';
 
-interface PermissionModalRef {
+interface PermissionModalRef extends Omit<BottomSheetRef, 'open'> {
     open: (e: MODE) => void;
-    close: () => void;
 }
 
-const AskPermissionModal = React.forwardRef<PermissionModalRef, PermissionModalProps>((props, ref) => {
+const AskPermissionModal = React.forwardRef<PermissionModalRef, PermissionModalProps>(({
+    theme = 'light',
+}, ref) => {
 
     const { actions_t, common_t, messages_t } = useAppTranslation();
-    const styles = styling(props.theme)
+    const styles = styling(theme);
 
     const [visible, setVisible] = React.useState<boolean>(false);
     const [mode, setMode] = React.useState<MODE>('notification');
