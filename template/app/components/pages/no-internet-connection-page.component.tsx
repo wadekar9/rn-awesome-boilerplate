@@ -1,6 +1,6 @@
 import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
-import { ThemedView } from '$components/containers'
+import { ThemedView } from '$components/ui'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { ITheme } from '$types/common.types'
 import { useAppTheme } from '$hooks/common'
@@ -35,6 +35,9 @@ const NoInternetConnectionPage: React.FC = () => {
         <Image
           source={IMAGES.NETWORK_CONNECTION}
           style={{ width: moderateScale(150), height: moderateScale(150) }}
+          accessible={true}
+          accessibilityRole="image"
+          accessibilityLabel="No Internet Illustration"
         />
 
         <View style={styles.content}>
@@ -43,7 +46,7 @@ const NoInternetConnectionPage: React.FC = () => {
           <BaseButton
             label='Try Again'
             LeftAccessory={<RotateCcw width={moderateScale(20)} height={moderateScale(20)} color={colors['brand-primary']} />}
-            containerStyle={styles.buttonContainer}
+            containerStyle={[styles.buttonContainer, { borderColor: colors.border }]}
             labelStyle={{ color: colors['text-primary'] }}
             onPress={refresh}
           />

@@ -1,14 +1,25 @@
 import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
-import { ThemedView } from '$components/containers'
+import { ThemedView } from '$components/ui'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { useAppTheme } from '$hooks/common'
 import { ITheme } from '$types/common.types'
 import { COLORS } from '$constants/colors.constants'
 import { IMAGES } from '$assets/images'
 import { ThemeText } from '$components/ui'
+import { ImageSourcePropType } from 'react-native'
 
-const EmptyStatePage: React.FC = () => {
+export interface EmptyStatePageProps {
+  title?: string;
+  description?: string;
+  image?: ImageSourcePropType;
+}
+
+const EmptyStatePage: React.FC<EmptyStatePageProps> = ({
+  title = "Oops!",
+  description = "Data not found",
+  image = IMAGES.EMPTY_STATE
+}) => {
 
   const { theme } = useAppTheme();
   const styles = styling(theme);
@@ -17,13 +28,16 @@ const EmptyStatePage: React.FC = () => {
     <ThemedView>
       <View style={styles.container}>
         <Image
-          source={IMAGES.EMPTY_STATE}
+          source={image}
           style={{ width: moderateScale(150), height: moderateScale(150) }}
+          accessibilityRole="image"
+          accessible={true}
+          accessibilityLabel="Empty State Illustration"
         />
 
         <View style={styles.content}>
-          <ThemeText style={styles.label}>Oops!</ThemeText>
-          <ThemeText style={styles.description}>Data not found</ThemeText>
+          <ThemeText style={styles.label}>{title}</ThemeText>
+          <ThemeText style={styles.description}>{description}</ThemeText>
         </View>
       </View>
     </ThemedView>
