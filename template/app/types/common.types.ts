@@ -1,5 +1,5 @@
-export type ITheme = 'dark' | 'light';
-export type IBaseTheme = 'default' | 'dark' | 'light';
+import { ITheme, IBaseTheme } from '$dto/common';
+export type { ITheme, IBaseTheme };
 
 export interface AppThemeContextProps {
   theme: ITheme;
@@ -7,13 +7,8 @@ export interface AppThemeContextProps {
   changeTheme: (theme: IBaseTheme) => void;
 }
 
-export interface IMediaFile {
-    name: string;
-    type: string;
-    uri: string;
-}
 
 export interface BottomSheetRef {
-    open: () => void;
-    close: () => void;
+  open: () => void;
+  close: () => void;
 }
