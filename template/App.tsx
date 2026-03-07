@@ -6,7 +6,7 @@ import { Provider as StoreProvider } from 'react-redux';
 import store from '$store/redux.store';
 import FlashMessage from 'react-native-flash-message';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import RootStackNavigator from '$navigation/root-stack-navigator';
+import AppStackNavigator from '$navigation/app-stack-navigator.navigation';
 import { container } from '$styles/flexbox';
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
         <KeyboardProvider>
           <SafeAreaProvider>
             <GestureHandlerRootView style={container}>
-              <RootStackNavigator />
+              <AppStackNavigator />
             </GestureHandlerRootView>
           </SafeAreaProvider>
         </KeyboardProvider>
