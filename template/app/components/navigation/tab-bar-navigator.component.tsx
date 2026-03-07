@@ -67,7 +67,7 @@ const TabBarNavigator: React.FC<TabBarNavigatorProps> = ({ state, descriptors, n
                     return (
                         <TabBarButton
                             key={index.toString()}
-                            accessibilityRole="button"
+                            accessibilityRole="tab"
                             accessibilityState={isFocused ? { selected: true } : {}}
                             accessibilityLabel={options.tabBarAccessibilityLabel}
                             onPress={onPress}

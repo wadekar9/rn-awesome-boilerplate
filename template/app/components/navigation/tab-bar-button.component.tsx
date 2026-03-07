@@ -12,18 +12,35 @@ interface TabBarButtonProps extends BottomTabBarButtonProps {
     }
 }
 
-const TabBarButton: React.FC<TabBarButtonProps> = (props) => {
+const TabBarButton: React.FC<TabBarButtonProps> = (props: any) => {
 
-    const { accessibilityState, onPress, onLongPress, icons } = props;
+    const {
+        icons,
+        style,
+        theme,
+        delayLongPress,
+        disabled,
+        onLongPress,
+        onBlur,
+        onFocus,
+        pressRetentionOffset,
+        pressOpacity,
+        ...remainingProps
+    } = props;
 
-    const isFocused = accessibilityState?.selected;
+    const isFocused = remainingProps.accessibilityState?.selected;
 
     return (
         <TouchableOpacity
             activeOpacity={0.65}
-            onPress={onPress}
-            onLongPress={onLongPress!}
-            style={styles.container}
+            {...remainingProps}
+            disabled={disabled ?? undefined}
+            onLongPress={onLongPress ?? undefined}
+            delayLongPress={delayLongPress ?? undefined}
+            onBlur={onBlur ?? undefined}
+            onFocus={onFocus ?? undefined}
+            pressRetentionOffset={pressRetentionOffset ?? undefined}
+            style={[styles.container, style]}
         >
             {isFocused ? icons.focused() : icons.unfocused()}
         </TouchableOpacity>
