@@ -1,9 +1,7 @@
-import { Pressable, PressableProps, PressableStateCallbackType, StyleProp, StyleSheet, ViewStyle, TextStyle } from 'react-native'
 import React from 'react'
-import { EFonts, moderateScale } from '$constants/styles.constants'
 import { ITheme } from '$types/common.types';
-import { COLORS } from '$constants/colors.constants';
-import { ThemeText } from '../themed';
+import BasePressableButton from './base-pressable-button.component';
+import { PressableProps, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 interface BaseButtonProps extends PressableProps {
   theme?: ITheme;
@@ -12,62 +10,31 @@ interface BaseButtonProps extends PressableProps {
   containerStyle?: StyleProp<ViewStyle>;
   RightAccessory?: React.ReactNode;
   LeftAccessory?: React.ReactNode;
+  outline?: boolean;
 };
 
 const BaseButton: React.FC<BaseButtonProps> = ({
   theme = 'light',
-  label = 'Button Text',
+  label,
   labelStyle,
   containerStyle,
   RightAccessory,
   LeftAccessory,
-  disabled,
+  outline,
   ...props
 }) => {
-
-  const styles = styling(theme);
-
-  function $wrapperStyle({ pressed }: PressableStateCallbackType): StyleProp<ViewStyle> {
-    return [
-      styles.wrapper,
-      !!pressed && { opacity: 0.85 },
-      !!disabled && { opacity: 0.5 },
-      containerStyle
-    ]
-  }
-
   return (
-    <Pressable
+    <BasePressableButton
       {...props}
-      role='button'
-      accessibilityRole='button'
-      style={$wrapperStyle}
-    >
-      {!!LeftAccessory && LeftAccessory}
-      <ThemeText style={[styles.label, labelStyle]}>{label}</ThemeText>
-      {!!RightAccessory && RightAccessory}
-    </Pressable>
+      theme={theme}
+      label={label}
+      labelStyle={labelStyle}
+      containerStyle={containerStyle}
+      RightAccessory={RightAccessory}
+      LeftAccessory={LeftAccessory}
+      outline={outline}
+    />
   )
 }
 
 export default React.memo(BaseButton);
-
-const styling = (theme: ITheme) => StyleSheet.create({
-  wrapper: {
-    width: '100%',
-    height: moderateScale(50),
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    borderRadius: moderateScale(5),
-    gap: moderateScale(10),
-    backgroundColor: COLORS[theme]['brand-primary']
-  },
-  label: {
-    fontFamily: EFonts.MEDIUM,
-    fontSize: moderateScale(15),
-    color: COLORS[theme].surface,
-    textTransform: 'capitalize'
-  }
-})

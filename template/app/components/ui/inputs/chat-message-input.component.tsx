@@ -1,19 +1,23 @@
 import React from 'react';
-import { Keyboard, NativeSyntheticEvent, Platform, StyleSheet, TextInput, TextInputContentSizeChangeEventData, View } from 'react-native';
+import { Keyboard, NativeSyntheticEvent, Platform, StyleSheet, TextInput, TextInputContentSizeChangeEventData, View, TextInputProps } from 'react-native';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { COLORS } from '$constants/colors.constants';
 import { waitForSeconds } from '$helpers/utils.helper';
-import { IMediaFile, ITheme } from '$types/common.types';
+import { IMediaFile } from '$dto/common';
+import { ITheme } from '$types/common.types';
 import { useAppTheme, useDocumentPicker } from '$hooks/common';
 import { IconButton } from '../buttons';
 import { Paperclip, SendHorizontal, Smile } from 'lucide-react-native';
 import { MediaUploadOptionsSheet } from '$components/bottom-sheet';
 
-interface ChatMessageInputProps {
+interface ChatMessageInputProps extends Omit<TextInputProps, 'style' | 'multiline' | 'value' | 'onChangeText'> {
   onSend?: (text: string) => void;
   onSendMedia?: (e: IMediaFile[]) => void;
-};
+  containerAccessible?: boolean;
+  containerAccessibilityLabel?: string;
+  containerAccessibilityHint?: string;
+}
 
 interface ChatMessageInputRef {
   clear: () => void;
@@ -23,9 +27,21 @@ const DEFAULT_HEIGHT = Platform.OS == 'ios' ? 40 : 50;
 const MAX_HEIGHT = 135;
 const MAX_CONTENT = 500;
 
-const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputProps>((props, ref) => {
+const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputProps>(({
+  onSend,
+  onSendMedia,
+  containerAccessible = true,
+  containerAccessibilityLabel = "Message input area",
+  containerAccessibilityHint = "Type a message or attach media",
+  placeholder = "Write a message...",
+  autoComplete = 'off',
+  autoCapitalize = 'sentences',
+  spellCheck = true,
+  importantForAutofill = 'auto',
+  selectionColor,
+  ...props
+}, ref) => {
 
-  const { onSend, onSendMedia } = props;
   const { theme, colors } = useAppTheme();
 
   const [text, setText] = React.useState<string>('');
@@ -72,33 +88,45 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
   return (
     <View style={[styles.wrapper, { paddingBottom: insets.bottom || moderateScale(20) }]}>
       <View style={styles.container}>
-        <View style={styles.content}>
+        <View
+          style={styles.content}
+          accessible={containerAccessible}
+          accessibilityLabel={containerAccessibilityLabel}
+          accessibilityHint={containerAccessibilityHint}
+        >
           <IconButton
             style={styles.icon}
             onPress={() => {
               Keyboard.dismiss();
               waitForSeconds(() => console.log("Emoji button pressed"), 500);
             }}
+            accessibilityLabel="Open emoji picker"
+            accessibilityRole="button"
           >
             <Smile color={colors['icon-default']} />
           </IconButton>
           <TextInput
+            {...props}
             ref={inputRef}
             value={text}
             onChangeText={setText}
             style={[styles.textInput, { height }, iosPlatformStyles]}
-            placeholder="Write a message..."
+            placeholder={placeholder}
             placeholderTextColor={colors['text-muted']}
             cursorColor={colors['brand-primary']}
+            selectionColor={selectionColor || colors['brand-primary']}
             underlineColorAndroid="transparent"
-            keyboardAppearance="light"
-            keyboardType={'default'}
-            textContentType={'none'}
-            autoComplete={'off'}
+            keyboardAppearance={theme}
+            keyboardType={props.keyboardType || 'default'}
+            textContentType={props.textContentType || 'none'}
+            autoComplete={autoComplete}
+            autoCapitalize={autoCapitalize}
+            spellCheck={spellCheck}
+            importantForAutofill={importantForAutofill}
             blurOnSubmit={false}
             multiline={true}
-            textAlignVertical={'auto'}
-            maxLength={MAX_CONTENT}
+            textAlignVertical={'top'}
+            maxLength={props.maxLength || MAX_CONTENT}
             onContentSizeChange={handleContentSizeChange}
             onSubmitEditing={Keyboard.dismiss}
           />
@@ -108,12 +136,20 @@ const ChatMessageInput = React.forwardRef<ChatMessageInputRef, ChatMessageInputP
               Keyboard.dismiss();
               waitForSeconds(() => mediaOptionSheet.current?.open(), 500);
             }}
+            accessibilityLabel="Attach media"
+            accessibilityRole="button"
           >
             <Paperclip color={colors['icon-default']} />
           </IconButton>
         </View>
         <View style={styles.linear}>
-          <IconButton style={styles.sendButton} onPress={handleSend}>
+          <IconButton
+            style={[styles.sendButton, { opacity: text.trim().length === 0 ? 0.5 : 1 }]}
+            onPress={handleSend}
+            accessibilityLabel="Send message"
+            accessibilityRole="button"
+            disabled={text.trim().length === 0}
+          >
             <SendHorizontal color={colors.surface} width={moderateScale(25)} height={moderateScale(25)} />
           </IconButton>
         </View>
@@ -171,9 +207,12 @@ const styling = (theme: ITheme) => StyleSheet.create({
   textInput: {
     flex: 1,
     height: 'auto',
+    padding: 0,
     fontFamily: EFonts.REGULAR,
     fontSize: moderateScale(16),
-    color: COLORS[theme]['text-primary']
+    color: COLORS[theme]['text-primary'],
+    paddingTop: Platform.OS === 'ios' ? moderateScale(10) : moderateScale(8),
+    paddingBottom: Platform.OS === 'ios' ? moderateScale(10) : moderateScale(8)
   },
   icon: {
     paddingHorizontal: moderateScale(12),

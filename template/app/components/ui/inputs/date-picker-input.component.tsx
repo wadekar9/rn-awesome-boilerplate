@@ -5,33 +5,33 @@ import { ITheme } from '$types/common.types';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
 import { Calendar } from 'lucide-react-native';
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import DateTimePickerModal, { DateTimePickerProps } from 'react-native-modal-datetime-picker';
 import { ThemeText } from '../themed';
 
-interface DatePickerInputProps {
+interface DatePickerInputProps extends Omit<DateTimePickerProps, 'onConfirm' | 'onCancel' | 'isVisible'> {
   label?: string;
   error?: string;
   value?: Date | null;
-  maximumDate?: Date;
-  minimumDate?: Date;
-  is24Hour?: boolean;
   onDateChange?: (date: Date) => void;
-  pickerMode?: 'datetime' | 'date' | 'time';
   placeholder?: string;
   disabled?: boolean;
+  accessible?: boolean;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
 }
 
 const DatePickerInput: React.FC<DatePickerInputProps> = ({
   label,
   error,
   value = null,
-  maximumDate,
-  minimumDate,
-  is24Hour,
   onDateChange,
-  pickerMode = 'date',
   placeholder = 'DD/MM/YYYY',
   disabled = false,
+  accessible = true,
+  accessibilityLabel,
+  accessibilityHint,
+  mode = 'date',
+  ...props
 }) => {
 
   const { colors, theme } = useAppTheme();
@@ -48,9 +48,8 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
     setIsDatePickerVisible(false);
   }
 
-  function onConfirmDate(event: DateTimePickerEvent, date?: Date) {
+  function handleConfirm(date: Date) {
     hidePicker();
-    if (event.type === 'dismissed' || !date) return;
     onDateChange && onDateChange(date);
   }
 
@@ -63,6 +62,10 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
         style={[styles.container, { opacity: disabled ? 0.5 : 1 }]}
         onPress={showPicker}
         disabled={disabled}
+        accessible={accessible}
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel || label || 'Select date'}
+        accessibilityHint={accessibilityHint || 'Opens a date picker dialog'}
       >
         <View style={styles.icon}>
           <Calendar width={moderateScale(25)} height={moderateScale(25)} color={colors['icon-default']} />
@@ -74,23 +77,20 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
 
       {error && (
         <View style={styles.errorTextWrapper}>
-          <ThemeText numberOfLines={3} style={styles.errorText}>{error}</ThemeText>
+          <ThemeText numberOfLines={3} style={styles.errorText} accessibilityRole="alert">{error}</ThemeText>
         </View>
       )}
 
-      {isDatePickerVisible && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={value || TODAY_DATE}
-          mode={pickerMode}
-          onChange={onConfirmDate}
-          is24Hour={is24Hour}
-          maximumDate={maximumDate}
-          minimumDate={minimumDate}
-          textColor={colors['text-primary']}
-          themeVariant={theme}
-        />
-      )}
+      <DateTimePickerModal
+        {...props}
+        isVisible={isDatePickerVisible}
+        date={value || TODAY_DATE}
+        mode={mode}
+        onConfirm={handleConfirm}
+        onCancel={hidePicker}
+        isDarkModeEnabled={theme === 'dark'}
+        themeVariant={theme}
+      />
     </View>
   );
 };

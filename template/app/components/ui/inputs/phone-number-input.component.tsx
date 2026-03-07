@@ -28,6 +28,10 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
     countryCode,
     error,
     disabled = false,
+    autoComplete = 'tel',
+    textContentType = 'telephoneNumber',
+    importantForAutofill = 'yes',
+    selectionColor,
     ...props
 }, ref) => {
 
@@ -77,17 +81,22 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
                 placeholder={props.placeholder || "Enter Contact Number"}
                 disabled={disabled}
                 textInputProps={{
+                    ...props,
                     value: removeCountryCode(props.value || ''),
                     placeholderTextColor: colors['text-muted'],
                     editable: !disabled,
                     cursorColor: colors['brand-primary'],
+                    selectionColor: selectionColor || colors['brand-primary'],
                     onFocus: handleFocus,
                     onBlur: handleBlur,
                     onSubmitEditing: handleSubmitEditing,
-                    keyboardType: 'number-pad',
+                    keyboardType: props.keyboardType || 'phone-pad',
                     returnKeyType: props.returnKeyType || 'done',
                     blurOnSubmit: props.blurOnSubmit || false,
-                    autoFocus: false,
+                    autoFocus: props.autoFocus || false,
+                    autoComplete: autoComplete,
+                    textContentType: textContentType,
+                    importantForAutofill: importantForAutofill,
                     keyboardAppearance: theme,
                     multiline: false,
                     numberOfLines: 1
@@ -102,6 +111,7 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
                 textInputStyle={{
                     flex: 1,
                     height: '100%',
+                    padding: 0,
                     fontFamily: EFonts.REGULAR,
                     fontSize: EFontSize.XL,
                     color: COLORS[theme]['text-secondary'],
@@ -120,7 +130,7 @@ const PhoneNumberInput = React.forwardRef<PhoneNumberInputRef, PhoneNumberInputP
 
             {error && (
                 <View style={styles.errorContainer}>
-                    <ThemeText numberOfLines={3} style={styles.errorText}>{error}</ThemeText>
+                    <ThemeText numberOfLines={3} style={styles.errorText} accessibilityRole="alert">{error}</ThemeText>
                 </View>
             )}
         </View>

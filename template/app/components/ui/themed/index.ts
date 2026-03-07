@@ -1,1 +1,5 @@
 export { default as ThemeText } from './theme-text.component'
+export { default as ThemedView } from './themed-view.component'
+export { default as KeyboardView } from './themed-keyboard-view.component'
+export { default as ThemedDivider } from './themed-divider.component'
+export { default as ThemedScreen } from './themed-screen.component'

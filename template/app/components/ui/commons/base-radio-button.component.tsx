@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, Animated, StyleProp, TextStyle } from 'react-native'
+import { StyleSheet, TouchableOpacity, Animated, StyleProp, TextStyle, TouchableOpacityProps, View } from 'react-native'
 import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
@@ -6,10 +6,9 @@ import { ITheme } from '$types/common.types';
 import { COLORS } from '$constants/colors.constants';
 import { ThemeText } from '../themed';
 
-interface BaseRadioButtonProps {
+interface BaseRadioButtonProps extends Omit<TouchableOpacityProps, 'style'> {
   value: boolean;
   onValueChange: (e: boolean) => void;
-  disabled?: boolean;
   size?: number;
 }
 
@@ -22,7 +21,8 @@ const BaseRadioButton: React.FC<BaseRadioButtonProps> = ({
   disabled = false,
   size = 22,
   value,
-  onValueChange
+  onValueChange,
+  ...props
 }) => {
 
   const { theme } = useAppTheme();
@@ -41,12 +41,25 @@ const BaseRadioButton: React.FC<BaseRadioButtonProps> = ({
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      style={[styles.wrapper, disabled && { opacity: 0.7 }]}
-      onPress={() => onValueChange(!value)}
+      {...props}
+      style={[
+        styles.wrapper,
+        disabled && { opacity: 0.7 },
+        { width: moderateScale(size), height: moderateScale(size), borderRadius: moderateScale(size / 2) }
+      ]}
+      onPress={(e) => {
+        onValueChange(!value);
+        if (props.onPress) props.onPress(e);
+      }}
       disabled={disabled}
+      accessibilityRole={props.accessibilityRole || "radio"}
+      accessibilityState={{ ...props.accessibilityState, checked: value, disabled }}
     >
       <Animated.View
-        style={[styles.container, { opacity }]}
+        style={[
+          styles.container,
+          { opacity, width: moderateScale(size / 1.8), height: moderateScale(size / 1.8) }
+        ]}
       />
     </TouchableOpacity>
   )
@@ -66,9 +79,14 @@ export const BaseLabelRadioButton: React.FC<BaseLabelRadioButtonProps> = ({
       activeOpacity={0.7}
       onPress={() => props.onValueChange(!props.value)}
       disabled={props.disabled}
+      accessibilityRole="radio"
+      accessibilityState={{ checked: props.value, disabled: props.disabled }}
+      accessibilityLabel={label}
     >
-      <BaseRadioButton {...props} />
-      <ThemeText style={styles.label}>{label}</ThemeText>
+      <View pointerEvents="none">
+        <BaseRadioButton {...props} />
+      </View>
+      <ThemeText style={[styles.label, props.labelStyle]}>{label}</ThemeText>
     </TouchableOpacity>
   )
 }

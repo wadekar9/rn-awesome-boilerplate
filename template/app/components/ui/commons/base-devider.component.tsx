@@ -1,16 +1,16 @@
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
+import { StyleProp, StyleSheet, View, ViewStyle, ViewProps } from 'react-native'
 import React from 'react'
 import { moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
 
-interface BaseDeviderProps {
+interface BaseDeviderProps extends ViewProps {
   wrapperStyle?: StyleProp<ViewStyle>;
 }
 
-const BaseDevider: React.FC<BaseDeviderProps> = ({ wrapperStyle }) => {
+const BaseDevider: React.FC<BaseDeviderProps> = ({ wrapperStyle, ...props }) => {
   const { colors } = useAppTheme();
   return (
-    <View style={[styles.wrapper, { backgroundColor: colors.border }, wrapperStyle]} />
+    <View {...props} style={[styles.wrapper, { backgroundColor: colors.border }, wrapperStyle]} />
   )
 }
 

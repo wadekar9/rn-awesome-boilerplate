@@ -17,6 +17,7 @@ interface TextareaInputProps extends Omit<TextInputProps, 'style' | 'editable' |
   error?: string;
   disabled?: boolean;
   LeftAccessory?: React.ReactNode;
+  RightAccessory?: React.ReactNode;
 }
 
 const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
@@ -24,6 +25,17 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
   error,
   disabled = false,
   LeftAccessory,
+  RightAccessory,
+  autoComplete = 'off',
+  autoCapitalize = 'sentences',
+  spellCheck = true,
+  importantForAutofill = 'auto',
+  selectionColor,
+  accessible = true,
+  accessibilityLabel,
+  accessibilityHint,
+  placeholder,
+  blurOnSubmit = false, // Multiline inputs usually shouldn't blur on submit
   ...props
 }, ref) => {
 
@@ -59,16 +71,29 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
   }, [props]);
 
   const $EXTRA_STYLES = React.useMemo((): StyleProp<ViewStyle> => {
-    if (!LeftAccessory) {
-      return { paddingLeft: moderateScale(12), paddingRight: moderateScale(12) }
+    const hasLeft = !!LeftAccessory;
+    const hasRight = !!RightAccessory;
+
+    if (!hasLeft && !hasRight) {
+      return { paddingHorizontal: moderateScale(12) }
+    } else if (!hasLeft && hasRight) {
+      return { paddingLeft: moderateScale(12), paddingRight: 0 }
+    } else if (hasLeft && !hasRight) {
+      return { paddingRight: moderateScale(12), paddingLeft: 0 }
+    } else {
+      return { paddingHorizontal: 0 }
     }
-    return { paddingHorizontal: moderateScale(12) };
-  }, [LeftAccessory])
+  }, [LeftAccessory, RightAccessory])
 
   return (
     <View style={styles.wrapper}>
       {label && <ThemeText style={styles.label}>{label}</ThemeText>}
-      <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors['brand-primary'] }]}>
+      <View
+        style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors['brand-primary'] }]}
+        accessible={accessible}
+        accessibilityLabel={accessibilityLabel || label}
+        accessibilityHint={accessibilityHint}
+      >
         <View style={[styles.container, $EXTRA_STYLES]}>
           {!!LeftAccessory && (<View style={styles.icon}>{LeftAccessory}</View>)}
           <TextInput
@@ -77,21 +102,27 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
             numberOfLines={5}
             multiline={true}
             style={styles.textInput}
-            placeholder={props.placeholder || "Type Something here..."}
+            placeholder={placeholder}
             placeholderTextColor={colors['text-muted']}
             cursorColor={colors['brand-primary']}
+            selectionColor={selectionColor || colors['brand-primary']}
             editable={!disabled}
             keyboardAppearance={theme}
-            blurOnSubmit={props.blurOnSubmit || false}
+            autoComplete={autoComplete}
+            autoCapitalize={autoCapitalize}
+            spellCheck={spellCheck}
+            importantForAutofill={importantForAutofill}
+            blurOnSubmit={blurOnSubmit}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onSubmitEditing={handleSubmitEditing}
           />
+          {!!RightAccessory && (<View style={styles.icon}>{RightAccessory}</View>)}
         </View>
       </View>
       {error && (
         <View style={styles.errorContainer}>
-          <ThemeText numberOfLines={3} style={styles.errorText}>{error}</ThemeText>
+          <ThemeText numberOfLines={3} style={styles.errorText} accessibilityRole="alert">{error}</ThemeText>
         </View>
       )}
     </View>
@@ -122,7 +153,10 @@ const styling = (theme: ITheme) => StyleSheet.create({
     height: moderateScale(150),
   },
   textInput: {
+    flex: 1,
     height: '100%',
+    padding: 0,
+    textAlignVertical: 'top',
     fontFamily: EFonts.REGULAR,
     fontSize: EFontSize.XL,
     color: COLORS[theme]['text-primary'],
@@ -142,7 +176,6 @@ const styling = (theme: ITheme) => StyleSheet.create({
     paddingHorizontal: moderateScale(12),
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: COLORS[theme]['surface-alt']
+    alignSelf: 'flex-start',
   }
 });

@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, Animated, StyleProp, TextStyle } from 'react-native'
+import { StyleSheet, TouchableOpacity, Animated, StyleProp, TextStyle, TouchableOpacityProps, View } from 'react-native'
 import React from 'react'
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
@@ -7,10 +7,9 @@ import { COLORS } from '$constants/colors.constants';
 import { Check } from 'lucide-react-native';
 import { ThemeText } from '../themed';
 
-interface BaseCheckboxProps {
+interface BaseCheckboxProps extends Omit<TouchableOpacityProps, 'style'> {
   value: boolean;
   onValueChange: (e: boolean) => void;
-  disabled?: boolean;
 }
 
 interface BaseLabelCheckboxProps extends BaseCheckboxProps {
@@ -21,7 +20,8 @@ interface BaseLabelCheckboxProps extends BaseCheckboxProps {
 const BaseCheckbox: React.FC<BaseCheckboxProps> = ({
   disabled = false,
   value,
-  onValueChange
+  onValueChange,
+  ...props
 }) => {
 
   const { theme } = useAppTheme();
@@ -40,9 +40,15 @@ const BaseCheckbox: React.FC<BaseCheckboxProps> = ({
   return (
     <TouchableOpacity
       activeOpacity={0.7}
+      {...props}
       style={[styles.wrapper, disabled && { opacity: 0.7 }]}
-      onPress={() => onValueChange(!value)}
+      onPress={(e) => {
+        onValueChange(!value);
+        if (props.onPress) props.onPress(e);
+      }}
       disabled={disabled}
+      accessibilityRole={props.accessibilityRole || "checkbox"}
+      accessibilityState={{ ...props.accessibilityState, checked: value, disabled }}
     >
       <Animated.View
         style={[styles.container, { opacity }]}
@@ -67,9 +73,14 @@ export const BaseLabelCheckbox: React.FC<BaseLabelCheckboxProps> = ({
       activeOpacity={0.7}
       onPress={() => props.onValueChange(!props.value)}
       disabled={props.disabled}
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked: props.value, disabled: props.disabled }}
+      accessibilityLabel={label}
     >
-      <BaseCheckbox {...props} />
-      <ThemeText style={styles.label}>{label}</ThemeText>
+      <View pointerEvents="none">
+        <BaseCheckbox {...props} />
+      </View>
+      <ThemeText style={[styles.label, props.labelStyle]}>{label}</ThemeText>
     </TouchableOpacity>
   )
 }

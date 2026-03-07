@@ -18,11 +18,12 @@ interface BaseDropdownProps {
     disabled?: boolean;
     onValueChange?: (e: string) => void;
     icon?: () => React.ReactNode;
+    accessibilityLabel?: string;
 }
 
 const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
 
-    const { data = [], label, value, placeholder = 'Select Item', error, disabled, variant, onValueChange, icon } = props;
+    const { data = [], label, value, placeholder = 'Select Item', error, disabled, variant, onValueChange, icon, accessibilityLabel } = props;
     const { theme, colors } = useAppTheme();
     const styles = styling(theme);
 
@@ -31,7 +32,11 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
     const DATA = useMemo(() => data.map(item => ({ label: item.name, value: `${item.id}` })), [data]);
 
     return (
-        <View style={styles.wrapper}>
+        <View
+            style={styles.wrapper}
+            accessible={true}
+            accessibilityLabel={props.accessibilityLabel || label || placeholder}
+        >
             {label && <ThemeText numberOfLines={2} style={styles.label}>{label}</ThemeText>}
             <View style={[styles.containerWrapper, (variant == 'secondary') && { borderRadius: moderateScale(100) }]}>
                 <Dropdown
@@ -73,7 +78,7 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
             </View>
             {error && (
                 <View style={styles.errorContainer}>
-                    <ThemeText numberOfLines={3} style={styles.errorText}>{error}</ThemeText>
+                    <ThemeText numberOfLines={3} style={styles.errorText} accessibilityRole="alert">{error}</ThemeText>
                 </View>
             )}
         </View>

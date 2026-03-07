@@ -1,20 +1,21 @@
 import React from "react";
 import { moderateScale } from "$constants/styles.constants"
 import { useAutoImage } from "$hooks/common";
-import { Platform, StyleSheet, StyleProp, ViewStyle, View } from "react-native"
+import { Platform, StyleSheet, StyleProp, ViewStyle, View, ViewProps } from "react-native"
 import FastImage, { FastImageProps, ImageStyle, Source } from "@d11/react-native-fast-image";
 import { COLORS } from "$constants/colors.constants";
 
-export interface AutoImageProps extends Omit<FastImageProps, 'style'> {
+interface AutoImageProps extends Omit<FastImageProps, 'style'> {
     width?: number;
     height?: number;
     wrapperStyle?: StyleProp<ViewStyle>;
     imageStyle?: StyleProp<ImageStyle>;
+    wrapperProps?: ViewProps;
 }
 
 const BaseAutoImage = (props: AutoImageProps) => {
 
-    const { width: BASE_WIDTH, height: BASE_HEIGHT, imageStyle, wrapperStyle, ...imageProps } = props;
+    const { width: BASE_WIDTH, height: BASE_HEIGHT, imageStyle, wrapperStyle, wrapperProps, ...imageProps } = props;
     const source = imageProps.source as Source;
     const headers = source?.headers;
 
@@ -28,7 +29,7 @@ const BaseAutoImage = (props: AutoImageProps) => {
     )
 
     return (
-        <View style={[styles.wrapper, { width, height }, wrapperStyle]}>
+        <View {...wrapperProps} style={[styles.wrapper, { width, height }, wrapperStyle]}>
             <FastImage
                 {...imageProps}
                 style={[styles.image, imageStyle]}
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     wrapper: {
         width: moderateScale(100),
         height: moderateScale(100),
-        backgroundColor: COLORS.light.gray,
+        backgroundColor: COLORS.light['surface-alt'],
         overflow: 'hidden'
     },
     image: {

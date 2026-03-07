@@ -5,9 +5,10 @@ const IconButton: React.FC<TouchableOpacityProps> = (props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.65}
-      accessibilityRole={'button'}
-      role={'button'}
       {...props}
+      accessibilityRole={props.accessibilityRole || 'button'}
+      role={props.role || 'button'}
+      accessibilityState={{ ...props.accessibilityState, disabled: !!props.disabled }}
     >
       {props.children}
     </TouchableOpacity>

@@ -2,17 +2,17 @@ import React, { useRef, useEffect } from 'react';
 import {
     StyleSheet,
     TouchableOpacity,
-    Animated
+    Animated,
+    TouchableOpacityProps
 } from 'react-native';
 import { moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
 import { COLORS } from '$constants/colors.constants';
 import { ITheme } from '$types/common.types';
 
-interface BaseSwitchProps {
+interface BaseSwitchProps extends Omit<TouchableOpacityProps, 'style'> {
     value: boolean;
     onValueChange: (value: boolean) => void;
-    disabled?: boolean;
 }
 
 const DEFAULT_DIMENSIONS = {
@@ -27,6 +27,7 @@ const BaseSwitch: React.FC<BaseSwitchProps> = ({
     value,
     onValueChange,
     disabled = false,
+    ...props
 }) => {
     const { theme } = useAppTheme();
     const styles = createStyles(theme);
@@ -49,18 +50,22 @@ const BaseSwitch: React.FC<BaseSwitchProps> = ({
         ]).start();
     }, [value, opacityAnim, translateXAnim]);
 
-    const handlePress = () => {
+    const handlePress = (e: any) => {
         if (!disabled) {
             onValueChange(!value);
+            if (props.onPress) props.onPress(e);
         }
     };
 
     return (
         <TouchableOpacity
             activeOpacity={0.75}
+            {...props}
             style={[styles.wrapper, disabled && styles.disabledWrapper]}
             onPress={handlePress}
             disabled={disabled}
+            accessibilityRole={props.accessibilityRole || "switch"}
+            accessibilityState={{ ...props.accessibilityState, checked: value, disabled }}
         >
             <Animated.View style={[styles.background, { opacity: opacityAnim }]} />
             <Animated.View style={[styles.circle, { transform: [{ translateX: translateXAnim }] }]} />

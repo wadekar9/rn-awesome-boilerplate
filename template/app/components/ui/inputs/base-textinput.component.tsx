@@ -5,8 +5,8 @@ import { COLORS } from '$constants/colors.constants';
 import { useAppTheme } from '$hooks/common';
 import { EyeOff, Eye } from 'lucide-react-native';
 import { ITheme } from '$types/common.types';
-import { IconButton } from '../buttons';
-import { ThemeText } from '../themed';
+import IconButton from '../buttons/icon-button.component';
+import ThemeText from '../themed/theme-text.component';
 
 interface BaseTextInputRef {
     clear: () => void;
@@ -29,6 +29,20 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
     disabled = false,
     RightAccessory,
     LeftAccessory,
+    autoComplete = 'off',
+    autoCapitalize = 'none',
+    spellCheck = false,
+    passwordRules,
+    textContentType = 'none',
+    importantForAutofill = 'auto',
+    selectionColor,
+    clearButtonMode = 'never',
+    accessible = true,
+    accessibilityLabel,
+    accessibilityHint,
+    placeholder,
+    returnKeyType = 'done',
+    blurOnSubmit = true,
     ...props
 }, ref) => {
 
@@ -65,19 +79,29 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
     }, [props]);
 
     const $EXTRA_STYLES = React.useMemo((): StyleProp<ViewStyle> => {
-        if (!!!LeftAccessory && !!!RightAccessory) {
+        const hasLeft = !!LeftAccessory;
+        const hasRight = !!RightAccessory || secureTextEntry;
+
+        if (!hasLeft && !hasRight) {
             return { paddingHorizontal: moderateScale(12) }
-        } else if (!LeftAccessory) {
-            return { paddingLeft: moderateScale(12) }
-        } else if (!RightAccessory || !secureTextEntry) {
-            return { paddingRight: moderateScale(12) }
+        } else if (!hasLeft && hasRight) {
+            return { paddingLeft: moderateScale(12), paddingRight: 0 }
+        } else if (hasLeft && !hasRight) {
+            return { paddingRight: moderateScale(12), paddingLeft: 0 }
+        } else {
+            return { paddingHorizontal: 0 }
         }
     }, [LeftAccessory, RightAccessory, secureTextEntry])
 
     return (
         <View style={styles.wrapper}>
             {label && <ThemeText style={styles.label}>{label}</ThemeText>}
-            <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors['brand-primary'] }]}>
+            <View
+                style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors['brand-primary'] }]}
+                accessible={accessible}
+                accessibilityLabel={accessibilityLabel || label}
+                accessibilityHint={accessibilityHint}
+            >
                 <View style={[styles.container, $EXTRA_STYLES]}>
                     {!!LeftAccessory && (<View style={styles.icon}>{LeftAccessory}</View>)}
                     <TextInput
@@ -86,14 +110,47 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
                         numberOfLines={1}
                         multiline={false}
                         style={styles.textInput}
-                        placeholder={props.placeholder || "Type Something here..."}
+                        placeholder={placeholder}
                         placeholderTextColor={colors['text-muted']}
                         secureTextEntry={isSecure}
                         cursorColor={colors['brand-primary']}
+                        selectionColor={selectionColor || colors['brand-primary']}
                         editable={!disabled}
                         keyboardAppearance={theme}
-                        returnKeyType={props.returnKeyType || 'done'}
-                        blurOnSubmit={props.blurOnSubmit || false}
+                        returnKeyType={returnKeyType || 'done'}
+                        blurOnSubmit={blurOnSubmit}
+                        autoComplete={autoComplete}
+                        autoCapitalize={autoCapitalize}
+                        spellCheck={spellCheck}
+                        importantForAutofill={importantForAutofill}
+                        clearButtonMode={clearButtonMode}
+                        passwordRules={passwordRules}
+                        textContentType={(() => {
+                            if (textContentType) return textContentType;
+                            if (!autoComplete) return 'none';
+
+                            // Map autoComplete to textContentType for iOS
+                            const mapping: Record<string, any> = {
+                                'given-name': 'givenName',
+                                'family-name': 'familyName',
+                                'email': 'emailAddress',
+                                'tel': 'telephoneNumber',
+                                'address-line1': 'streetAddressLine1',
+                                'address-line2': 'streetAddressLine2',
+                                'postal-code': 'postalCode',
+                                'postal-address-locality': 'addressCity',
+                                'city': 'addressCity',
+                                'username': 'username',
+                                'password': 'password',
+                                'current-password': 'password',
+                                'password-current': 'password',
+                                'new-password': 'newPassword',
+                                'password-new': 'newPassword',
+                                'one-time-code': 'oneTimeCode',
+                                'organization': 'organizationName',
+                            };
+                            return mapping[autoComplete] || 'none';
+                        })()}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                         onSubmitEditing={handleSubmitEditing}
@@ -102,6 +159,7 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
                         <IconButton
                             style={styles.icon}
                             onPress={() => setIsSecure(prev => !prev)}
+                            accessibilityLabel={isSecure ? 'Show password' : 'Hide password'}
                         >
                             {!isSecure ? (
                                 <Eye height={moderateScale(22)} width={moderateScale(22)} color={colors['icon-default']} />
@@ -115,7 +173,7 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
             </View>
             {error && (
                 <View style={styles.errorContainer}>
-                    <ThemeText numberOfLines={3} style={styles.errorText}>{error}</ThemeText>
+                    <ThemeText numberOfLines={3} style={styles.errorText} accessibilityRole="alert">{error}</ThemeText>
                 </View>
             )}
         </View>
@@ -148,6 +206,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     textInput: {
         flex: 1,
         height: '100%',
+        padding: 0,
         fontFamily: EFonts.REGULAR,
         fontSize: EFontSize.XL,
         color: COLORS[theme]['text-primary']

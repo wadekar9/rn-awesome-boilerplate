@@ -1,29 +1,28 @@
-import { StyleProp, StyleSheet, TextStyle, TouchableOpacity } from 'react-native'
+import { StyleProp, StyleSheet, TextStyle, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import React from 'react'
 import { EFonts, EFontSize } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
 import { ThemeText } from '../themed';
 
-interface TextButtonProps {
-  disabled?: boolean;
+interface TextButtonProps extends TouchableOpacityProps {
   label: string;
   labelStyle?: StyleProp<TextStyle>;
-  onPress?: () => void;
 }
 
 const TextButton: React.FC<TextButtonProps> = ({
   label = 'text-button',
   labelStyle,
   disabled,
-  onPress
+  ...props
 }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.65}
-      accessibilityRole={'button'}
-      role={'button'}
+      {...props}
+      accessibilityRole={props.accessibilityRole || 'button'}
+      role={props.role || 'button'}
+      accessibilityState={{ ...props.accessibilityState, disabled: !!disabled }}
       disabled={disabled}
-      onPress={onPress}
     >
       <ThemeText numberOfLines={1} style={[styles.label, labelStyle]}>{label}</ThemeText>
     </TouchableOpacity>
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: EFonts.MEDIUM,
     fontSize: EFontSize.BASE,
-    color: COLORS.light.primary,
+    color: COLORS.light['brand-primary'],
     textDecorationLine: 'underline'
   }
 })

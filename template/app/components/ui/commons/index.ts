@@ -6,3 +6,4 @@ export { default as BaseDropdown } from './base-dropdown.component';
 export { default as BaseRadioButton } from './base-radio-button.component';
 export { BaseLabelCheckbox } from './base-checkbox.component';
 export { BaseLabelRadioButton } from './base-radio-button.component';
+export { default as AppList } from './app-list.component';
