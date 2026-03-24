@@ -49,8 +49,8 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
   React.useImperativeHandle(ref, () => ({
     clear: () => inputRef.current?.clear(),
     blur: () => inputRef.current?.blur(),
-    focus: () => inputRef.current?.focus()
-  }), [])
+    focus: () => inputRef.current?.focus(),
+  }), []);
 
   const handleFocus = React.useCallback((e: any) => {
     setIsFocused(true);
@@ -65,7 +65,7 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
   const handleSubmitEditing = React.useCallback((e: any) => {
     if (!props.onSubmitEditing) {
       inputRef.current?.blur();
-      return
+      return;
     }
     props.onSubmitEditing(e);
   }, [props]);
@@ -102,8 +102,10 @@ const TextareaInput = React.forwardRef<TextareaInputRef, TextareaInputProps>(({
             numberOfLines={5}
             multiline={true}
             style={styles.textInput}
-            placeholder={placeholder}
+            placeholder={placeholder || "Type Something here..."}
             placeholderTextColor={colors['text-muted']}
+            textAlignVertical='top'
+            returnKeyType={props.returnKeyType || 'done'}
             cursorColor={colors['brand-primary']}
             selectionColor={selectionColor || colors['brand-primary']}
             editable={!disabled}
@@ -153,8 +155,9 @@ const styling = (theme: ITheme) => StyleSheet.create({
     height: moderateScale(150),
   },
   textInput: {
-    flex: 1,
+    width: '100%',
     height: '100%',
+    flex: 1,
     padding: 0,
     textAlignVertical: 'top',
     fontFamily: EFonts.REGULAR,
@@ -167,9 +170,10 @@ const styling = (theme: ITheme) => StyleSheet.create({
   },
   errorText: {
     fontFamily: EFonts.REGULAR,
-    fontSize: moderateScale(13),
+    fontSize: EFontSize.SM,
     color: COLORS[theme]['state-danger'],
     flexWrap: 'wrap',
+    letterSpacing: 0.2
   },
   icon: {
     height: moderateScale(50),
